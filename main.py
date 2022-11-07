@@ -1,5 +1,5 @@
 '''
-test
+test 2
 - should be able to select automatically the callable script/scenario: Movie - Series - TV
 - link from clipboard
 - how to pass the link from main to the called script?
