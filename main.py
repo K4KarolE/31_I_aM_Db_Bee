@@ -32,13 +32,22 @@ soup = BeautifulSoup(html_text, 'lxml')
 
 title = soup.find(class_='sc-b73cd867-0 eKrKux').text
 year = soup.find(class_='sc-8c396aa2-2 itZqyK').text
-directors = soup.find(class_='sc-fa02f843-0 fjLeDR')
-director_first = directors.find('li', class_='ipc-inline-list__item').text
+directors_search = soup.find(class_='sc-fa02f843-0 fjLeDR')
+director_ul = directors_search.find('ul', class_='ipc-inline-list ipc-inline-list--show-dividers ipc-inline-list--inline ipc-metadata-list-item__list-content baseAlt')
+directors = director_ul.find_all('li')
+
+directors_list = []
+for i in directors:
+    directors_list = directors_list + [i.text]
+
 
 
 print()
 print(f"{title} - {year}\n")
-print(director_first + '\n')
+print('Director(s):')
+for i in directors_list:
+    print(f"{i} ")
+
 
 
 
