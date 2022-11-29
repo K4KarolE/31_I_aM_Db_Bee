@@ -15,10 +15,10 @@ import requests
 ## Data Scraping ##
 headers = { 'User Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0'}
 
-html_text = requests.get('https://www.imdb.com/title/tt0104952/?ref_=nv_sr_srsg_0', headers=headers).text  #Movie - 1 director
-# html_text = requests.get('https://www.imdb.com/title/tt0120855/?ref_=nv_sr_srsg_0').text  #Movie - 2 Directors
-# html_text = requests.get('https://www.imdb.com/title/tt0944947/?ref_=nv_sr_srsg_0').text  #TV Show
-# html_text = requests.get('https://www.imdb.com/title/tt15318872/?ref_=adv_li_tt').text  #TV Special
+html_text = requests.get('https://www.imdb.com/title/tt0104952/?ref_=nv_sr_srsg_0', headers=headers).text   #Movie - 1 director
+# html_text = requests.get('https://www.imdb.com/title/tt0120855/?ref_=nv_sr_srsg_0').text                  #Movie - 2 Directors
+# html_text = requests.get('https://www.imdb.com/title/tt0944947/?ref_=nv_sr_srsg_0').text                  #TV Show
+# html_text = requests.get('https://www.imdb.com/title/tt15318872/?ref_=adv_li_tt').text                    #TV Special
 
 soup = BeautifulSoup(html_text, 'lxml')
 
