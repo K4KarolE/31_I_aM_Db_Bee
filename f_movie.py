@@ -101,18 +101,23 @@ except:
         print()
 
 # DIRECTOR(S)
+directors_test = []
 try:    
-        director_1_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[1]/a').text
+        for counter in range(1,4):
+                directors_test = directors_test +  [driver.find_element(
+                By.XPATH, f'//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[{counter}]/a').text]
 
-        director_2_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[2]/a').text
+                # director_2_Read = driver.find_element(
+                # By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[2]/a').text
 
-        director_3_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[3]/a').text   
+                # director_3_Read = driver.find_element(
+                # By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[3]/a').text   
 except:
-        print() # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
+        pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
+print(directors_test)
 
+driver.quit()
+sys.exit()
 # STAR(S)
 try:    
         star_1_Read = driver.find_element(
@@ -139,7 +144,7 @@ try:
         genre_3_Read = driver.find_element(
         By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[3]/span').text
 except:
-        print() # would be triggered if the movie has less than 3 genres
+        pass # would be triggered if the movie has less than 3 genres
 
 # TAKING THE LENGTH VALUE
 try:
