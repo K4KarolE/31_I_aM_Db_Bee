@@ -3,7 +3,7 @@ import shutil
 
 terminal_columns = shutil.get_terminal_size().columns
 
-def f_messages_banner():
+def banner():
     print()
     k = 11
     print((' Z-z-z '*k).center(terminal_columns))
@@ -13,7 +13,7 @@ def f_messages_banner():
     print((' Z-z-z '*k).center(terminal_columns))
     print('\n')
 
-def f_messages_outro():
+def outro():
     k = 6
     print()
     print((' Z-z-z '*k).center(terminal_columns))
@@ -23,7 +23,7 @@ def f_messages_outro():
     print((' Z-z-z '*k).center(terminal_columns))
     print()
 
-def f_messages_TVShow_length():
+def TVShow_length():
     note_length = len('TV Mini Series: length of the whole show')
     print()
     print(' Please note '.center(terminal_columns))

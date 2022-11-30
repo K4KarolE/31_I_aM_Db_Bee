@@ -20,7 +20,7 @@ from datetime import date
 # from tkinter import Tk
 import pyperclip as pc
 
-from f_messages import *
+import f_messages
 
 
 # from requests import options            #headless chrome / it is slower
@@ -32,7 +32,7 @@ import sys, webbrowser, platform, shutil
 terminal_columns = shutil.get_terminal_size().columns
 
 # BANNER
-f_messages_banner()
+f_messages.banner()
 
 link = pc.paste()
 cellnumber = 3
@@ -176,27 +176,30 @@ if len(str(movieLengthSum).split()) == 2:
 
 # ADDING THE VALUES TO EXCEL
 # MOVIE TITLE
-cell = 'C' + str(cellnumber)
-ws[cell].value = titleRead
-# YEAR OF RELEASE 
-cellRYear = 'E' + str(cellnumber)
-ws[cellRYear].value = yearRead
+import f_excel_sheet
+f_excel_sheet.test(ws,cellnumber,director_1_Read,director_2_Read,director_3_Read,titleRead,yearRead)
 
-# DIRECTOR(S)
-cellRDirector_1 = 'F' + str(cellnumber)
-ws[cellRDirector_1].value = None                # removing the previous value from the cell
-if director_1_Read != None:
-        ws[cellRDirector_1].value = director_1_Read
+# cell = 'C' + str(cellnumber)
+# ws[cell].value = titleRead
+# # YEAR OF RELEASE 
+# cellRYear = 'E' + str(cellnumber)
+# ws[cellRYear].value = yearRead
 
-cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
-ws[cellRDirector_2].value = None
-if director_2_Read != None:
-        ws[cellRDirector_2].value = director_2_Read
+# # DIRECTOR(S)
+# cellRDirector_1 = 'F' + str(cellnumber)
+# ws[cellRDirector_1].value = None                # removing the previous value from the cell
+# if director_1_Read != None:
+#         ws[cellRDirector_1].value = director_1_Read
 
-cellRDirector_3 = 'F' + str(int(cellnumber) + 2)
-ws[cellRDirector_3].value = None
-if director_3_Read != None:
-        ws[cellRDirector_3].value = director_3_Read
+# cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
+# ws[cellRDirector_2].value = None
+# if director_2_Read != None:
+#         ws[cellRDirector_2].value = director_2_Read
+
+# cellRDirector_3 = 'F' + str(int(cellnumber) + 2)
+# ws[cellRDirector_3].value = None
+# if director_3_Read != None:
+#         ws[cellRDirector_3].value = director_3_Read
 
 # STAR(S)
 cellRStar_1 = 'G' + str(cellnumber)
@@ -294,4 +297,4 @@ link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 webbrowser.open(link)
 
 # BYE BYE BANNER
-f_messages_outro
+f_messages.outro()

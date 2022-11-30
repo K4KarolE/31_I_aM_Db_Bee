@@ -19,3 +19,9 @@ Requirements:
 - pop-up for first time users? how to tell first time user?
 
 '''
+
+
+import f_messages
+
+#BANNER
+f_messages.banner()
