@@ -17,17 +17,11 @@ from selenium import webdriver
 
 from datetime import date
 
-# from tkinter import Tk
 import pyperclip as pc
 
-import f_messages
-
-
-# from requests import options            #headless chrome / it is slower
-# options = webdriver.ChromeOptions()
-# options.headless = True
-
 import sys, webbrowser, platform, shutil
+
+import f_messages
 
 terminal_columns = shutil.get_terminal_size().columns
 
@@ -44,7 +38,7 @@ if platform.system() == 'Windows':
         ws = wb.active
 
         PATH = 'C:\Program Files (x86)\chromedriver.exe'
-        driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
+        driver = webdriver.Chrome(PATH)
         driver.minimize_window()
         driver.get(link)
 
@@ -54,7 +48,7 @@ if platform.system() == 'Linux':
         ws = wb.active
 
         PATH = '/home/zsandark/_DEV/Support/Chrome_driver/chromedriver'
-        driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
+        driver = webdriver.Chrome(PATH)
         driver.minimize_window()
         driver.get(link)
 
@@ -101,48 +95,32 @@ except:
         print()
 
 # DIRECTOR(S)
-directors_test = []
+directors = []  # instead of director_1_Read - director_3_Read
 try:    
         for counter in range(1,4):
-                directors_test = directors_test +  [driver.find_element(
+                directors = directors +[driver.find_element(
                 By.XPATH, f'//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[{counter}]/a').text]
-
-                # director_2_Read = driver.find_element(
-                # By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[2]/a').text
-
-                # director_3_Read = driver.find_element(
-                # By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[3]/a').text   
 except:
         pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
-print(directors_test)
 
-driver.quit()
-sys.exit()
 # STAR(S)
+stars = []  # instead star_1_Read - star_3_Read
 try:    
-        star_1_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[1]/a').text
-
-        star_2_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[2]/a').text
-
-        star_3_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[3]/a').text
+        for counter in range(1,4):
+                stars = stars + [driver.find_element(
+                By.XPATH, f'//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[{counter}]/a').text]
 except:
         print()
         print('*** ERROR - STARS ***') # would be triggered if the movie has less than 3 stars
         print()
         
 # GENRE(S)
+genres= [] #instead of genre_1_Read - genre_3_Read
 try:    
-        genre_1_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/span').text
+        for counter in range(1,4):
+                genres = genres + [driver.find_element(
+        By.XPATH, f'//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[{counter}]/span').text]
 
-        genre_2_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[2]/span').text
-
-        genre_3_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[3]/span').text
 except:
         pass # would be triggered if the movie has less than 3 genres
 
@@ -181,62 +159,40 @@ if len(str(movieLengthSum).split()) == 2:
 
 # ADDING THE VALUES TO EXCEL
 # MOVIE TITLE
-import f_excel_sheet
-f_excel_sheet.test(ws,cellnumber,director_1_Read,director_2_Read,director_3_Read,titleRead,yearRead)
+# import f_excel_sheet
+# f_excel_sheet.test(ws,cellnumber,director_1_Read,director_2_Read,director_3_Read,titleRead,yearRead)
 
-# cell = 'C' + str(cellnumber)
-# ws[cell].value = titleRead
-# # YEAR OF RELEASE 
-# cellRYear = 'E' + str(cellnumber)
-# ws[cellRYear].value = yearRead
+cell = 'C' + str(cellnumber)
+ws[cell].value = titleRead
+# YEAR OF RELEASE 
+cellRYear = 'E' + str(cellnumber)
+ws[cellRYear].value = yearRead
 
-# # DIRECTOR(S)
-# cellRDirector_1 = 'F' + str(cellnumber)
-# ws[cellRDirector_1].value = None                # removing the previous value from the cell
-# if director_1_Read != None:
-#         ws[cellRDirector_1].value = director_1_Read
-
-# cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
-# ws[cellRDirector_2].value = None
-# if director_2_Read != None:
-#         ws[cellRDirector_2].value = director_2_Read
-
-# cellRDirector_3 = 'F' + str(int(cellnumber) + 2)
-# ws[cellRDirector_3].value = None
-# if director_3_Read != None:
-#         ws[cellRDirector_3].value = director_3_Read
+# DIRECTOR(S)
+for counter in range(0,3):
+        cell_director = 'F' + str(int(cellnumber) + counter)
+        try:
+                ws[cell_director].value = directors[counter]    # adding directors to the sheet (overwriting the privious ones)
+        except:
+                ws[cell_director].value = None                  # removing previous values, example: the new title has 1 director, the previous one had 3
+                                                                # the first will be overwritten, the 2nd, 3rd will be removed
 
 # STAR(S)
-cellRStar_1 = 'G' + str(cellnumber)
-ws[cellRStar_1].value = None                   # removing the previous value from the cell    
-if star_1_Read != None:
-        ws[cellRStar_1].value = star_1_Read
-
-cellRStar_2 = 'G' + str(int(cellnumber) + 1)
-ws[cellRStar_2].value = None
-if star_2_Read != None:
-        ws[cellRStar_2].value = star_2_Read
-
-cellRStar_3 = 'G' + str(int(cellnumber) + 2)
-ws[cellRStar_3].value = None
-if star_3_Read != None:
-        ws[cellRStar_3].value = star_3_Read
+for counter in range(0,3):
+        cell_star = 'G' + str(int(cellnumber) + counter)
+        try:
+                ws[cell_star].value = stars[counter]
+        except:
+                ws[cell_star].value = None
 
 # GENRE(S)
-cellRGenre_1 = 'H' + str(cellnumber)
-ws[cellRGenre_1].value = None                   # removing the previous value from the cell
-if genre_1_Read != None:
-        ws[cellRGenre_1].value = genre_1_Read
-
-cellRGenre_2 = 'I' + str(cellnumber)
-ws[cellRGenre_2].value = None
-if genre_2_Read != None:
-        ws[cellRGenre_2].value = genre_2_Read
-
-cellRGenre_3 = 'J' + str(cellnumber)
-ws[cellRGenre_3].value = None
-if genre_3_Read != None:
-        ws[cellRGenre_3].value = genre_3_Read
+genre_columns = ['H', 'I', 'J']
+for counter in range(0,3):
+        cell_genre = genre_columns[counter] + str(cellnumber)   # writing the genre values horizontally (not vertically like: directors, actors)
+        try:
+                ws[cell_genre].value = genres[counter]
+        except:
+                ws[cell_genre].value = None
 
 # MOVIE LENGTH
 cellLengthHour = 'Q' + str(cellnumber)
