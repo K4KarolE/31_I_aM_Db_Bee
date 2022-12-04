@@ -1,13 +1,8 @@
 #!/bin python3.11
 '''
-22 - Movie Details Scraping - Excel + Selenium  / optimized for movies, not ideal for TV series, TV specials /
-- Cross-platform: Windows, Linux 
-- ask the new title`s IMDb link
-- collect the movie details(title, director, stars..) from the site and add to the excel sheet
-- open the poster image in the same tab (the poster image is not 'right click saveable' on IMDb by default)
-- in a new browser tab look for the movie`s hungarian title
-- end of process confirmation message displayed
-- if you want to test it, make sure the excel sheet links are updated (around line 43, 270)
+Movie
+- no "Episode Guide" at the top of the page (TV Shows, TV Mini Series)
+- under the title, the first section starts with the YEAR: 1999 U 1h 28m
 '''
 
 from selenium.webdriver.support import expected_conditions as EC
@@ -52,31 +47,16 @@ if platform.system() == 'Linux':
         driver.minimize_window()
         driver.get(link)
 
-
-# VARIABLES FOR THE READOUT - avoiding errors at the excel writing stage
-# - if the there are less than 3 records/types to add
-# - no length value displayed on IMDb
-director_1_Read = None
-director_2_Read = None
-director_3_Read = None
-star_1_Read = None
-star_2_Read = None
-star_3_Read = None
-genre_1_Read = None
-genre_2_Read = None
-genre_3_Read = None
-movieLengthSum = None
-
 # TAKING THE VALUES FROM THE 
 # MOVIE TITLE
 try:
         element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((
-                By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/h1'))
+                By.CSS_SELECTOR, '.sc-b73cd867-0'))
         )                       
           
         titleRead = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/h1').text      
+        By.CSS_SELECTOR, '.sc-b73cd867-0').text
 except:
         print()
         print('*** ERROR - MOVIE TITLE ***')
@@ -87,7 +67,7 @@ except:
 # YEAR OF RELEASE
 try:
         yearRead = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[1]/a').text # if only one item(year) there is no index in the last li[1] just li
+        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(1) > a:nth-child(1)').text # if only one item(year) there is no index in the last li[1] just li
                    
 except:
         print()
@@ -99,7 +79,7 @@ directors = []  # instead of director_1_Read - director_3_Read
 try:    
         for counter in range(1,4):
                 directors = directors +[driver.find_element(
-                By.XPATH, f'//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[{counter}]/a').text]
+                By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
 except:
         pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
 
@@ -108,7 +88,7 @@ stars = []  # instead star_1_Read - star_3_Read
 try:    
         for counter in range(1,4):
                 stars = stars + [driver.find_element(
-                By.XPATH, f'//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[{counter}]/a').text]
+                By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(3) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
 except:
         print()
         print('*** ERROR - STARS ***') # would be triggered if the movie has less than 3 stars
@@ -119,7 +99,7 @@ genres= [] #instead of genre_1_Read - genre_3_Read
 try:    
         for counter in range(1,4):
                 genres = genres + [driver.find_element(
-        By.XPATH, f'//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[{counter}]/span').text]
+        By.CSS_SELECTOR, f'a.sc-16ede01-3:nth-child({counter}) > span:nth-child(1)').text]
 
 except:
         pass # would be triggered if the movie has less than 3 genres
@@ -128,13 +108,14 @@ except:
 try:
         # taking the 2nd item(length) from "2022 1h 33m"
         movieLengthSum = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[2]').text
+        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(2) > a:nth-child(1)').text
 
         # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
         if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
                 movieLengthSum = driver.find_element(
-                By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[3]').text
+                By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(3)').text
 except:
+        movieLengthSum = None
         print()
         print('*** ERROR - LENGTH ***')
         print()
@@ -159,8 +140,6 @@ if len(str(movieLengthSum).split()) == 2:
 
 # ADDING THE VALUES TO EXCEL
 # MOVIE TITLE
-# import f_excel_sheet
-# f_excel_sheet.test(ws,cellnumber,director_1_Read,director_2_Read,director_3_Read,titleRead,yearRead)
 
 cell = 'C' + str(cellnumber)
 ws[cell].value = titleRead

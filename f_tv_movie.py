@@ -1,12 +1,8 @@
 #!/bin python3.11
 '''
-27 - TV Movie, TV Special Details Scraping - Excel + Selenium / optimized for TV Movies, TV Specials, not ideal for Movies, TV Series (project 22/23) /
-- ask the new title`s IMDb link
-- collect the new record`s details(title, director, stars..) from the site and add to the excel sheet
-- open the poster image in the same tab (the poster image is not 'right click saveable' on IMDb by default)
-- in a new browser tab look for the movie`s hungarian title
-- end of process confirmation message displayed
-- if you want to test it, make sure the excel sheet links are updated (around line 21, 211)
+TV Movie
+- no "Episode Guide" at the top of the page (TV Shows, TV Mini Series)
+- under the title, the first section starts with the TYPE of the piece: TV Special 2022 TV-14 52m
 '''
 
 from selenium.webdriver.support import expected_conditions as EC
@@ -20,20 +16,16 @@ import pyperclip as pc
 
 import sys, webbrowser, platform, shutil
 
+import f_messages
+
 terminal_columns = shutil.get_terminal_size().columns
 
 # BANNER
-print()
-k = 11
-print((' Z-z-z '*k).center(terminal_columns))
-print()
-print(' I aM D bee! '.center(terminal_columns))
-print()
-print((' Z-z-z '*k).center(terminal_columns))
-print('\n')
+f_messages.banner()
 
-link = pc.paste()               #taking the link from clipboard
+link = pc.paste()
 cellnumber = 3
+
 
 if platform.system() == 'Windows':
         from openpyxl import load_workbook
@@ -41,7 +33,7 @@ if platform.system() == 'Windows':
         ws = wb.active
 
         PATH = 'C:\Program Files (x86)\chromedriver.exe'
-        driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
+        driver = webdriver.Chrome(PATH)
         driver.minimize_window()
         driver.get(link)
 
@@ -51,34 +43,20 @@ if platform.system() == 'Linux':
         ws = wb.active
 
         PATH = '/home/zsandark/_DEV/Support/Chrome_driver/chromedriver'
-        driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
+        driver = webdriver.Chrome(PATH)
         driver.minimize_window()
         driver.get(link)
 
-# VARIABLES FOR THE READOUT - avoiding errors at the excel writing stage
-# - if the there are less than 3 records/types to add
-# - no length value displayed on IMDb
-director_1_Read = None
-director_2_Read = None
-director_3_Read = None
-star_1_Read = None
-star_2_Read = None
-star_3_Read = None
-genre_1_Read = None
-genre_2_Read = None
-genre_3_Read = None
-movieLengthSum = None
-
 # TAKING THE VALUES FROM THE 
-# MOVIE TITLE
+# MOVIE TITLE - SAME AS MOVIE
 try:
         element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((
-                By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/h1'))
+                By.CSS_SELECTOR, '.sc-b73cd867-0'))
         )                       
           
         titleRead = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/h1').text      
+        By.CSS_SELECTOR, '.sc-b73cd867-0').text
 except:
         print()
         print('*** ERROR - MOVIE TITLE ***')
@@ -86,65 +64,58 @@ except:
         driver.quit()
         sys.exit()
 
-# YEAR OF RELEASE
+# YEAR OF RELEASE - SAME AS MOVIE
 try:
         yearRead = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[2]').text              
+        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(2) > a:nth-child(1)').text # if only one item(year) there is no index in the last li[1] just li
+                   
 except:
         print()
         print('*** ERROR - YEAR OF RELEASE ***')
         print()
 
-# DIRECTOR(S)
+# DIRECTOR(S) - SAME AS MOVIE
+directors = []  # instead of director_1_Read - director_3_Read
 try:    
-        director_1_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[1]/a').text
-
-        director_2_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[2]/a').text
-
-        director_3_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[3]/a').text   
+        for counter in range(1,4):
+                directors = directors +[driver.find_element(
+                By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
 except:
-        print() # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
+        pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
 
-
-
-# STAR(S)
+# STAR(S) - SAME AS MOVIE
+stars = []  # instead star_1_Read - star_3_Read
 try:    
-        star_1_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[1]/a').text
-
-        star_2_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[2]/a').text
-
-        star_3_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[3]/a').text
+        for counter in range(1,4):
+                stars = stars + [driver.find_element(
+                By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(3) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
 except:
         print()
-        print('*** ERROR - STARS ***') # would be triggered if the TV show has less than 3 stars
+        print('*** ERROR - STARS ***') # would be triggered if the movie has less than 3 stars
         print()
         
-# GENRE(S)
+# GENRE(S) - SAME AS MOVIE
+genres= [] #instead of genre_1_Read - genre_3_Read
 try:    
-        genre_1_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[1]/span').text
+        for counter in range(1,4):
+                genres = genres + [driver.find_element(
+        By.CSS_SELECTOR, f'a.sc-16ede01-3:nth-child({counter}) > span:nth-child(1)').text]
 
-        genre_2_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[2]/span').text
-
-        genre_3_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[3]/span').text
 except:
-        print() # would be triggered if the TV show has less than 3 genres
+        pass # would be triggered if the movie has less than 3 genres
 
-# TAKING THE LENGTH VALUE
+# TAKING THE LENGTH VALUE - DIFF.
 try:
         # taking the 2nd item(length) from "2022 1h 33m"
         movieLengthSum = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[4]').text
+        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(3) > a:nth-child(1)').text
 
+        # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
+        if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
+                movieLengthSum = driver.find_element(
+                By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(4)').text
 except:
+        movieLengthSum = None
         print()
         print('*** ERROR - LENGTH ***')
         print()
@@ -169,6 +140,7 @@ if len(str(movieLengthSum).split()) == 2:
 
 # ADDING THE VALUES TO EXCEL
 # MOVIE TITLE
+
 cell = 'C' + str(cellnumber)
 ws[cell].value = titleRead
 # YEAR OF RELEASE 
@@ -176,52 +148,30 @@ cellRYear = 'E' + str(cellnumber)
 ws[cellRYear].value = yearRead
 
 # DIRECTOR(S)
-cellRDirector_1 = 'F' + str(cellnumber)
-ws[cellRDirector_1].value = None                # removing the previous value from the cell
-if director_1_Read != None:
-        ws[cellRDirector_1].value = director_1_Read
-
-cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
-ws[cellRDirector_2].value = None
-if director_2_Read != None:
-        ws[cellRDirector_2].value = director_2_Read
-
-cellRDirector_3 = 'F' + str(int(cellnumber) + 2)
-ws[cellRDirector_3].value = None
-if director_3_Read != None:
-        ws[cellRDirector_3].value = director_3_Read
+for counter in range(0,3):
+        cell_director = 'F' + str(int(cellnumber) + counter)
+        try:
+                ws[cell_director].value = directors[counter]    # adding directors to the sheet (overwriting the privious ones)
+        except:
+                ws[cell_director].value = None                  # removing previous values, example: the new title has 1 director, the previous one had 3
+                                                                # the first will be overwritten, the 2nd, 3rd will be removed
 
 # STAR(S)
-cellRStar_1 = 'G' + str(cellnumber)
-ws[cellRStar_1].value = None                   # removing the previous value from the cell    
-if star_1_Read != None:
-        ws[cellRStar_1].value = star_1_Read
-
-cellRStar_2 = 'G' + str(int(cellnumber) + 1)
-ws[cellRStar_2].value = None
-if star_2_Read != None:
-        ws[cellRStar_2].value = star_2_Read
-
-cellRStar_3 = 'G' + str(int(cellnumber) + 2)
-ws[cellRStar_3].value = None
-if star_3_Read != None:
-        ws[cellRStar_3].value = star_3_Read
+for counter in range(0,3):
+        cell_star = 'G' + str(int(cellnumber) + counter)
+        try:
+                ws[cell_star].value = stars[counter]
+        except:
+                ws[cell_star].value = None
 
 # GENRE(S)
-cellRGenre_1 = 'H' + str(cellnumber)
-ws[cellRGenre_1].value = None                   # removing the previous value from the cell
-if genre_1_Read != None:
-        ws[cellRGenre_1].value = genre_1_Read
-
-cellRGenre_2 = 'I' + str(cellnumber)
-ws[cellRGenre_2].value = None
-if genre_2_Read != None:
-        ws[cellRGenre_2].value = genre_2_Read
-
-cellRGenre_3 = 'J' + str(cellnumber)
-ws[cellRGenre_3].value = None
-if genre_3_Read != None:
-        ws[cellRGenre_3].value = genre_3_Read
+genre_columns = ['H', 'I', 'J']
+for counter in range(0,3):
+        cell_genre = genre_columns[counter] + str(cellnumber)   # writing the genre values horizontally (not vertically like: directors, actors)
+        try:
+                ws[cell_genre].value = genres[counter]
+        except:
+                ws[cell_genre].value = None
 
 # MOVIE LENGTH
 cellLengthHour = 'Q' + str(cellnumber)
@@ -286,11 +236,5 @@ except:
 link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 webbrowser.open(link)
 
-k = 6
-print()
-print((' Z-z-z '*k).center(terminal_columns))
-print()
-print(' Honey added to your jar! '.center(terminal_columns))
-print()
-print((' Z-z-z '*k).center(terminal_columns))
-print()
+# BYE BYE BANNER
+f_messages.outro()
