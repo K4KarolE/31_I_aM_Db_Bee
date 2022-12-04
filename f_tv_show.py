@@ -1,8 +1,8 @@
 #!/bin python3.11
 '''
-Movie
-- no "Episode Guide" at the top of the page (TV Shows, TV Mini Series)
-- under the title, the first section starts with the YEAR: 1999 U 1h 28m
+TV Show - TV Mini Series
+- "Episode Guide" at the top of the page
+- under the title, the first section starts with the TYPE of the piece: TV Series 2011–2019 18 57m
 '''
 
 from selenium.webdriver.support import expected_conditions as EC
@@ -27,6 +27,7 @@ f_messages.banner()
 link = pc.paste()
 cellnumber = 3
 
+
 # DUAL BOOT OPTION
 if platform.system() == 'Windows':
         from openpyxl import load_workbook
@@ -49,7 +50,7 @@ if platform.system() == 'Linux':
         driver.get(link)
 
 # TAKING THE VALUES FROM THE 
-# MOVIE TITLE
+# MOVIE TITLE - SAME AS MOVIE
 try:
         element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((
@@ -65,37 +66,37 @@ except:
         driver.quit()
         sys.exit()
 
-# YEAR OF RELEASE
+# YEAR OF RELEASE - SAME AS MOVIE
 try:
         yearRead = driver.find_element(
-        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(1) > a:nth-child(1)').text # if only one item(year) there is no index in the last li[1] just li
+        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(2) > a:nth-child(1)').text # if only one item(year) there is no index in the last li[1] just li
                    
 except:
         print()
         print('*** ERROR - YEAR OF RELEASE ***')
         print()
 
-# DIRECTOR(S)
-directors = []  # instead of director_1_Read - director_3_Read
-try:    
-        for counter in range(1,4):
-                directors = directors +[driver.find_element(
-                By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
-except:
-        pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
+# DIRECTOR(S) - DIFF!
+# directors = []  # instead of director_1_Read - director_3_Read
+# try:    
+#         for counter in range(1,4):
+#                 directors = directors +[driver.find_element(
+#                 By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
+# except:
+#         pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
 
-# STAR(S)
+# STAR(S) - DIFF!
 stars = []  # instead star_1_Read - star_3_Read
 try:    
         for counter in range(1,4):
                 stars = stars + [driver.find_element(
-                By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(3) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
+                By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(2) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
 except:
         print()
         print('*** ERROR - STARS ***') # would be triggered if the movie has less than 3 stars
         print()
         
-# GENRE(S)
+# GENRE(S) - SAME AS MOVIE
 genres= [] #instead of genre_1_Read - genre_3_Read
 try:    
         for counter in range(1,4):
@@ -105,16 +106,16 @@ try:
 except:
         pass # would be triggered if the movie has less than 3 genres
 
-# TAKING THE LENGTH VALUE
+# TAKING THE LENGTH VALUE - DIFF. THAN MOVIE - SAME AS TV MOVIE
 try:
         # taking the 2nd item(length) from "2022 1h 33m"
         movieLengthSum = driver.find_element(
-        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(2) > a:nth-child(1)').text
+        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(3) > a:nth-child(1)').text
 
         # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
         if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
                 movieLengthSum = driver.find_element(
-                By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(3)').text
+                By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(4)').text
 except:
         movieLengthSum = None
         print()
@@ -236,6 +237,9 @@ except:
 # LOOKING FOR THE HUNGARIAN TITLE
 link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 webbrowser.open(link)
+
+# EPISODE / SERIES LENGTH WARNING
+f_messages.tv_show_length()
 
 # BYE BYE BANNER
 f_messages.outro()

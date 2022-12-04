@@ -23,7 +23,7 @@ def outro():
     print((' Z-z-z '*k).center(terminal_columns))
     print()
 
-def TVShow_length():
+def tv_show_length():
     note_length = len('TV Mini Series: length of the whole show')
     print()
     print(' Please note '.center(terminal_columns))

@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 
 from datetime import date
 
@@ -27,13 +28,14 @@ link = pc.paste()
 cellnumber = 3
 
 
+# DUAL BOOT OPTION
 if platform.system() == 'Windows':
         from openpyxl import load_workbook
         wb = load_workbook('D:/Movies_New_Record.xlsx')
         ws = wb.active
 
-        PATH = 'C:\Program Files (x86)\chromedriver.exe'
-        driver = webdriver.Chrome(PATH)
+        service = Service('C:\Program Files (x86)\chromedriver.exe')
+        driver = webdriver.Chrome(service=service)
         driver.minimize_window()
         driver.get(link)
 
@@ -42,8 +44,8 @@ if platform.system() == 'Linux':
         wb = load_workbook(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
         ws = wb.active
 
-        PATH = '/home/zsandark/_DEV/Support/Chrome_driver/chromedriver'
-        driver = webdriver.Chrome(PATH)
+        service = Service('/home/zsandark/_DEV/Support/Chrome_driver/chromedriver')
+        driver = webdriver.Chrome(service=service)
         driver.minimize_window()
         driver.get(link)
 
