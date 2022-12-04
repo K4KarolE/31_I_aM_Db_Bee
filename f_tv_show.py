@@ -149,14 +149,14 @@ ws[cell].value = titleRead
 cellRYear = 'E' + str(cellnumber)
 ws[cellRYear].value = yearRead
 
-# DIRECTOR(S)
-for counter in range(0,3):
-        cell_director = 'F' + str(int(cellnumber) + counter)
-        try:
-                ws[cell_director].value = directors[counter]    # adding directors to the sheet (overwriting the privious ones)
-        except:
-                ws[cell_director].value = None                  # removing previous values, example: the new title has 1 director, the previous one had 3
-                                                                # the first will be overwritten, the 2nd, 3rd will be removed
+# # DIRECTOR(S)
+# for counter in range(0,3):
+#         cell_director = 'F' + str(int(cellnumber) + counter)
+#         try:
+#                 ws[cell_director].value = directors[counter]    # adding directors to the sheet (overwriting the privious ones)
+#         except:
+#                 ws[cell_director].value = None                  # removing previous values, example: the new title has 1 director, the previous one had 3
+#                                                                 # the first will be overwritten, the 2nd, 3rd will be removed
 
 # STAR(S)
 for counter in range(0,3):
