@@ -4,27 +4,25 @@ Movie
 - no "Episode Guide" at the top of the page (TV Shows, TV Mini Series)
 - under the title, the first section starts with the YEAR: 1999 U 1h 28m
 '''
-
+from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+import pyperclip
 
 from datetime import date
+import sys
+import webbrowser
+import platform
 
-import pyperclip as pc
+import functions.messages as messages
 
-import sys, webbrowser, platform, shutil
-
-import f_messages
-
-terminal_columns = shutil.get_terminal_size().columns
 
 # BANNER
-f_messages.banner()
+messages.banner()
 
-link = pc.paste()
+link = pyperclip.paste()
 cellnumber = 3
 
 # DUAL BOOT OPTION
@@ -238,4 +236,4 @@ link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 webbrowser.open(link)
 
 # BYE BYE BANNER
-f_messages.outro()
+messages.outro()

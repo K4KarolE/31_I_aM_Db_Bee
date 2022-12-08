@@ -17,12 +17,12 @@ import pyperclip as pc
 
 import sys, webbrowser, platform, shutil
 
-import f_messages
+import functions.messages as messages
 
 terminal_columns = shutil.get_terminal_size().columns
 
 # BANNER
-f_messages.banner()
+messages.banner()
 
 link = pc.paste()
 cellnumber = 3
@@ -239,4 +239,4 @@ link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 webbrowser.open(link)
 
 # BYE BYE BANNER
-f_messages.outro()
+messages.outro()
