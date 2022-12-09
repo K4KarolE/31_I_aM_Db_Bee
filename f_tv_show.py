@@ -66,7 +66,7 @@ except:
         driver.quit()
         sys.exit()
 
-# YEAR OF RELEASE - SAME AS MOVIE
+# YEAR OF RELEASE - DIFF THAN MOVIE
 try:
         yearRead = driver.find_element(
         By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(2) > a:nth-child(1)').text # if only one item(year) there is no index in the last li[1] just li
