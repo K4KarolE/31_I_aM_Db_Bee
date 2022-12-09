@@ -80,10 +80,10 @@ def web_driver():
             sys.exit()
 
 ### YEAR OF RELEASE
-    if decider in ['series', 'tv_movie']:
-        index = 2
+    if decider == 'movie':
+        index = 1
     else:
-        index = 1   # movie
+        index = 2  # series, tv_movie
     try:
         yearRead = driver.find_element(
         By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index}) > a:nth-child(1)').text
@@ -93,12 +93,19 @@ def web_driver():
             print('*** ERROR - YEAR OF RELEASE ***')
             print()
 
+### DIRECTOR(S) - SAME AS MOVIE
+    directors = []
+    if decider in ['movie', 'tv_movie']:    # series do not have directors on the front page
+        try:    
+                for counter in range(1,4):
+                        directors = directors +[driver.find_element(
+                        By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
+        except:
+                pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
+
+
     print(titleRead)
     print(yearRead)
-
-
-
-
 
 
 
