@@ -1,6 +1,6 @@
 I aM D Bee
 - IMDb scraping app for movie, tv show, tv mini series..
-- Get the IMDb link from clipboard
-- Copy the movie details(title, year, stars..) to an excel sheet
-- Open the movie poster in a new browser tab (it is not copy-able from the front page by default)
-- Look for own language title (just hungarian at the moment)
+- Gets the IMDb link from clipboard
+- Copies the movie details(title, year, stars..) to an excel sheet
+- Opens the movie poster in a new browser tab (it is not copy-able from the front page by default)
+- Looks for the title`s your native language version (just hungarian at the moment)
