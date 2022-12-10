@@ -1,3 +1,4 @@
+#!/bin python3.11
 
 import shutil
 
@@ -9,6 +10,7 @@ frame = { 'bee_noise': ' Z-z-z ',
 message_dic = { 'banner': ' I aM D bee! ',
             'outro': ' Honey added to your jar! ',
             'error_link': 'ERROR - WRONG IMDb LINK ',
+            'error_decider': 'ERROR - DECIDER ',
             'error_movie_title':' ERROR - MOVIE TITLE ',
             'error_year':'ERROR - YEAR OF RELEASE',
             'error_stars':'ERROR - STARS',
@@ -41,7 +43,7 @@ def tv_show_length():
     print()
 
 
-message('bee_noise', 2, 'banner')
-message('bee_noise', 1.5, 'outro')
-message('error', 1.2, 'error_excel')
-message('error', 2, 'error_stars')
+# message('bee_noise', 2, 'banner')
+# message('bee_noise', 2, 'outro')
+# message('error', 1.5, 'error_excel')
+# message('error', 1.5, 'error_stars')

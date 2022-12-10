@@ -16,11 +16,11 @@ import sys
 import webbrowser
 import platform
 
-import functions.messages as messages
+# import functions.messages as messages
 
 
 # BANNER
-messages.banner()
+# messages.banner()
 
 link = pyperclip.paste()
 cellnumber = 3
@@ -236,4 +236,4 @@ link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 webbrowser.open(link)
 
 # BYE BYE BANNER
-messages.outro()
+# messages.outro()
