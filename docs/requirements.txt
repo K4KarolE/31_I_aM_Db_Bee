@@ -1,0 +1,34 @@
+- In Progress -
+
+---------------------------
+--- Python and Mondules ---
+---------------------------
+
+1. Python 3
+- in the installation, click on the checkbox: add to path
+
+
+2. tkinter
+- https://stackoverflow.com/questions/25905540/importerror-no-module-named-tkinter
+- Ubuntu: sudo apt-get install python3-tk
+- Fedora: sudo dnf install python3-tkinter
+
+
+3. pyperclip
+
+
+
+--------------
+--- Others ---
+--------------
+
+4. Google Chrome
+
+
+5. Selenium WebDriver
+- you will be able to add the location once you started the program
+
+
+6. Excel sheet - attached in the docs folder
+- with no pictures (openpyxl module removes the pictures from the sheet)
+- with no merged cells for the Directors, Stars values (where we can write more data in one column)
