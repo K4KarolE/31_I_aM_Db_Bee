@@ -1,14 +1,14 @@
+#!/bin python3.11
+
 import platform
 from datetime import date
 
-# from functions import scraping
 from functions import messages
 
-def write_sheet(titleRead, yearRead, directors, stars, lengthHour, lengthMinute):
-    # titleRead, yearRead, directors, stars, lengthHour, lengthMinute = scraping.web_driver()
+def write_sheet(titleRead, yearRead, directors, stars, genres, lengthHour, lengthMinute):
     cellnumber = 3
 
-    # DUAL BOOT OPTION
+# DUAL BOOT OPTION
     if platform.system() == 'Windows':
             from openpyxl import load_workbook
             wb = load_workbook('D:/Movies_New_Record.xlsx')
@@ -20,24 +20,24 @@ def write_sheet(titleRead, yearRead, directors, stars, lengthHour, lengthMinute)
             ws = wb.active
 
 
-    # ADDING THE VALUES TO EXCEL
-    # MOVIE TITLE
+# ADDING THE VALUES TO EXCEL
+# MOVIE TITLE
     cell = 'C' + str(cellnumber)
     ws[cell].value = titleRead
     # YEAR OF RELEASE 
     cellRYear = 'E' + str(cellnumber)
     ws[cellRYear].value = yearRead
 
-    # DIRECTOR(S)
+# DIRECTOR(S)
     for counter in range(0,3):
             cell_director = 'F' + str(int(cellnumber) + counter)
             try:
                     ws[cell_director].value = directors[counter]    # adding directors to the sheet (overwriting the privious ones)
             except:
                     ws[cell_director].value = None                  # removing previous values, example: the new title has 1 director, the previous one had 3
-                                                                    # the first will be overwritten, the 2nd, 3rd will be removed
+                                                                    # the first will be overwritten, the 2nd, 3rd will be removed from the sheet
 
-    # STAR(S)
+# STAR(S)
     for counter in range(0,3):
             cell_star = 'G' + str(int(cellnumber) + counter)
             try:
@@ -45,7 +45,7 @@ def write_sheet(titleRead, yearRead, directors, stars, lengthHour, lengthMinute)
             except:
                     ws[cell_star].value = None
 
-    # GENRE(S)
+# GENRE(S)
     genre_columns = ['H', 'I', 'J']
     for counter in range(0,3):
             cell_genre = genre_columns[counter] + str(cellnumber)   # writing the genre values horizontally (not vertically like: directors, actors)
@@ -54,7 +54,7 @@ def write_sheet(titleRead, yearRead, directors, stars, lengthHour, lengthMinute)
             except:
                     ws[cell_genre].value = None
 
-    # MOVIE LENGTH
+# MOVIE LENGTH
     cellLengthHour = 'Q' + str(cellnumber)
     ws[cellLengthHour].value = None                 # removing the previous value from the cell
     if lengthHour != None:
@@ -65,7 +65,7 @@ def write_sheet(titleRead, yearRead, directors, stars, lengthHour, lengthMinute)
     if lengthMinute != None:
             ws[cellLengthMin].value = str(lengthMinute)
 
-    # TODAY`S DATE
+# TODAY`S DATE
     today = date.today()
 
     day = 'K' + str(cellnumber)
@@ -77,16 +77,16 @@ def write_sheet(titleRead, yearRead, directors, stars, lengthHour, lengthMinute)
     day = 'M' + str(cellnumber)
     ws[day].value = str(today)[0:4]
 
-    # HOW MANY TIMES SEEN FORMULA
+# HOW MANY TIMES SEEN FORMULA
     formula = '=COUNTA(M' + str(cellnumber) + ':M' + str(int(cellnumber) + 2) + ')'  # like: =COUNTA(M6965:M6967)
     day = 'N' + str(cellnumber)
     ws[day].value = formula
 
-    # 1st TIME WATCHING
+# 1st TIME WATCHING
     cellRFirst = 'O' + str(cellnumber)
     ws[cellRFirst].value = '1st'        
 
-    # SAVE THE SHEET
+# SAVE THE SHEET
     openSheet = True
     while openSheet == True:
             try:

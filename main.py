@@ -5,11 +5,9 @@ from functions import hun_title
 
 messages.message('bee_noise', 2, 'banner')
 
-scraping.get_link()
+titleRead, yearRead, directors, stars, genres, lengthHour, lengthMinute = scraping.web_driver()
 
-titleRead, yearRead, directors, stars, lengthHour, lengthMinute = scraping.web_driver()
-
-excel_sheet.write_sheet(titleRead, yearRead, directors, stars, lengthHour, lengthMinute)
+excel_sheet.write_sheet(titleRead, yearRead, directors, stars, genres, lengthHour, lengthMinute)
 
 hun_title.search(titleRead, yearRead)
 

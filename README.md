@@ -1,4 +1,4 @@
-I aM D Bee
+I aM D bee
 - IMDb scraping app for movie, tv show, tv mini series..
 - Gets the IMDb link from clipboard
 - Copies the movie details(title, year, stars..) to an excel sheet

@@ -9,7 +9,7 @@ frame = { 'bee_noise': ' Z-z-z ',
 
 message_dic = { 'banner': ' I aM D bee! ',
             'outro': ' Honey added to your jar! ',
-            'error_link': 'ERROR - WRONG IMDb LINK ',
+            'error_link': 'ERROR - WRONG IMDb LINK - COPY AGAIN & HIT ENTER ',
             'error_decider': 'ERROR - DECIDER ',
             'error_movie_title':' ERROR - MOVIE TITLE ',
             'error_year':'ERROR - YEAR OF RELEASE',
@@ -29,21 +29,3 @@ def message(frame_type, frame_length_adjuster, message_type):
     print()
     print((frame[frame_type] * int(message_length / frame_type_length * frame_length_adjuster)).center(terminal_columns))
     print('\n')
-
-
-def tv_show_length():
-    note_length = len('TV Mini Series: length of the whole show')
-    print()
-    print(' Please note '.center(terminal_columns))
-    print(('*'*note_length).center(terminal_columns))
-    print('TV Series: length of an episode'.ljust(note_length).center(terminal_columns))
-    print('TV Mini Series: length of the whole show'.center(terminal_columns))
-    print('Will be added to the sheet.'.center(terminal_columns))
-    print(('*'*note_length).center(terminal_columns))
-    print()
-
-
-# message('bee_noise', 2, 'banner')
-# message('bee_noise', 2, 'outro')
-# message('error', 1.5, 'error_excel')
-# message('error', 1.5, 'error_stars')

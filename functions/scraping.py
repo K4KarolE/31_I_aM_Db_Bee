@@ -15,11 +15,11 @@ from functions import messages
 
 def get_link():
     link = pyperclip.paste()
-    if 'www.imdb.com/title/' not in link:
-        messages.link_error()
-        sys.exit()
+    while 'www.imdb.com/title/' not in link:
+        messages.message('error', 1.2, 'error_link')
+        input()
+        link = pyperclip.paste()
     return link
-
 
 def web_driver():
     link = get_link()
@@ -48,8 +48,6 @@ def web_driver():
             messages.message('error', 2, 'error_decider')
             driver.quit()
             sys.exit()
-    
-    # print(decider_read)
 
     decider = None
     if len(decider_read) == 4:        # 1992 - year -> Movie, Short Film
@@ -59,8 +57,7 @@ def web_driver():
     if decider == None:               # TV Movie, TV Special
         decider = 'tv_movie'
 
-    
-### MOVIE TITLE - SAME FOR ALL 3 DECIDER CATEGORIES
+### MOVIE TITLE
     try:
             element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((
@@ -86,7 +83,7 @@ def web_driver():
     except:
             messages.message('error', 2, 'error_year')
 
-### DIRECTOR(S) - SAME AS MOVIE
+### DIRECTOR(S)
     directors = []
     if decider in ['movie', 'tv_movie']:    # series do not have directors on the front page
         try:    
@@ -97,7 +94,7 @@ def web_driver():
                 pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
 
 ### STAR(S)
-    stars = []  # instead star_1_Read - star_3_Read
+    stars = []
     if decider in ['movie', 'tv_movie']:
         index_s = 3
     else:
@@ -111,7 +108,7 @@ def web_driver():
             
 
 ### GENRE(S)
-    genres= [] #instead of genre_1_Read - genre_3_Read
+    genres= []
     try:    
             for counter in range(1,4):
                     genres = genres + [driver.find_element(
@@ -121,15 +118,15 @@ def web_driver():
             pass # would be triggered if the movie has less than 3 genres
 
 ### LENGTH VALUE
-    if decider == 'movie':
+    if decider == 'movie':  # format: 1992 15 1h 35m 
         index_l_1 = 2
         index_l_2 = 3
         
-    else:
+    else:                   # format: TV Series 2011–2019 18 57m
         index_l_1 = 3
         index_l_2 = 4
     try:
-            # taking the 2nd item(length) from "2022 1h 33m"
+            # taking the 2nd item(1h 33m) from "2022 1h 33m"
             movieLengthSum = driver.find_element(
             By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index_l_1}) > a:nth-child(1)').text
 
@@ -165,4 +162,4 @@ def web_driver():
     except:
             messages.message('error', 2, 'error_poster')
 
-    return titleRead, yearRead, directors, stars, lengthHour, lengthMinute
+    return titleRead, yearRead, directors, stars, genres, lengthHour, lengthMinute
