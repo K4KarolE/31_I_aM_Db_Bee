@@ -157,8 +157,12 @@ def web_driver():
 ### POSTER IMAGE
     try:
             poster = driver.find_element(By.CSS_SELECTOR, '.ipc-media--poster-l > img:nth-child(1)')
-            posterLink = poster.get_attribute('src')
-            webbrowser.open(posterLink)
+            posterLink = poster.get_attribute('srcset')
+            posterLink_list = posterLink.split() # making a list devided by the space(link(1st in the list) size, link(3rd) size, link(5th) size)       
+            webbrowser.open(posterLink_list[0])     # small
+            # webbrowser.open(posterLink_list[2])   # medium
+            # webbrowser.open(posterLink_list[4])   # larger
+
     except:
             messages.message('error', 2, 'error_poster')
 
