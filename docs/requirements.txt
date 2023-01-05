@@ -31,7 +31,8 @@
 - https://sites.google.com/chromium.org/driver/
 
 
-7. Movies_New_Record Excel sheet - attached in the docs folder
-- the excel sheet we are going to save the collected data, should not contain pictures (openpyxl module removes the pictures from the sheet)
+7. Movies_New_Record Excel sheet (attached in the docs folder) - and any prog to handle it (MS Excel, LibreOffice Calc..)
+- in the excel sheet we are going to save the collected data
+- if you are using your own sheet, it should not contain pictures (openpyxl module removes the pictures from the sheet)
 - with no merged cells for the Directors, Stars values (where we can write more data in one column)
 - you will be able to add the location of the sheet once you started the program (when the UI is ready)
