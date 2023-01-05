@@ -34,7 +34,7 @@ def write_sheet(titleRead, yearRead, directors, stars, genres, lengthHour, lengt
             try:
                     ws[cell_director].value = directors[counter]    # adding directors to the sheet (overwriting the privious ones)
             except:
-                    ws[cell_director].value = None                  # removing previous values, example: the new title has 1 director, the previous one had 3
+                    ws[cell_director].value = None                  # removing previous values, example: the new title has 1 director, the previous had 3
                                                                     # the first will be overwritten, the 2nd, 3rd will be removed from the sheet
 
 # STAR(S)
