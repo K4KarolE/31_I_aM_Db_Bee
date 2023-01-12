@@ -12,3 +12,5 @@ excel_sheet.write_sheet(titleRead, yearRead, directors, stars, genres, lengthHou
 own_language_title.search(titleRead, yearRead)
 
 messages.message('bee_noise', 1.5, 'outro')
+
+excel_sheet.launch_sheets()

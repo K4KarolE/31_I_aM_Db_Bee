@@ -1,6 +1,7 @@
 #!/bin python3.11
 
 import platform
+import os
 from datetime import date
 
 from functions import messages
@@ -90,14 +91,28 @@ def write_sheet(titleRead, yearRead, directors, stars, genres, lengthHour, lengt
     openSheet = True
     while openSheet == True:
             try:
-                    if platform.system() == 'Windows':
-                            wb.save('D:/Movies_New_Record.xlsx')
-                            openSheet = False
-                            print('\n')
+                    if platform.system() == 'Windows':                   
+                        wb.save("d:\Movies_New_Record.xlsx")
+                        openSheet = False
+                        print('\n')
 
                     if platform.system() == 'Linux':
-                            wb.save(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
-                            openSheet = False
-                            print('\n')
+                        wb.save(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
+                        openSheet = False
+                        print('\n')
             except:
                     messages.message('error', 1.5, 'error_excel')
+                    input()
+
+def launch_sheets():
+    if platform.system() == 'Windows':
+        full_path_to_MoviesNewRecord = "d:\Movies_New_Record.xlsx"
+        full_path_to_Movies = "d:\Movies.xlsx"
+        os.system(f'start "excel" {full_path_to_Movies}')
+        os.system(f'start "excel" {full_path_to_MoviesNewRecord}')
+
+    if platform.system() == 'Linux':                                    #amendment needed
+        full_path_to_MoviesNewRecord = "d:\Movies_New_Record.xlsx"
+        full_path_to_Movies = "d:\Movies.xlsx"
+        os.system(f'start "excel" {full_path_to_Movies}')
+        os.system(f'start "excel" {full_path_to_MoviesNewRecord}')
