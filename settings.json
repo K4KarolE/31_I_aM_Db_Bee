@@ -1,0 +1,14 @@
+{
+  "test": "1414",
+  "imdb_link_in_clipboard": true,
+  "path_movies_sheet": "",
+  "path_movie_new_record": "",
+  "title_search": true,
+  "title_search_link": {
+    "Hungarian": "https://www.mafab.hu/search/&search=",
+    "Czech": "https://www.csfd.cz/hledat/?q="
+  },
+  "poster_open_in_new_tab": true,
+  "poster_size": "",
+  "run_by_start": false
+}
