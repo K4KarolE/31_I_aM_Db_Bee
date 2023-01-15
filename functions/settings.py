@@ -22,6 +22,11 @@ save_settings(settings_data)
 '''
 Information from the user
 
+checkbox: 4
+searchbox: 2
+field: 1
+rolldown: 1
+
 checkbox     "imdb_link_in_clipboard": true,     mandatory
 searchbox    "path_movies_sheet": "",
 searchbox    "path_movie_new_record": "",        mandatory

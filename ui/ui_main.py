@@ -1,21 +1,58 @@
 
 from tkinter import *
 
+font_style = 'Georgia'
+
 root = Tk()
+root.title('I am D bee')
+root.geometry('450x600')
 
-def click():
-    #TEXT
-    my_label1 = Label(root, text = 'Jumbo: ' + entry.get()) # entry.get() - printing text added in the entry
-    my_label1.grid(column=20, row=25)
+# TITLE - will be a picture
+w = Label(root, text ='I am D bee',
+height = 2,
+font = (font_style, 20))
+w.pack()
 
-# BUTTON
-my_button = Button(root, text ='My Button', padx=20, pady=20, command=click, fg='yellow', bg='red') # click (functions) without ()
-my_button.grid(column=20, row=10)
 
-# ENTRY - for 1. excel sheet route / 2. selenium route
-entry = Entry(root, width=50, bg='grey', borderwidth=2)
-entry.grid(column=20, row=9,)
-entry.insert(0,'C3') # adding a default value to the entry / for excel - 1st cell
+
+checkbox = {
+    'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'Link in clipboard' ],
+    'title': ['title_search', 'title_search_button', 'Look for native title' ],
+    'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
+    'run': ['run_by_start', 'run_by_start_button', 'Run by start' ]
+}
+
+for item in checkbox.values():
+    item[0] = IntVar()
+    item[1] = Checkbutton(root, text = item[2],
+    variable = item[0], 
+    height = 2,
+    font = (font_style, 12))
+    item[1].pack()
+
+
 
 
 root.mainloop()
+
+
+'''
+Information from the user
+
+checkbox: 4
+searchbox: 2
+field: 1
+rolldown: 1
+
+checkbox     "imdb_link_in_clipboard": true,     mandatory
+searchbox    "path_movies_sheet": "",
+searchbox    "path_movie_new_record": "",        mandatory
+checkbox     "title_search": true,
+field        "title_search_link": "",            if "title_search": true - mandatory // roll down menu? greyed out otherwise? - able to add new link?
+checkbox     "poster_open_in_new_tab": true,
+rolldown     "poster_size": "",                  small by default / medium / larger // greyed out otherwise?
+checkbox     "run_by_start": false
+
+button - save current settings - message: will load automatically with next start
+
+'''
