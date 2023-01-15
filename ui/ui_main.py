@@ -3,12 +3,12 @@ from tkinter import *
 
 font_style = 'Georgia'
 
-root = Tk()
-root.title('I am D bee')
-root.geometry('450x600')
+window = Tk()
+window.title('I am D bee')
+window.geometry('450x600')
 
 # TITLE - will be a picture
-w = Label(root, text ='I am D bee',
+w = Label(window, text ='I am D bee',
 height = 2,
 font = (font_style, 20))
 w.pack()
@@ -22,18 +22,27 @@ checkbox = {
     'run': ['run_by_start', 'run_by_start_button', 'Run by start' ]
 }
 
+searchbox = {
+    'movie_new_record': ['imdb_link_in_clipboard', 'clipboard_button', 'Path to the target sheet' ],
+    'movies_sheet': ['title_search', 'title_search_button', 'Path to your movie database sheet' ],
+
+}
+
+# CHECKBOXES
 for item in checkbox.values():
     item[0] = IntVar()
-    item[1] = Checkbutton(root, text = item[2],
+    item[1] = Checkbutton(window, text = item[2],
     variable = item[0], 
     height = 2,
     font = (font_style, 12))
     item[1].pack()
 
+# SEARCHBOXES
 
 
 
-root.mainloop()
+
+window.mainloop()
 
 
 '''
