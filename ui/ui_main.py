@@ -1,19 +1,19 @@
 
 from tkinter import *
+from tkinter import filedialog      # searchbox
 
 font_style = 'Georgia'
+filename = None
 
 window = Tk()
-window.title('I am D bee')
-window.geometry('450x600')
+window.title('I am D bee - Window')
+window.geometry('600x800')
 
 # TITLE - will be a picture
 w = Label(window, text ='I am D bee',
 height = 2,
 font = (font_style, 20))
 w.pack()
-
-
 
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'Link in clipboard' ],
@@ -31,19 +31,48 @@ searchbox = {
 # CHECKBOXES
 for item in checkbox.values():
     item[0] = IntVar()
-    item[1] = Checkbutton(window, text = item[2],
-    variable = item[0], 
-    height = 2,
-    font = (font_style, 12))
+    item[1] = Checkbutton(
+        window,
+        text = item[2],
+        variable = item[0], 
+        height = 2,
+        font = (font_style, 12)
+        )
     item[1].pack()
 
-# SEARCHBOXES
+## FIELD FOR SEARCHBOX
+
+searchBox_field = Text(window, height = 1, width = 50)
+
+searchBox_field_title = Label(window, text = "Your target sheet path")
+searchBox_field_title.config(font =(font_style, 12))
+
+searchBox_field_title.pack()
+searchBox_field.pack()
+
+## SEARCHBOXES
+def browseSheet_1():
+    filename = filedialog.askopenfilename(initialdir = "/",
+            title = "Select a File",
+            filetypes = (("Excel sheet", "*.xlsx"),
+                           ("all files", "*.*")))
+    # label_file_explorer.configure(text=filename)
+    searchBox_field.delete('1.0', END)
+    searchBox_field.insert(END,filename)
+
+button_explore = Button(window,
+text = "Browse Files",
+command = browseSheet_1)
+
+
+button_explore.pack()
+
+
 
 
 
 
 window.mainloop()
-
 
 '''
 Information from the user
