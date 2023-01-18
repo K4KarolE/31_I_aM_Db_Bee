@@ -12,11 +12,11 @@ def save_settings(settings_data):
 
 
 
-settings_data = open_settings()
+# settings_data = open_settings()
 
-settings_data['test'] = "1414"
+# settings_data['test'] = "1414"
 
-save_settings(settings_data)
+# save_settings(settings_data)
 
 
 '''

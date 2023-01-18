@@ -1,6 +1,7 @@
 
 from tkinter import *
 from tkinter import filedialog      # searchbox
+from functions import settings
 
 font_style = 'Georgia'
 filename = None
@@ -38,10 +39,11 @@ for item in checkbox.values():
         height = 2,
         font = (font_style, 12)
         )
-    item[1].pack()
-# checkbox['clipboard'][1].pack()
-# checkbox['poster'][1].pack()
-# checkbox['run'][1].pack()
+    # item[1].pack()
+checkbox['clipboard'][1].pack()
+checkbox['poster'][1].pack()
+checkbox['run'][1].pack()
+checkbox['title'][1].pack()
 
 ## FIELD - TITLE SEARCH
 
@@ -82,30 +84,44 @@ button_explore.pack()
 
 ## POSTER SIZE - ROLL DOWN MENU
 options = [
-  "No poster",
+  "Disable",
   "Small",
   "Medium",
-  "Larger"
+  "Larger",
+  "All sizes"
 ]
- 
-
 
 clicked = StringVar()
- 
 
-clicked.set("Open poster")
+clicked.set("Small")
+
+poster_title = Label(window, text = "Open poster in a new tab")
 
 drop = OptionMenu( window, clicked, *options )
+poster_title.pack()
 drop.pack()
 
-# ttt = Label(window, text = clicked.get())
-# ttt.pack()
 
 
+### SAVE SETTINGS
+
+def save():
+    settings_data = settings.open_settings()
+
+    settings_data['path_movie_new_record'] = searchBox_field.get("1.0", "end-1c")
+    settings_data['poster_size'] = clicked.get()
 
 
+    settings_data['title_search'] = checkbox['title'][0].get()
+
+    settings.save_settings(settings_data)
 
 
+button_save_settings = Button(window,
+text = "Save settings",
+command = save)
+
+button_save_settings.pack()
 
 
 

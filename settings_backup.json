@@ -1,0 +1,14 @@
+{
+  "test": "D:/Movies_New_Record.xlsx",
+  "imdb_link_in_clipboard": true,
+  "path_movies_sheet": "",
+  "path_movie_new_record": "D:/Movies_New_Record.xlsx",
+  "title_search": true,
+  "title_search_link": {
+    "Hungarian": "https://www.mafab.hu/search/&search=",
+    "Czech": "https://www.csfd.cz/hledat/?q="
+  },
+  "poster_open_in_new_tab": true,
+  "poster_size": "All sizes",
+  "run_by_start": false
+}
