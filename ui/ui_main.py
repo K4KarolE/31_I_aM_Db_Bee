@@ -17,9 +17,9 @@ w.pack()
 
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'Link in clipboard' ],
-    'title': ['title_search', 'title_search_button', 'Look for native title' ],
     'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
-    'run': ['run_by_start', 'run_by_start_button', 'Run by start' ]
+    'run': ['run_by_start', 'run_by_start_button', 'Run by start' ],
+    'title': ['title_search', 'title_search_button', 'Look for native title' ]
 }
 
 searchbox = {
@@ -39,8 +39,22 @@ for item in checkbox.values():
         font = (font_style, 12)
         )
     item[1].pack()
+# checkbox['clipboard'][1].pack()
+# checkbox['poster'][1].pack()
+# checkbox['run'][1].pack()
 
-## FIELD FOR SEARCHBOX
+## FIELD - TITLE SEARCH
+
+title_search_link_field = Text(window, height = 1, width = 50)
+
+title_search_link_name = Label(window, text = "Title search link")
+title_search_link_name.config(font =(font_style, 12))
+
+
+title_search_link_name.pack()
+title_search_link_field.pack()
+
+## SEARCHBOXES
 
 searchBox_field = Text(window, height = 1, width = 50)
 
@@ -50,7 +64,6 @@ searchBox_field_title.config(font =(font_style, 12))
 searchBox_field_title.pack()
 searchBox_field.pack()
 
-## SEARCHBOXES
 def browseSheet_1():
     filename = filedialog.askopenfilename(initialdir = "/",
             title = "Select a File",
@@ -66,6 +79,30 @@ command = browseSheet_1)
 
 
 button_explore.pack()
+
+## POSTER SIZE - ROLL DOWN MENU
+options = [
+  "No poster",
+  "Small",
+  "Medium",
+  "Larger"
+]
+ 
+
+
+clicked = StringVar()
+ 
+
+clicked.set("Open poster")
+
+drop = OptionMenu( window, clicked, *options )
+drop.pack()
+
+# ttt = Label(window, text = clicked.get())
+# ttt.pack()
+
+
+
 
 
 
