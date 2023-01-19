@@ -6,17 +6,13 @@ from functions import settings
 font_style = 'Georgia'
 filename = None
 
-settings_data = settings.open_settings()        # access to the saved settings (settings_db.json)
+settings_data = settings.open_settings()        # access to the saved/default settings (settings_db.json)
 
 window = Tk()
 window.title('I am D bee - Window')
-window.geometry('600x800')
-
-# TITLE - will be a picture
-w = Label(window, text ='I am D bee',
-height = 2,
-font = (font_style, 20))
-w.pack()
+width = 500
+length = 600
+window.geometry(f'{width}x{length}')
 
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'Link in clipboard' ],
@@ -31,6 +27,12 @@ searchbox = {
 
 }
 
+# TITLE - will be a picture
+window_title = Label(window, text ='I am D bee',
+height = 2,
+font = (font_style, 20))
+
+
 # CHECKBOXES
 for item in checkbox.values():
     item[0] = IntVar()
@@ -42,12 +44,6 @@ for item in checkbox.values():
         font = (font_style, 12)
         )
     # item[1].pack()
-checkbox['clipboard'][1].pack()
-checkbox['poster'][1].pack()
-checkbox['run'][1].pack()
-checkbox['title'][1].pack()
-
-## TITLE SEARCH
 
 
 # TITLE SEARCH - BUTTON
@@ -55,24 +51,19 @@ title_search_options = []
 for item in settings_data['title_search_links'].keys():
     title_search_options = title_search_options + [item]
 
-
 title_search_clicked = StringVar()
 
 title_search_clicked.set("Hungarian")
 
 title_search_roll_down = OptionMenu( window, title_search_clicked, *title_search_options )
 
-title_search_roll_down.pack()
+
 
 ## SEARCHBOXES
-
-searchBox_field = Text(window, height = 1, width = 50)
+searchBox_field = Text(window, height = 1, width = 20)
 
 searchBox_field_title = Label(window, text = "Your target sheet path")
 searchBox_field_title.config(font =(font_style, 12))
-
-searchBox_field_title.pack()
-searchBox_field.pack()
 
 def browseSheet_1():
     filename = filedialog.askopenfilename(initialdir = "/",
@@ -83,12 +74,10 @@ def browseSheet_1():
     searchBox_field.delete('1.0', END)
     searchBox_field.insert(END,filename)
 
-button_explore = Button(window,
-text = "Browse Files",
+searchbox_button = Button(window,
+text = "Location",
 command = browseSheet_1)
 
-
-button_explore.pack()
 
 ## POSTER SIZE - ROLL DOWN MENU
 poster_size_options = [
@@ -103,12 +92,12 @@ clicked = StringVar()
 clicked.set("Small")
 
 poster_roll_down = OptionMenu( window, clicked, *poster_size_options )
-poster_roll_down.pack()
+
 
 settings_data = settings.open_settings()
 
-### SAVE SETTINGS
 
+### SAVE SETTINGS
 def save():
 
     settings_data['path_movie_new_record'] = searchBox_field.get("1.0", "end-1c")
@@ -125,10 +114,48 @@ button_save_settings = Button(window,
 text = "Save settings",
 command = save)
 
-button_save_settings.pack()
+
+
+### DISPLAY WIDGETS
+# BASE VALUES
+display_x = 140
+display_x_button_gap = 170
+display_y_base = 80
+displaey_y_gap = 30
+
+# WINDOW TITLE
+window_title.place(x=display_x+40, y=10)
+
+# CLIPBOARD CHECKBOX
+checkbox['clipboard'][1].place(x=display_x, y=80)
+
+# POSTER CHECKBOX + ROLL DOWN BUTTON
+checkbox['poster'][1].place(x=display_x, y=110)
+poster_roll_down.place(x=display_x+display_x_button_gap, y=115)
+
+# RAUN BY START CHECKBOX
+checkbox['run'][1].place(x=display_x, y=140)
+
+# LOOK FOR NATIVE TITLE + ROLL DOWN BUTTON
+checkbox['title'][1].place(x=display_x, y=170)
+title_search_roll_down.place(x=display_x+display_x_button_gap, y=175)
+
+# XL SHEET PATH TITEL + FIELD + SEARCHBOX BUTTON
+searchBox_field_title.place(x=display_x, y=230)
+searchBox_field.place(x=display_x, y=250)
+searchbox_button.place(x=display_x+display_x_button_gap, y=230)
+
+# SAVE SETTINGS BUTTON
+button_save_settings.place(x=display_x+50, y=350)
+
+
+
 
 
 window.mainloop()
+
+
+
 
 '''
 Information from the user

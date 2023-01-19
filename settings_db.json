@@ -1,7 +1,7 @@
 {
   "imdb_link_in_clipboard": true,
   "path_movies_sheet": "",
-  "path_movie_new_record": "",
+  "path_movie_new_record": "D:/Movies_New_Record.xlsx",
   "title_search": 0,
   "title_search_links": {
     "Hungarian": "https://www.mafab.hu/search/&search=",
@@ -10,6 +10,6 @@
   },
   "title_search_link_selected": "Czech",
   "poster_open_in_new_tab": true,
-  "poster_size": "Small",
+  "poster_size": "All sizes",
   "run_by_start": false
 }
