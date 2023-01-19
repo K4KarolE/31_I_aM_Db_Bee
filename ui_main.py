@@ -6,6 +6,8 @@ from functions import settings
 font_style = 'Georgia'
 filename = None
 
+settings_data = settings.open_settings()        # access to the saved settings (settings_db.json)
+
 window = Tk()
 window.title('I am D bee - Window')
 window.geometry('600x800')
@@ -45,16 +47,22 @@ checkbox['poster'][1].pack()
 checkbox['run'][1].pack()
 checkbox['title'][1].pack()
 
-## FIELD - TITLE SEARCH
-
-title_search_link_field = Text(window, height = 1, width = 50)
-
-title_search_link_name = Label(window, text = "Title search link")
-title_search_link_name.config(font =(font_style, 12))
+## TITLE SEARCH
 
 
-title_search_link_name.pack()
-title_search_link_field.pack()
+# TITLE SEARCH - BUTTON
+title_search_options = []
+for item in settings_data['title_search_links'].keys():
+    title_search_options = title_search_options + [item]
+
+
+title_search_clicked = StringVar()
+
+title_search_clicked.set("Hungarian")
+
+title_search_roll_down = OptionMenu( window, title_search_clicked, *title_search_options )
+
+title_search_roll_down.pack()
 
 ## SEARCHBOXES
 
@@ -83,8 +91,7 @@ command = browseSheet_1)
 button_explore.pack()
 
 ## POSTER SIZE - ROLL DOWN MENU
-options = [
-  "Disable",
+poster_size_options = [
   "Small",
   "Medium",
   "Larger",
@@ -95,24 +102,21 @@ clicked = StringVar()
 
 clicked.set("Small")
 
-poster_title = Label(window, text = "Open poster in a new tab")
+poster_roll_down = OptionMenu( window, clicked, *poster_size_options )
+poster_roll_down.pack()
 
-drop = OptionMenu( window, clicked, *options )
-poster_title.pack()
-drop.pack()
-
-
+settings_data = settings.open_settings()
 
 ### SAVE SETTINGS
 
 def save():
-    settings_data = settings.open_settings()
 
     settings_data['path_movie_new_record'] = searchBox_field.get("1.0", "end-1c")
     settings_data['poster_size'] = clicked.get()
 
 
-    settings_data['title_search'] = checkbox['title'][0].get()
+    settings_data['title_search'] = checkbox['title'][0].get()      # from CHECKBOXES for loop: variable = item[0] -> item[0] = checkbox['title'][0]
+    settings_data['title_search_link_selected'] = title_search_clicked.get()
 
     settings.save_settings(settings_data)
 
@@ -122,7 +126,6 @@ text = "Save settings",
 command = save)
 
 button_save_settings.pack()
-
 
 
 window.mainloop()

@@ -1,12 +1,12 @@
 import json
 
 def open_settings():
-    with open('settings.json') as f:
+    with open('settings_db.json') as f:
         settings_data = json.load(f)
     return settings_data
 
 def save_settings(settings_data):
-    with open('settings.json', 'w') as f:
+    with open('settings_db.json', 'w') as f:
         json.dump(settings_data, f, indent=2)
     return
 
