@@ -1,14 +1,14 @@
 {
-  "imdb_link_in_clipboard": 0,
-  "path_movies_db_sheet": "",
-  "path_movie_new_record": "",
-  "title_search": 0,
+  "imdb_link_in_clipboard": 1,
+  "path_movies_db_sheet": "D:/Movies_New_Record.xlsx",
+  "path_movie_new_record": ".xlsx",
+  "title_search": 1,
   "title_search_links": {
     "Hungarian": "https://www.mafab.hu/search/&search=",
     "Czech": "https://www.csfd.cz/hledat/?q="
   },
-  "title_search_link_selected": "Hungarian",
-  "poster_open_in_new_tab": 0,
-  "poster_size": "All sizes",
+  "title_search_link_selected": "Czech",
+  "poster_open_in_new_tab": 1,
+  "poster_size": "Medium",
   "run_by_start": 0
 }

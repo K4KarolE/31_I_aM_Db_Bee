@@ -16,7 +16,7 @@ length = 600
 window.geometry(f'{width}x{length}')
 
 checkbox = {
-    'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'IMDb Link in clipboard' ],
+    'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'IMDb link in clipboard' ],     # [0/1, button, text]
     'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
     'run': ['run_by_start', 'run_by_start_button', 'Run by start' ],
     'title': ['title_search', 'title_search_button', 'Look for native title' ]
@@ -106,8 +106,8 @@ clicked.set(settings_data['poster_size'])       # # set to the latest saved valu
 poster_roll_down = OptionMenu( window, clicked, *poster_size_options )
 
 
-### SAVE SETTINGS
-def save():
+### SAVE SETTINGS, START THE ENGINE
+def save_and_start():
     # CLIPBOARD CHECKBOX
     settings_data['imdb_link_in_clipboard'] = checkbox['clipboard'][0].get()
     
@@ -129,25 +129,20 @@ def save():
     settings_data['path_movies_db_sheet'] = movies_db_sheet_field.get("1.0", "end-1c")
 
     settings.save_settings(settings_data)
-button_save_settings = Button(window,
-text = "Save settings",
-command = save)
 
-### START
-def start():
-    # MANDATORY FIELDS CHECK
+    ### START ###
+    # MANDATORY FIELDS CHECK   
     error_popup_window_title = ['Got stuck in honey','Danger Will Robinson, danger!']
     if checkbox['clipboard'][0].get() == 0:
-        tkinter.messagebox.showinfo(error_popup_window_title[0], f"The #{checkbox['clipboard'][2]}# checkbox needs to be selected")     # error pop-up message
+        tkinter.messagebox.showinfo(error_popup_window_title[0], f"The #{checkbox['clipboard'][2]}# checkbox needs to be selected")   # error pop-up message
 
     if target_sheet_field.get("1.0", "end-1c") == '':
-        tkinter.messagebox.showinfo(error_popup_window_title[0], f"The #{target_sheet_text}# needs to be added")        # error pop-up message
+        tkinter.messagebox.showinfo(error_popup_window_title[0], f"The #{target_sheet_text}# needs to be added")   # error pop-up message
 
 
-
-button_start = Button(window,
-text = "START",
-command = start)
+button_save_settings = Button(window,
+text = "Start",
+command = save_and_start)
 
 
 ### DISPLAY WIDGETS
@@ -188,10 +183,13 @@ def display_widgets():
     # SAVE SETTINGS BUTTON
     button_save_settings.place(x=display_x+50, y=350)
 
-    # START BUTTON
-    button_start.place(x=display_x+65, y=400)
+    # # START BUTTON
+    # button_start.place(x=display_x+65, y=400)
 display_widgets()
 
+### START THE ENGINE AUTOMATICALLY WHEN THE run by start CHECKBOX VALUE SAVED AS 1/checked
+if settings_data['run_by_start'] == 1:
+    save_and_start()
 
 
 window.mainloop()
