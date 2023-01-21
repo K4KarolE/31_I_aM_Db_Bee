@@ -4,6 +4,8 @@ from tkinter import filedialog      # target_sheet
 import tkinter.messagebox           # for pop-up windows
 from functions import settings
 
+from functions import scraping
+
 font_style = 'Georgia'
 filename = None
 
@@ -132,13 +134,16 @@ def save_and_start():
 
     ### START ###
     # MANDATORY FIELDS CHECK   
-    error_popup_window_title = ['Got stuck in honey','Danger Will Robinson, danger!']
+    error_popup_window_title = [
+        'Got stuck in honey',
+        'Danger Will Robinson, danger!'
+        ]
     if checkbox['clipboard'][0].get() == 0:
         tkinter.messagebox.showinfo(error_popup_window_title[0], f"The #{checkbox['clipboard'][2]}# checkbox needs to be selected")   # error pop-up message
 
     if target_sheet_field.get("1.0", "end-1c") == '':
         tkinter.messagebox.showinfo(error_popup_window_title[0], f"The #{target_sheet_text}# needs to be added")   # error pop-up message
-
+    
 
 button_save_settings = Button(window,
 text = "Start",

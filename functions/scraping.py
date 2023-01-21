@@ -15,10 +15,15 @@ from functions import messages
 
 def get_link():
     link = pyperclip.paste()
-    while 'www.imdb.com/title/' not in link:
-        messages.message('error', 1.2, 'error_link')
-        input()
+    counter = 0
+    while 'imdb.com/title/' not in link:
+        counter += 1
+        messages.error_pop_up('wrong_link')
+        # messages.message('error', 1.2, 'error_link')
+        # input()
         link = pyperclip.paste()
+        if counter == 3:
+            sys.exit()
     return link
 
 def web_driver():
@@ -45,9 +50,9 @@ def web_driver():
         decider_read = driver.find_element(
         By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(1)').text      
     except:
-            messages.message('error', 2, 'error_decider')
-            driver.quit()
-            sys.exit()
+        messages.message('error', 2, 'error_decider')
+        driver.quit()
+        sys.exit()
 
     decider = None
     if len(decider_read) == 4:        # 1992 - year -> Movie, Short Film
@@ -59,17 +64,17 @@ def web_driver():
 
 ### MOVIE TITLE
     try:
-            element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((
-                    By.CSS_SELECTOR, '.sc-b73cd867-0'))
-            )                       
-            
-            titleRead = driver.find_element(
-            By.CSS_SELECTOR, '.sc-b73cd867-0').text
+        element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((
+                By.CSS_SELECTOR, '.sc-b73cd867-0'))
+        )                       
+        
+        titleRead = driver.find_element(
+        By.CSS_SELECTOR, '.sc-b73cd867-0').text
     except:
-            messages.message('error', 2, 'error_movie_title')
-            driver.quit()
-            sys.exit()
+        messages.message('error', 2, 'error_movie_title')
+        driver.quit()
+        sys.exit()
 
 ### YEAR OF RELEASE
     if decider == 'movie':
@@ -126,17 +131,17 @@ def web_driver():
         index_l_1 = 3
         index_l_2 = 4
     try:
-            # taking the 2nd item(1h 33m) from "2022 1h 33m"
-            movieLengthSum = driver.find_element(
-            By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index_l_1}) > a:nth-child(1)').text
+        # taking the 2nd item(1h 33m) from "2022 1h 33m"
+        movieLengthSum = driver.find_element(
+        By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index_l_1}) > a:nth-child(1)').text
 
-            # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
-            if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
-                    movieLengthSum = driver.find_element(
-                    By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index_l_2})').text
+        # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
+        if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
+                movieLengthSum = driver.find_element(
+                By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index_l_2})').text
     except:
-            movieLengthSum = None
-            messages.message('error', 2, 'error_length')
+        movieLengthSum = None
+        messages.message('error', 2, 'error_length')
 
 ### VALUATE AND TRANSFORM THE LENGTH VALUE(S)
     lengthHour = None

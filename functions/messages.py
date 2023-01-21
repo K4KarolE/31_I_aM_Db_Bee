@@ -1,7 +1,27 @@
 #!/bin python3.11
 
-import shutil
+import tkinter.messagebox  
 
+
+error_popup_window_title = [
+    'Got stuck in honey',
+    'Danger Will Robinson, danger!'
+    ]
+
+popup_message_dic = {
+    'wrong_link': 'Wrong link in clipboard\n\nCopy the IMDb link and click OK',
+    'excel_is_open':'Close your sheet and click OK'
+    }
+
+def error_pop_up(popup_message_dic_key):
+    tkinter.messagebox.showinfo(error_popup_window_title[0], f"{popup_message_dic[popup_message_dic_key]}")
+
+# error_pop_up('wrong_link')
+# error_pop_up('excel_is_open')
+
+
+### TERMINAL MESSAGES
+import shutil
 terminal_columns = shutil.get_terminal_size().columns
 
 frame = { 'bee_noise': ' Z-z-z ',

@@ -2,6 +2,7 @@
 
 import platform
 import os
+import sys
 from datetime import date
 
 from functions import messages
@@ -89,20 +90,26 @@ def write_sheet(titleRead, yearRead, directors, stars, genres, lengthHour, lengt
 
 # SAVE THE SHEET
     openSheet = True
+    counter = 0
     while openSheet == True:
             try:
-                    if platform.system() == 'Windows':                   
-                        wb.save("d:\Movies_New_Record.xlsx")
-                        openSheet = False
-                        print('\n')
+                if platform.system() == 'Windows':                   
+                    wb.save("d:\Movies_New_Record.xlsx")
+                    openSheet = False
+                    print('\n')
 
-                    if platform.system() == 'Linux':
-                        wb.save(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
-                        openSheet = False
-                        print('\n')
+                if platform.system() == 'Linux':
+                    wb.save(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
+                    openSheet = False
+                    print('\n')
             except:
-                    messages.message('error', 1.5, 'error_excel')
-                    input()
+                counter += 1
+                if counter < 4:
+                    messages.error_pop_up('excel_is_open')
+                    # messages.message('error', 1.5, 'error_excel')
+                    # input()
+                else:
+                    sys.exit()
 
 def launch_sheets():
     if platform.system() == 'Windows':
