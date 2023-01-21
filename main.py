@@ -2,33 +2,39 @@
 from tkinter import *
 from tkinter import filedialog      # target_sheet
 import tkinter.messagebox           # for pop-up windows
+
 from functions import settings
+settings_data = settings.open_settings()        # access to the saved/default settings (settings_db.json)
 
 import engine
 
+# STYLE
+background_color = '#E6B91E'
 font_style = 'Georgia'
-filename = None
 
-settings_data = settings.open_settings()        # access to the saved/default settings (settings_db.json)
+
 
 window = Tk()
 window.title('I am D bee - Window')
 width = 500
 length = 600
 window.geometry(f'{width}x{length}')
+window.configure(background=background_color)
 
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'IMDb link in clipboard' ],     # [0/1, button, text]
     'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
     'run': ['run_by_start', 'run_by_start_button', 'Run by start' ],
-    'title': ['title_search', 'title_search_button', 'Look for native title' ]
+    'title': ['title_search', 'title_search_button', 'Look for native title' ],
+    'no_picture': ['no_picture_in_sheet', 'no_picture_in_sheet_button', 'No pictures in target sheet' ]
 }
 
 
 # TITLE - will be a picture
 window_title = Label(window, text ='I am D bee',
 height = 2,
-font = (font_style, 20))
+font = (font_style, 20),
+background=background_color)
 
 
 # CHECKBOXES
@@ -62,6 +68,7 @@ target_sheet_field.insert(END,settings_data['path_movie_new_record'])   # set to
 target_sheet_field_title = Label(window, text = target_sheet_text)
 target_sheet_field_title.config(font =(font_style, 12))
 
+filename = None
 def browseSheet_1():
     filename = filedialog.askopenfilename(initialdir = "/",
             title = "Select a File",
@@ -117,6 +124,9 @@ def save_and_start():
     # RUN BY START CHECKBOX
     settings_data['run_by_start'] = checkbox['run'][0].get()
 
+    # NO PICTURE IN TARHET SHEET CHECKBOX
+    settings_data['no_picture_in_sheet'] = checkbox['no_picture'][0].get()
+
     # LOOK FOR NATIVE TITLE - CHECKBOX + ROLL DOWN BUTTON
     settings_data['title_search'] = checkbox['title'][0].get()                      # from CHECKBOXES for loop: variable = item[0] -> item[0] = checkbox['title'][0]
     settings_data['title_search_link_selected'] = title_search_clicked.get()        # Hungarian / Czech..
@@ -135,66 +145,79 @@ def save_and_start():
         'Got stuck in honey',
         'Danger Will Robinson, danger!'
         ]
-    if checkbox['clipboard'][0].get() == 0:
-        tkinter.messagebox.showinfo(error_popup_window_title[0], f"#{checkbox['clipboard'][2]}# checkbox is not selected\n\nClick OK once the link is copied")   # error pop-up message
-
     if target_sheet_field.get("1.0", "end-1c") == '':
         tkinter.messagebox.showinfo(error_popup_window_title[0], f"#{target_sheet_text}# needs to be added")   # error pop-up message
         return
     
+    if checkbox['no_picture'][0].get() == 0:
+        tkinter.messagebox.showinfo(error_popup_window_title[0], f"#{checkbox['no_picture'][2]}# checkbox is not selected")   # error pop-up message
+        return
+
+    if checkbox['clipboard'][0].get() == 0:
+        tkinter.messagebox.showinfo(error_popup_window_title[0], f"#{checkbox['clipboard'][2]}# checkbox is not selected\n\nClick OK once the link is copied")   # error pop-up message
+    
     engine.start_engine()   # will start data collection / save to excel sheet / if selected: open poster and native title search in new tabs, open movie DB sheet...
     
 
-button_save_settings = Button(window,
+button_save_and_start = Button(window,
 text = "Start",
-command = save_and_start)
+command = save_and_start,       # no () otherwise will execute it before clicking the button 
+font = (font_style, 15))        # binding multiple commands to the same button: command = lambda: [save_settings(), engine.start_engine()]
 
 
 ### DISPLAY WIDGETS
 def display_widgets():
     # BASE VALUES
+    # X
     display_x = 140
     display_x_button_gap = 170
-    # display_y_base = 80
-    # displaey_y_gap = 30
+    # Y
+    display_y_BASE = 80
+    display_y_GAP = 30
+
+    def y_location(gap_by_number):
+        display_y = display_y_BASE + display_y_GAP * gap_by_number
+        return display_y
+
 
     # WINDOW TITLE
     window_title.place(x=display_x+40, y=10)
 
     # CLIPBOARD CHECKBOX
-    checkbox['clipboard'][1].place(x=display_x, y=80)
+    checkbox['clipboard'][1].place(x=display_x, y=y_location(0))
 
     # POSTER CHECKBOX + ROLL DOWN BUTTON
-    checkbox['poster'][1].place(x=display_x, y=110)
-    poster_roll_down.place(x=display_x+display_x_button_gap, y=115)
-
-    # RAUN BY START CHECKBOX
-    checkbox['run'][1].place(x=display_x, y=140)
+    checkbox['poster'][1].place(x=display_x, y=y_location(1))
+    poster_roll_down.place(x=display_x+display_x_button_gap, y=y_location(1) + 7)
 
     # LOOK FOR NATIVE TITLE + ROLL DOWN BUTTON
-    checkbox['title'][1].place(x=display_x, y=170)
-    title_search_roll_down.place(x=display_x+display_x_button_gap, y=175)
+    checkbox['title'][1].place(x=display_x, y=y_location(2))
+    title_search_roll_down.place(x=display_x+display_x_button_gap, y=y_location(2) + 7)
+
+     # RAUN BY START CHECKBOX
+    checkbox['run'][1].place(x=display_x, y=y_location(3))
 
     # TARGET SHEET PATH TITEL + FIELD + target_sheet BUTTON
-    target_sheet_field_title.place(x=display_x, y=230)
-    target_sheet_field.place(x=display_x, y=250)
-    target_sheet_button.place(x=display_x+display_x_button_gap, y=243)
+    target_sheet_field_title.place(x=display_x, y=y_location(6))
+    target_sheet_field.place(x=display_x+3, y=y_location(6)+25)
+    target_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(6)+13)
+
+    # NO PICTURE IN TARHET SHEET CHECKBOX
+    checkbox['no_picture'][1].place(x=display_x, y=y_location(7)+10)
 
     # MOVIES DB SHEET PATH TITEL + FIELD + target_sheet BUTTON
-    movies_db_sheet_field_title.place(x=display_x, y=280)
-    movies_db_sheet_field.place(x=display_x, y=300)
-    movies_db_sheet_button.place(x=display_x+display_x_button_gap, y=293)
+    movies_db_sheet_field_title.place(x=display_x, y=y_location(9))
+    movies_db_sheet_field.place(x=display_x+3, y=y_location(9)+25)
+    movies_db_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(9)+13)
 
     # SAVE SETTINGS BUTTON
-    button_save_settings.place(x=display_x+50, y=350)
+    button_save_and_start.place(x=display_x+50, y=y_location(11))
 
-    # # START BUTTON
-    # button_start.place(x=display_x+65, y=400)
 display_widgets()
 
-### START THE ENGINE AUTOMATICALLY WHEN THE run by start CHECKBOX VALUE SAVED AS 1/checked
-if settings_data['run_by_start'] == 1:
-    save_and_start()
+## START THE ENGINE AUTOMATICALLY WHEN THE run by start CHECKBOX VALUE SAVED AS 1/checked
+# if settings_data['run_by_start'] == 1:
+#     engine.start_engine()
 
 
 window.mainloop()

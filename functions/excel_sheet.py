@@ -5,21 +5,26 @@ import os
 import sys
 from datetime import date
 
+from functions import settings              # from settings_db.json getting the info for the TARGET SHEET and MOVIE DB locations
+
 from functions import messages
 
 def write_sheet(titleRead, yearRead, directors, stars, genres, lengthHour, lengthMinute):
     cellnumber = 3
 
-# DUAL BOOT OPTION
+    settings_data = settings.open_settings()                                # opening the settings_db.json DB
+    full_path_to_MoviesNewRecord = settings_data['path_movie_new_record']
+
+# DUAL BOOT OPTION - TEST NEEDED FOR LINUX
     if platform.system() == 'Windows':
             from openpyxl import load_workbook
-            wb = load_workbook('D:/Movies_New_Record.xlsx')
+            wb = load_workbook(full_path_to_MoviesNewRecord)
             ws = wb.active
 
-    if platform.system() == 'Linux':
-            from openpyxl import load_workbook
-            wb = load_workbook(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
-            ws = wb.active
+    # if platform.system() == 'Linux':
+    #         from openpyxl import load_workbook
+    #         wb = load_workbook(settings_data['path_movies_db_sheet'])
+    #         ws = wb.active
 
 
 # ADDING THE VALUES TO EXCEL
@@ -94,14 +99,14 @@ def write_sheet(titleRead, yearRead, directors, stars, genres, lengthHour, lengt
     while openSheet == True:
             try:
                 if platform.system() == 'Windows':                   
-                    wb.save("d:\Movies_New_Record.xlsx")
+                    wb.save(full_path_to_MoviesNewRecord)
                     openSheet = False
                     print('\n')
 
-                if platform.system() == 'Linux':
-                    wb.save(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
-                    openSheet = False
-                    print('\n')
+                # if platform.system() == 'Linux':
+                #     wb.save(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
+                #     openSheet = False
+                #     print('\n')
             except:
                 counter += 1
                 if counter < 4:
@@ -112,14 +117,15 @@ def write_sheet(titleRead, yearRead, directors, stars, genres, lengthHour, lengt
                     sys.exit()
 
 def launch_sheets():
+    settings_data = settings.open_settings()                                # opening the settings_db.json DB
+    full_path_to_MoviesNewRecord = settings_data['path_movie_new_record']
+    full_path_to_Movies = settings_data['path_movies_db_sheet']
     if platform.system() == 'Windows':
-        full_path_to_MoviesNewRecord = "d:\Movies_New_Record.xlsx"
-        full_path_to_Movies = "d:\Movies.xlsx"
         os.system(f'start "excel" {full_path_to_Movies}')
         os.system(f'start "excel" {full_path_to_MoviesNewRecord}')
 
-    if platform.system() == 'Linux':                                    #amendment needed
-        full_path_to_MoviesNewRecord = "d:\Movies_New_Record.xlsx"
-        full_path_to_Movies = "d:\Movies.xlsx"
-        os.system(f'start "excel" {full_path_to_Movies}')
-        os.system(f'start "excel" {full_path_to_MoviesNewRecord}')
+    # if platform.system() == 'Linux':                                    #amendment needed
+    #     full_path_to_MoviesNewRecord = "d:\Movies_New_Record.xlsx"
+    #     full_path_to_Movies = "d:\Movies.xlsx"
+    #     os.system(f'start "excel" {full_path_to_Movies}')
+    #     os.system(f'start "excel" {full_path_to_MoviesNewRecord}')

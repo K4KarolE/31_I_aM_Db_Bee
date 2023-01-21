@@ -13,11 +13,10 @@ import platform
 
 from functions import messages
 
-from functions import settings          # from settings_db.json getting the info for the POSTER CHECKBOX and ROLDOWN MENU
-
-
-
+from functions import settings              # from settings_db.json getting the info for the POSTER CHECKBOX, ROLDOWN MENU
+                                            
 def get_link():
+    settings_data = settings.open_settings()    # opening the settings_db.json DB
     link = pyperclip.paste()
     counter = 0
     while 'imdb.com/title/' not in link:
@@ -26,12 +25,15 @@ def get_link():
         # messages.message('error', 1.2, 'error_link')
         # input()
         link = pyperclip.paste()
-        if counter == 3:
+        if counter == 2:
             messages.error_pop_up('bye_bye')
+            settings_data['run_by_start'] = 0       # set the RUN BY START value to 0, so the next start the ENGINE will not be launched
+            settings.save_settings(settings_data)
             sys.exit()
     return link
 
 def web_driver():
+    settings_data = settings.open_settings()
     link = get_link()
     if platform.system() == 'Windows':
         service = Service('C:\Program Files (x86)\chromedriver.exe')
@@ -165,7 +167,6 @@ def web_driver():
             lengthMinute = lengthList[1].strip('hm')
 
 ### POSTER IMAGE
-    settings_data = settings.open_settings()
     if settings_data['poster_open_in_new_tab'] == 1:
         try:
             poster = driver.find_element(By.CSS_SELECTOR, '.ipc-media--poster-l > img:nth-child(1)')
