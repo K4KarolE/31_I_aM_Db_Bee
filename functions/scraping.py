@@ -13,6 +13,10 @@ import platform
 
 from functions import messages
 
+from functions import settings          # from settings_db.json getting the info for the POSTER CHECKBOX and ROLDOWN MENU
+
+
+
 def get_link():
     link = pyperclip.paste()
     counter = 0
@@ -23,6 +27,7 @@ def get_link():
         # input()
         link = pyperclip.paste()
         if counter == 3:
+            messages.error_pop_up('bye_bye')
             sys.exit()
     return link
 
@@ -160,15 +165,23 @@ def web_driver():
             lengthMinute = lengthList[1].strip('hm')
 
 ### POSTER IMAGE
-    try:
+    settings_data = settings.open_settings()
+    if settings_data['poster_open_in_new_tab'] == 1:
+        try:
             poster = driver.find_element(By.CSS_SELECTOR, '.ipc-media--poster-l > img:nth-child(1)')
             posterLink = poster.get_attribute('srcset')
-            posterLink_list = posterLink.split() # making a list devided by the space(link(1st in the list) size, link(3rd) size, link(5th) size)       
-            webbrowser.open(posterLink_list[0])     # small
-            # webbrowser.open(posterLink_list[2])   # medium
-            # webbrowser.open(posterLink_list[4])   # larger
+            posterLink_list = posterLink.split() # making a list devided by the space(link(1st in the list) size, link(3rd) size, link(5th) size)
+            
+            selected_poster_size = settings_data['poster_size']     # Small, Medium...
+            selected_poster_size_value = settings_data["poster_size_options"][selected_poster_size]     # 0 - Small, 2 - Medium, 4 - Larger
 
-    except:
-            messages.message('error', 2, 'error_poster')
+            if selected_poster_size != "All sizes":     # just open a specific size of poster
+                webbrowser.open(posterLink_list[selected_poster_size_value])
+            else:                                     # ALL SIZES     
+                webbrowser.open(posterLink_list[0])   # small
+                webbrowser.open(posterLink_list[2])   # medium
+                webbrowser.open(posterLink_list[4])   # larger
+        except:
+                messages.message('error', 2, 'error_poster')
 
     return titleRead, yearRead, directors, stars, genres, lengthHour, lengthMinute

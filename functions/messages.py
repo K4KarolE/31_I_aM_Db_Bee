@@ -10,7 +10,8 @@ error_popup_window_title = [
 
 popup_message_dic = {
     'wrong_link': 'Wrong link in clipboard\n\nCopy the IMDb link and click OK',
-    'excel_is_open':'Close your sheet and click OK'
+    'excel_is_open':'Close your sheet and click OK',
+    'bye_bye':'You just blew it honey!'
     }
 
 def error_pop_up(popup_message_dic_key):

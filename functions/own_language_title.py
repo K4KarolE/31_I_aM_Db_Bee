@@ -1,5 +1,6 @@
 import webbrowser
-from functions import settings
+from functions import settings      # when you call it outside functions folder
+# import settings                   # when you run it from insinde functions folder
 
 settings_data = settings.open_settings() 
 
