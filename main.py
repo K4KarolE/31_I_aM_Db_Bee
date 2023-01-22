@@ -8,18 +8,19 @@ settings_data = settings.open_settings()        # access to the saved/default se
 
 import engine
 
-# STYLE
-background_color = '#F0F0F0' # IMDb yellow: #E6B91E // default: #F0F0F0
+# COLORS - FONT STYLE
+background_color = '#E6B91E'
+field_background_color = 'white' # IMDb yellow: #E6B91E // default: #F0F0F0
 font_style = 'Georgia'
 
 
-
 window = Tk()
-window.title('I am D bee - Window')
+window.title('Hunny 4 life')
 width = 500
 length = 600
 window.geometry(f'{width}x{length}')
 window.configure(background=background_color)
+
 
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'IMDb link in clipboard' ],     # [0/1, button, text]
@@ -29,13 +30,17 @@ checkbox = {
     'no_picture': ['no_picture_in_sheet', 'no_picture_in_sheet_button', 'No pictures in target sheet' ]
 }
 
+# IMAGES
+backgound_image = PhotoImage(file = "./skins/_default/BG.png")
+backgound_image_label = Label( window, image = backgound_image)
+backgound_image_label.place(x = -2, y = 0)
+window.iconbitmap("./skins/_default/icon.ico")        # window icon
 
 # TITLE - will be a picture
-window_title = Label(window, text ='I am D bee',
-height = 2,
-font = (font_style, 20),
-background=background_color)
-
+# window_title = Label(window, text ='I am D bee',
+# height = 2,
+# font = (font_style, 20),
+# background=background_color)
 
 # CHECKBOXES
 for item in checkbox.values():
@@ -45,8 +50,9 @@ for item in checkbox.values():
         window,
         text = item[2],
         variable = item[0], 
-        height = 2,
-        font = (font_style, 12)
+        height = 1,
+        font = (font_style, 12),
+        background=background_color
         )
 
 
@@ -58,14 +64,20 @@ for item in settings_data['title_search_links'].keys():
 title_search_clicked = StringVar()
 title_search_clicked.set(settings_data['title_search_link_selected'])   # set to the latest saved value (Hungarian / Czech /..)
 title_search_roll_down = OptionMenu( window, title_search_clicked, *title_search_options )
+title_search_roll_down.config(background=background_color)
 
 
 ## PATH FIELDS - SEARCHBOXES
 # TARGET SHEET
 target_sheet_text = "Target sheet path"
-target_sheet_field = Text(window, height = 1, width = 20)
+target_sheet_field = Text(window,
+height = 1,
+width = 20,
+background=field_background_color)
 target_sheet_field.insert(END,settings_data['path_movie_new_record'])   # set to the latest saved PATH value
-target_sheet_field_title = Label(window, text = target_sheet_text)
+target_sheet_field_title = Label(window,
+text = target_sheet_text,
+background=background_color)
 target_sheet_field_title.config(font =(font_style, 12))
 
 filename = None
@@ -80,12 +92,18 @@ def browseSheet_1():
 
 target_sheet_button = Button(window,
 text = ">>",
-command = browseSheet_1)
+command = browseSheet_1,
+background=background_color)
 
 # MOVIES DB SHEET
-movies_db_sheet_field = Text(window, height = 1, width = 20)
+movies_db_sheet_field = Text(window,
+height = 1,
+width = 20,
+background=field_background_color)
 movies_db_sheet_field.insert(END,settings_data['path_movies_db_sheet'])    # set to the latest saved PATH value
-movies_db_sheet_field_title = Label(window, text = "Movies DB sheet path")
+movies_db_sheet_field_title = Label(window,
+text = "Movies DB sheet path",
+background=background_color)
 movies_db_sheet_field_title.config(font =(font_style, 12))
 
 def browseSheet_2():
@@ -99,13 +117,19 @@ def browseSheet_2():
 
 movies_db_sheet_button = Button(window,
 text = ">>",
-command = browseSheet_2)
+command = browseSheet_2,
+background=background_color)
 
 # CHROME DRIVER
 chrome_driver_text = "Chrome driver path"
-chrome_driver_field = Text(window, height = 1, width = 20)
+chrome_driver_field = Text(window,
+height = 1,
+width = 20,
+background=field_background_color)
 chrome_driver_field.insert(END,settings_data["path_chrome_driver"])   # set to the latest saved PATH value
-chrome_driver_field_title = Label(window, text = chrome_driver_text)
+chrome_driver_field_title = Label(window,
+text = chrome_driver_text,
+background=background_color)
 chrome_driver_field_title.config(font =(font_style, 12))
 
 filename = None
@@ -120,7 +144,8 @@ def browseSheet_3():
 
 chrome_driver_button = Button(window,
 text = ">>",
-command = browseSheet_3)
+command = browseSheet_3,
+background=background_color)
 
 
 ## POSTER SIZE - ROLL DOWN MENU
@@ -130,7 +155,8 @@ for item in settings_data['poster_size_options'].keys():        # creating a lis
 
 clicked = StringVar()
 clicked.set(settings_data['poster_size'])       # # set to the latest saved value
-poster_roll_down = OptionMenu( window, clicked, *poster_size_options )
+poster_roll_down = OptionMenu( window, clicked, *poster_size_options)
+poster_roll_down.config(background=background_color)
 
 
 ### SAVE SETTINGS, START THE ENGINE
@@ -189,28 +215,28 @@ def save_and_start():
     
 
 button_save_and_start = Button(window,
-text = "Start",
+text = "Save & Start",
 command = save_and_start,       # no () otherwise will execute it before clicking the button 
-font = (font_style, 15))        # binding multiple commands to the same button: command = lambda: [save_settings(), engine.start_engine()]
+font = (font_style, 15),
+background=background_color)        # binding multiple commands to the same button: command = lambda: [save_settings(), engine.start_engine()]
 
 
 ### DISPLAY WIDGETS
 def display_widgets():
     # BASE VALUES
     # X
-    display_x = 140
+    display_x = 150
     display_x_button_gap = 170
     # Y
-    display_y_BASE = 80
+    display_y_BASE = 130
     display_y_GAP = 30
 
     def y_location(gap_by_number):
         display_y = display_y_BASE + display_y_GAP * gap_by_number
         return display_y
 
-
-    # WINDOW TITLE
-    window_title.place(x=display_x+40, y=10)
+    #WINDOW TITLE
+    # window_title.place(x=display_x+40, y=10)
 
     # CLIPBOARD CHECKBOX
     checkbox['clipboard'][1].place(x=display_x, y=y_location(0))
@@ -240,12 +266,12 @@ def display_widgets():
     checkbox['no_picture'][1].place(x=display_x, y=y_location(8)+10)
 
     # MOVIES DB SHEET PATH - TITEL + FIELD + BUTTON
-    movies_db_sheet_field_title.place(x=display_x, y=y_location(10))
-    movies_db_sheet_field.place(x=display_x+3, y=y_location(10)+25)
-    movies_db_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(10)+13)
+    movies_db_sheet_field_title.place(x=display_x, y=y_location(10)-12)
+    movies_db_sheet_field.place(x=display_x+3, y=y_location(10)+25-12)
+    movies_db_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(10)+13-12)
 
     # SAVE SETTINGS BUTTON
-    button_save_and_start.place(x=display_x+50, y=y_location(12)+10)
+    button_save_and_start.place(x=display_x+30, y=y_location(12)+10)
 
 display_widgets()
 
