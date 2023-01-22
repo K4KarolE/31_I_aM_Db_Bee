@@ -22,6 +22,12 @@ window.geometry(f'{width}x{length}')
 window.configure(background=background_color)
 
 
+# IMAGES
+backgound_image = PhotoImage(file = "./skins/default/BG.png")
+backgound_image_label = Label( window, image = backgound_image)
+backgound_image_label.place(x = -2, y = 0)
+window.iconbitmap("./skins/default/icon.ico")        # window icon
+
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'IMDb link in clipboard' ],     # [0/1, button, text]
     'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
@@ -29,12 +35,6 @@ checkbox = {
     'title': ['title_search', 'title_search_button', 'Look for native title' ],
     'no_picture': ['no_picture_in_sheet', 'no_picture_in_sheet_button', 'No pictures in target sheet' ]
 }
-
-# IMAGES
-backgound_image = PhotoImage(file = "./skins/_default/BG.png")
-backgound_image_label = Label( window, image = backgound_image)
-backgound_image_label.place(x = -2, y = 0)
-window.iconbitmap("./skins/_default/icon.ico")        # window icon
 
 # TITLE - will be a picture
 # window_title = Label(window, text ='I am D bee',
@@ -54,6 +54,7 @@ for item in checkbox.values():
         font = (font_style, 12),
         background=background_color
         )
+checkbox['no_picture'][1].config(font = (font_style, 9))    # make the /No pictures in target sheet/ checkbox text smaller
 
 
 # TITLE SEARCH - BUTTON
@@ -243,11 +244,11 @@ def display_widgets():
 
     # POSTER CHECKBOX + ROLL DOWN BUTTON
     checkbox['poster'][1].place(x=display_x, y=y_location(1))
-    poster_roll_down.place(x=display_x+display_x_button_gap, y=y_location(1) + 7)
+    poster_roll_down.place(x=display_x+display_x_button_gap, y=y_location(1))
 
     # LOOK FOR NATIVE TITLE + ROLL DOWN BUTTON
     checkbox['title'][1].place(x=display_x, y=y_location(2))
-    title_search_roll_down.place(x=display_x+display_x_button_gap, y=y_location(2) + 7)
+    title_search_roll_down.place(x=display_x+display_x_button_gap, y=y_location(2))
 
      # RAUN BY START CHECKBOX
     checkbox['run'][1].place(x=display_x, y=y_location(3))
@@ -263,7 +264,7 @@ def display_widgets():
     target_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(7)+13)
 
     # NO PICTURE IN TARHET SHEET CHECKBOX
-    checkbox['no_picture'][1].place(x=display_x, y=y_location(8)+10)
+    checkbox['no_picture'][1].place(x=display_x, y=y_location(8)+13)
 
     # MOVIES DB SHEET PATH - TITEL + FIELD + BUTTON
     movies_db_sheet_field_title.place(x=display_x, y=y_location(10)-12)
