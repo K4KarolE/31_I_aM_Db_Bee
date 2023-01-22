@@ -36,13 +36,13 @@ def web_driver():
     settings_data = settings.open_settings()
     link = get_link()
     if platform.system() == 'Windows':
-        service = Service('C:\Program Files (x86)\chromedriver.exe')
+        service = Service(settings_data["path_chrome_driver"])
         driver = webdriver.Chrome(service=service)
         driver.minimize_window()
         driver.get(link)
 
     if platform.system() == 'Linux':
-        service = Service('/home/zsandark/_DEV/Support/Chrome_driver/chromedriver')
+        service = Service(settings_data["path_chrome_driver"])
         driver = webdriver.Chrome(service=service)
         driver.minimize_window()
         driver.get(link)

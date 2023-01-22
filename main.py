@@ -9,7 +9,7 @@ settings_data = settings.open_settings()        # access to the saved/default se
 import engine
 
 # STYLE
-background_color = '#E6B91E'
+background_color = '#F0F0F0' # IMDb yellow: #E6B91E // default: #F0F0F0
 font_style = 'Georgia'
 
 
@@ -24,7 +24,7 @@ window.configure(background=background_color)
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'IMDb link in clipboard' ],     # [0/1, button, text]
     'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
-    'run': ['run_by_start', 'run_by_start_button', 'Run by start' ],
+    'run': ['run_by_start', 'run_by_start_button', 'Autorun by next start' ],
     'title': ['title_search', 'title_search_button', 'Look for native title' ],
     'no_picture': ['no_picture_in_sheet', 'no_picture_in_sheet_button', 'No pictures in target sheet' ]
 }
@@ -101,6 +101,27 @@ movies_db_sheet_button = Button(window,
 text = ">>",
 command = browseSheet_2)
 
+# CHROME DRIVER
+chrome_driver_text = "Chrome driver path"
+chrome_driver_field = Text(window, height = 1, width = 20)
+chrome_driver_field.insert(END,settings_data["path_chrome_driver"])   # set to the latest saved PATH value
+chrome_driver_field_title = Label(window, text = chrome_driver_text)
+chrome_driver_field_title.config(font =(font_style, 12))
+
+filename = None
+def browseSheet_3():
+    filename = filedialog.askopenfilename(initialdir = "/",
+            title = "Select a File",
+            filetypes = (("Executable", "*.exe"),
+                        ("all files", "*.*")))
+    # label_file_explorer.configure(text=filename)
+    chrome_driver_field.delete('1.0', END)       # once a button is clicked, removes the previous value
+    chrome_driver_field.insert(END,filename)     # adding the path and the name of the selected file
+
+chrome_driver_button = Button(window,
+text = ">>",
+command = browseSheet_3)
+
 
 ## POSTER SIZE - ROLL DOWN MENU
 poster_size_options = []
@@ -131,6 +152,9 @@ def save_and_start():
     settings_data['title_search'] = checkbox['title'][0].get()                      # from CHECKBOXES for loop: variable = item[0] -> item[0] = checkbox['title'][0]
     settings_data['title_search_link_selected'] = title_search_clicked.get()        # Hungarian / Czech..
 
+    # CHROME DRIVER PATH FIELD
+    settings_data['path_chrome_driver'] = chrome_driver_field.get("1.0", "end-1c")
+
     # TARGET SHEET PATH FIELD
     settings_data['path_movie_new_record'] = target_sheet_field.get("1.0", "end-1c")
 
@@ -140,21 +164,26 @@ def save_and_start():
     settings.save_settings(settings_data)
 
     ### START ###
-    # MANDATORY FIELDS CHECK   
+    ## MANDATORY FIELDS CHECK   
     error_popup_window_title = [
         'Got stuck in honey',
         'Danger Will Robinson, danger!'
         ]
+    # CHROME DRIVER
+    if chrome_driver_field.get("1.0", "end-1c") == '':
+        tkinter.messagebox.showinfo(error_popup_window_title[1], f"#{chrome_driver_text}# needs to be added")   # error pop-up message
+        return
+    # TARGET SHEET
     if target_sheet_field.get("1.0", "end-1c") == '':
-        tkinter.messagebox.showinfo(error_popup_window_title[0], f"#{target_sheet_text}# needs to be added")   # error pop-up message
+        tkinter.messagebox.showinfo(error_popup_window_title[1], f"#{target_sheet_text}# needs to be added")   # error pop-up message
         return
-    
+    # NO PICTURES IN TARGET SHEET - CHECKBOX
     if checkbox['no_picture'][0].get() == 0:
-        tkinter.messagebox.showinfo(error_popup_window_title[0], f"#{checkbox['no_picture'][2]}# checkbox is not selected")   # error pop-up message
+        tkinter.messagebox.showinfo(error_popup_window_title[1], f"#{checkbox['no_picture'][2]}# checkbox is not selected")   # error pop-up message
         return
-
+    # IMDb LINK IN CLIPBOARD - CHECKBOX
     if checkbox['clipboard'][0].get() == 0:
-        tkinter.messagebox.showinfo(error_popup_window_title[0], f"#{checkbox['clipboard'][2]}# checkbox is not selected\n\nClick OK once the link is copied")   # error pop-up message
+        tkinter.messagebox.showinfo(error_popup_window_title[1], f"#{checkbox['clipboard'][2]}# checkbox is not selected\n\nClick OK once the link is copied")   # error pop-up message
     
     engine.start_engine()   # will start data collection / save to excel sheet / if selected: open poster and native title search in new tabs, open movie DB sheet...
     
@@ -197,21 +226,26 @@ def display_widgets():
      # RAUN BY START CHECKBOX
     checkbox['run'][1].place(x=display_x, y=y_location(3))
 
-    # TARGET SHEET PATH TITEL + FIELD + target_sheet BUTTON
-    target_sheet_field_title.place(x=display_x, y=y_location(6))
-    target_sheet_field.place(x=display_x+3, y=y_location(6)+25)
-    target_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(6)+13)
+    # CHROME DRIVER PATH - TITEL + FIELD + BUTTON
+    chrome_driver_field_title.place(x=display_x, y=y_location(5))
+    chrome_driver_field.place(x=display_x+3, y=y_location(5)+25)
+    chrome_driver_button.place(x=display_x+display_x_button_gap, y=y_location(5)+13)
+
+    # TARGET SHEET PATH - TITEL + FIELD + BUTTON
+    target_sheet_field_title.place(x=display_x, y=y_location(7))
+    target_sheet_field.place(x=display_x+3, y=y_location(7)+25)
+    target_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(7)+13)
 
     # NO PICTURE IN TARHET SHEET CHECKBOX
-    checkbox['no_picture'][1].place(x=display_x, y=y_location(7)+10)
+    checkbox['no_picture'][1].place(x=display_x, y=y_location(8)+10)
 
-    # MOVIES DB SHEET PATH TITEL + FIELD + target_sheet BUTTON
-    movies_db_sheet_field_title.place(x=display_x, y=y_location(9))
-    movies_db_sheet_field.place(x=display_x+3, y=y_location(9)+25)
-    movies_db_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(9)+13)
+    # MOVIES DB SHEET PATH - TITEL + FIELD + BUTTON
+    movies_db_sheet_field_title.place(x=display_x, y=y_location(10))
+    movies_db_sheet_field.place(x=display_x+3, y=y_location(10)+25)
+    movies_db_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(10)+13)
 
     # SAVE SETTINGS BUTTON
-    button_save_and_start.place(x=display_x+50, y=y_location(11))
+    button_save_and_start.place(x=display_x+50, y=y_location(12)+10)
 
 display_widgets()
 
