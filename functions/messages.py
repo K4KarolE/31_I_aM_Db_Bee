@@ -15,7 +15,7 @@ popup_message_dic = {
     }
 
 def error_pop_up(popup_message_dic_key):
-    tkinter.messagebox.showinfo(error_popup_window_title[0], f"{popup_message_dic[popup_message_dic_key]}")
+    tkinter.messagebox.showinfo(error_popup_window_title[0], f"{popup_message_dic[popup_message_dic_key]}") # tkinter.messagebox.showinfo ( window title, message )
 
 # error_pop_up('wrong_link')
 # error_pop_up('excel_is_open')

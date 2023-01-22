@@ -199,7 +199,7 @@ def save_and_start():
     # CHROME DRIVER
     if chrome_driver_field.get("1.0", "end-1c") == '':
         tkinter.messagebox.showinfo(error_popup_window_title[1], f"#{chrome_driver_text}# needs to be added")   # error pop-up message
-        return
+        return      # stops the function without exiting from the main script
     # TARGET SHEET
     if target_sheet_field.get("1.0", "end-1c") == '':
         tkinter.messagebox.showinfo(error_popup_window_title[1], f"#{target_sheet_text}# needs to be added")   # error pop-up message
@@ -210,14 +210,14 @@ def save_and_start():
         return
     # IMDb LINK IN CLIPBOARD - CHECKBOX
     if checkbox['clipboard'][0].get() == 0:
-        tkinter.messagebox.showinfo(error_popup_window_title[1], f"#{checkbox['clipboard'][2]}# checkbox is not selected\n\nClick OK once the link is copied")   # error pop-up message
-    
+        tkinter.messagebox.showinfo(error_popup_window_title[1], f"#{checkbox['clipboard'][2]}# checkbox is not selected\n\nClick OK once the link is copied")
+        # error pop-up message, more relevant for the first time users
     engine.start_engine()   # will start data collection / save to excel sheet / if selected: open poster and native title search in new tabs, open movie DB sheet...
     
 
 button_save_and_start = Button(window,
 text = "Save & Start",
-command = save_and_start,       # no () otherwise will execute it before clicking the button 
+command = save_and_start,       # no () in save_and_start() otherwise will execute it automatically before clicking the button 
 font = (font_style, 15),
 background=background_color)        # binding multiple commands to the same button: command = lambda: [save_settings(), engine.start_engine()]
 
@@ -276,9 +276,9 @@ def display_widgets():
 
 display_widgets()
 
-## START THE ENGINE AUTOMATICALLY WHEN THE run by start CHECKBOX VALUE SAVED AS 1/checked
-# if settings_data['run_by_start'] == 1:
-#     engine.start_engine()
+# START THE ENGINE AUTOMATICALLY WHEN THE run by start CHECKBOX VALUE SAVED AS 1/checked
+if settings_data['run_by_start'] == 1:
+    engine.start_engine()
 
 
 window.mainloop()
