@@ -15,7 +15,7 @@ font_style = 'Georgia'
 
 
 window = Tk()
-window.title('Hunny 4 life')
+window.title('Hunny 4 Life')
 width = 500
 length = 600
 window.geometry(f'{width}x{length}')
