@@ -9,6 +9,6 @@
 - Looks for the user`s native language movie title (if checked - multiple languages option)
 - Automatically opens your movie database excel sheet (if the path added by the user via UI)
 <p>
-- Please see the UI screenshot in docs/promo folder
-- Please see the requirements in the docs folder
-- Default skin: bee icon/figure by Martin Berube, please see more information in launcher/icon
+* Please see the UI screenshot in docs/promo folder
+* Please see the requirements in the docs folder
+* Default skin: bee icon/figure by Martin Berube, please see more information in launcher/icon
