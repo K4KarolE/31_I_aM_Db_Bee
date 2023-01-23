@@ -12,3 +12,9 @@ $~$
 * Please see the UI screenshot in docs/promo folder
 * Please see the requirements in the docs folder
 * Default skin: bee icon/figure by Martin Berube, please see more information in launcher/icon
+$~$
+![ScreenShot](https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png)
+
+<div align="center">
+    <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png" width="400px"</img> 
+</div>
