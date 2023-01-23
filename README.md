@@ -9,12 +9,9 @@
 - Looks for the user`s native language movie title (if checked - multiple languages option)
 - Automatically opens your movie database excel sheet (if the path added by the user via UI)
 $~$
-* Please see the UI screenshot in docs/promo folder
 * Please see the requirements in the docs folder
 * Default skin: bee icon/figure by Martin Berube, please see more information in launcher/icon
 $~$
-![ScreenShot](https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png)
-
 <div align="center">
-    <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png" width="400px"</img> 
+    <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png" width="500px"</img> 
 </div>
