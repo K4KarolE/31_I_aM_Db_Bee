@@ -8,7 +8,7 @@
 - Note: the poster image is not "right click copy-able" from the movie`s IMDb front page by default
 - Looks for the user`s native language movie title (if checked - multiple languages option)
 - Automatically opens your movie database excel sheet (if the path added by the user via UI)
-\
+<br/>
 - Please see the UI screenshot in docs/promo folder
 - Please see the requirements in the docs folder
 - Default skin: bee icon/figure by Martin Berube, please see more information in launcher/icon
