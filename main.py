@@ -65,7 +65,8 @@ for item in settings_data['title_search_links'].keys():
 title_search_clicked = StringVar()
 title_search_clicked.set(settings_data['title_search_link_selected'])   # set to the latest saved value (Hungarian / Czech /..)
 title_search_roll_down = OptionMenu( window, title_search_clicked, *title_search_options )
-title_search_roll_down.config(background=background_color)
+title_search_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
+title_search_roll_down["menu"].config(background=background_color, activebackground=background_color)
 
 
 ## PATH FIELDS - SEARCHBOXES
@@ -157,7 +158,8 @@ for item in settings_data['poster_size_options'].keys():        # creating a lis
 clicked = StringVar()
 clicked.set(settings_data['poster_size'])       # # set to the latest saved value
 poster_roll_down = OptionMenu( window, clicked, *poster_size_options)
-poster_roll_down.config(background=background_color)
+poster_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
+poster_roll_down["menu"].config(background=background_color, activebackground=background_color)
 
 
 ### SAVE SETTINGS, START THE ENGINE
