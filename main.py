@@ -13,14 +13,14 @@ background_color = '#E6B91E'
 field_background_color = 'white' # IMDb yellow: #E6B91E // default: #F0F0F0
 font_style = 'Georgia'
 
-
+# WINDOW
 window = Tk()
 window.title('Hunny 4 Life')
 width = 500
 length = 600
 window.geometry(f'{width}x{length}')
+window.resizable(0,0)   # lock the main window
 window.configure(background=background_color)
-
 
 # IMAGES
 backgound_image = PhotoImage(file = "./skins/default/BG.png")
@@ -28,6 +28,7 @@ backgound_image_label = Label( window, image = backgound_image)
 backgound_image_label.place(x = -2, y = 0)
 window.iconbitmap("./skins/default/icon.ico")        # window icon
 
+# CHECKBOXES
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'IMDb link in clipboard' ],     # [0/1, button, text]
     'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
@@ -36,13 +37,6 @@ checkbox = {
     'no_picture': ['no_picture_in_sheet', 'no_picture_in_sheet_button', 'No pictures in target sheet' ]
 }
 
-# TITLE - will be a picture
-# window_title = Label(window, text ='I am D bee',
-# height = 2,
-# font = (font_style, 20),
-# background=background_color)
-
-# CHECKBOXES
 for item in checkbox.values():
     first_list_item = item[0]                               # we need the titles of first items in the dic. values('imdb_link_in_clipboard'..) in the next line
     item[0] = IntVar(value=settings_data[first_list_item])  # loading the previosly saved values (ticked/unticked) from settings_db.json
@@ -52,10 +46,10 @@ for item in checkbox.values():
         variable = item[0], 
         height = 1,
         font = (font_style, 12),
-        background=background_color
+        background=background_color,
+        activebackground=background_color   # activebackground - color when clicked
         )
 checkbox['no_picture'][1].config(font = (font_style, 9))    # make the /No pictures in target sheet/ checkbox text smaller
-
 
 # TITLE SEARCH - BUTTON
 title_search_options = []
@@ -67,7 +61,8 @@ title_search_clicked.set(settings_data['title_search_link_selected'])   # set to
 title_search_roll_down = OptionMenu( window, title_search_clicked, *title_search_options )
 title_search_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
 title_search_roll_down["menu"].config(background=background_color, activebackground=background_color)
-
+# highlightbackground - color around the button
+# activebackground - color when mouse over or clicked
 
 ## PATH FIELDS - SEARCHBOXES
 # TARGET SHEET
@@ -149,7 +144,6 @@ text = ">>",
 command = browseSheet_3,
 background=background_color)
 
-
 ## POSTER SIZE - ROLL DOWN MENU
 poster_size_options = []
 for item in settings_data['poster_size_options'].keys():        # creating a list of the POSTER SIZE OPTIONS holded in settings_db.json / poster_size_options
@@ -160,7 +154,6 @@ clicked.set(settings_data['poster_size'])       # # set to the latest saved valu
 poster_roll_down = OptionMenu( window, clicked, *poster_size_options)
 poster_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
 poster_roll_down["menu"].config(background=background_color, activebackground=background_color)
-
 
 ### SAVE SETTINGS, START THE ENGINE
 def save_and_start():
@@ -216,7 +209,6 @@ def save_and_start():
         # error pop-up message, more relevant for the first time users
     engine.start_engine()   # will start data collection / save to excel sheet / if selected: open poster and native title search in new tabs, open movie DB sheet...
     
-
 button_save_and_start = Button(window,
 text = "Save & Start",
 command = save_and_start,       # no () in save_and_start() otherwise will execute it automatically before clicking the button 
@@ -281,6 +273,5 @@ display_widgets()
 # START THE ENGINE AUTOMATICALLY WHEN THE run by start CHECKBOX VALUE SAVED AS 1/checked
 if settings_data['run_by_start'] == 1:
     engine.start_engine()
-
 
 window.mainloop()
