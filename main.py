@@ -19,7 +19,7 @@ font_style = settings_data['skins'][skin_selected]['font_style']
 
 # WINDOW
 window = Tk()
-window.title('Hunny 4 Life')
+window.title(settings_data['skins'][skin_selected]['window_title'])
 width = 500
 length = 600
 window.geometry(f'{width}x{length}')
@@ -40,6 +40,8 @@ def change_skin(__):
     settings.save_settings(settings_data)
     skin_selected = skins_roll_down_clicked.get()
     # LIST OF WIDGETS TO UPDATE
+    #TEXT
+    window.title(settings_data['skins'][skin_selected]['window_title'])
     #IMAGES
     backgound_image.configure(file = f"./skins/{skin_selected}/BG.png")
     window.iconbitmap(f"./skins/{skin_selected}/icon.ico")
