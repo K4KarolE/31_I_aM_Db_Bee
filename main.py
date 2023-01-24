@@ -200,8 +200,8 @@ def browseSheet_3():
 chrome_driver_button = Button(window, text = ">>", command = browseSheet_3, foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
 
-
-### SAVE SETTINGS, START THE ENGINE
+### BUTTONS
+# SAVE SETTINGS, START THE ENGINE - BUTTON
 def save_and_start():
     ## SETUP AND SAVE
     # CLIPBOARD CHECKBOX
@@ -268,6 +268,7 @@ def display_widgets():
     # X
     display_x = 150
     display_x_button_gap = 170
+    display_x_gap_for_path_objects = 5
     # Y
     display_y_BASE = 130
     display_y_GAP = 30
@@ -295,29 +296,29 @@ def display_widgets():
     checkbox['run'][1].place(x=display_x, y=y_location(3))
 
     # CHROME DRIVER PATH - TITEL + FIELD + BUTTON
-    chrome_driver_field_title.place(x=display_x, y=y_location(5))
-    chrome_driver_field.place(x=display_x+3, y=y_location(5)+25)
-    chrome_driver_button.place(x=display_x+display_x_button_gap, y=y_location(5)+13)
+    chrome_driver_field_title.place(x=display_x+display_x_gap_for_path_objects, y=y_location(5))
+    chrome_driver_field.place(x=display_x+display_x_gap_for_path_objects+3, y=y_location(5)+25)
+    chrome_driver_button.place(x=display_x+display_x_gap_for_path_objects+display_x_button_gap, y=y_location(5)+13)
 
     # TARGET SHEET PATH - TITEL + FIELD + BUTTON
-    target_sheet_field_title.place(x=display_x, y=y_location(7))
-    target_sheet_field.place(x=display_x+3, y=y_location(7)+25)
-    target_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(7)+13)
+    target_sheet_field_title.place(x=display_x+display_x_gap_for_path_objects, y=y_location(7))
+    target_sheet_field.place(x=display_x+display_x_gap_for_path_objects+3, y=y_location(7)+25)
+    target_sheet_button.place(x=display_x+display_x_gap_for_path_objects+display_x_button_gap, y=y_location(7)+13)
 
     # NO PICTURE IN TARHET SHEET CHECKBOX
-    checkbox['no_picture'][1].place(x=display_x, y=y_location(8)+13)
+    checkbox['no_picture'][1].place(x=display_x+display_x_gap_for_path_objects, y=y_location(8)+13)
 
     # MOVIES DB SHEET PATH - TITEL + FIELD + BUTTON
-    movies_db_sheet_field_title.place(x=display_x, y=y_location(10)-12)
-    movies_db_sheet_field.place(x=display_x+3, y=y_location(10)+25-12)
-    movies_db_sheet_button.place(x=display_x+display_x_button_gap, y=y_location(10)+13-12)
+    movies_db_sheet_field_title.place(x=display_x+display_x_gap_for_path_objects, y=y_location(10)-12)
+    movies_db_sheet_field.place(x=display_x+display_x_gap_for_path_objects+3, y=y_location(10)+25-12)
+    movies_db_sheet_button.place(x=display_x+display_x_gap_for_path_objects+display_x_button_gap, y=y_location(10)+13-12)
 
-    # SAVE SETTINGS BUTTON
-    button_save_and_start.place(x=display_x+30, y=y_location(12)+10)
+    # SAVE SETTINGS & START BUTTON
+    button_save_and_start.place(x=display_x+display_x_gap_for_path_objects+30, y=y_location(12)+10)
 
     # SKINS ROLL DOWN BUTTON
-    
     skins_roll_down.place(x=7, y=y_location(11))
+
 
 display_widgets()
 
