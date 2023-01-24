@@ -1,6 +1,6 @@
 {
-  "imdb_link_in_clipboard": 0,
-  "path_chrome_driver": "",
+  "imdb_link_in_clipboard": 1,
+  "path_chrome_driver": "D:/PW.xspf",
   "path_movies_db_sheet": "",
   "path_movie_new_record": "",
   "title_search": 0,
@@ -24,14 +24,16 @@
       "field_background_color": "#E6B91E",
       "font_style": "Georgia",
       "font_color": "black",
-      "window_title": "Hunny for Life"
+      "window_title": "Hunny for Life",
+      "error_window_title": "Danger Will Robinson, danger!"
     },
     "darth": {
       "background_color": "black",
       "field_background_color": "black",
       "font_style": "Georgia",
       "font_color": "red",
-      "window_title": "Hunny for Force"
+      "window_title": "Hunny for Force",
+      "error_window_title": "Your thoughts betray you.."
     }
   },
   "run_by_start": 0,
