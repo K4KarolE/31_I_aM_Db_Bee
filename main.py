@@ -1,17 +1,21 @@
 
 from tkinter import *
-from tkinter import filedialog      # target_sheet
+from tkinter import filedialog      # for browse window (adding path)
 import tkinter.messagebox           # for pop-up windows
+
+import engine
 
 from functions import settings
 settings_data = settings.open_settings()        # access to the saved/default settings (settings_db.json)
 
-import engine
 
 # COLORS - FONT STYLE
-background_color = '#E6B91E'
-field_background_color = 'white' # IMDb yellow: #E6B91E // default: #F0F0F0
-font_style = 'Georgia'
+# IMDb yellow: #E6B91E // original: #F0F0F0
+skin_selected = settings_data['skin_selected']                                  # example: default
+background_color = settings_data['skins'][skin_selected]['background_color']    # example: skins / default / background_color / #E6B91E
+field_background_color = settings_data['skins'][skin_selected]['field_background_color'] 
+font_style = settings_data['skins'][skin_selected]['font_style']
+
 
 # WINDOW
 window = Tk()
@@ -20,13 +24,63 @@ width = 500
 length = 600
 window.geometry(f'{width}x{length}')
 window.resizable(0,0)   # lock the main window
-window.configure(background=background_color)
+# window.configure(background="black")
+
 
 # IMAGES
-backgound_image = PhotoImage(file = "./skins/default/BG.png")
+backgound_image = PhotoImage(file = f"./skins/{skin_selected}/BG.png")  # folder name = skin name
 backgound_image_label = Label( window, image = backgound_image)
 backgound_image_label.place(x = -2, y = 0)
-window.iconbitmap("./skins/default/icon.ico")        # window icon
+window.iconbitmap(f"./skins/{skin_selected}/icon.ico")        # window icon
+
+
+## SKINS - ROLL DOWN MENU
+def change_skin(__):
+    settings_data['skin_selected'] = skins_roll_down_clicked.get()  # updating & saving the "skin_selected" value in settings_db.json with every click/skin change
+    settings.save_settings(settings_data)
+    skin_selected = skins_roll_down_clicked.get()
+    # LIST OF WIDGETS TO UPDATE
+    #IMAGES
+    backgound_image.configure(file = f"./skins/{skin_selected}/BG.png")
+    window.iconbitmap(f"./skins/{skin_selected}/icon.ico")
+    #COLORS
+    background_color = settings_data['skins'][skin_selected]['background_color']
+
+    skins_roll_down.configure(background=background_color, activebackground=background_color, highlightbackground=background_color)
+    skins_roll_down['menu'].configure(background=background_color, activebackground=background_color)
+
+    title_search_roll_down.configure(background=background_color, activebackground=background_color, highlightbackground=background_color)
+    title_search_roll_down['menu'].configure(background=background_color, activebackground=background_color)
+
+    target_sheet_field.configure(bg=background_color)
+    target_sheet_field_title.configure(bg=background_color)
+    target_sheet_button.configure(bg=background_color)
+
+    movies_db_sheet_field.configure(bg=background_color)
+    movies_db_sheet_field_title.configure(bg=background_color)
+    movies_db_sheet_button.configure(bg=background_color)
+
+    chrome_driver_field.configure(bg=background_color)
+    chrome_driver_field_title.configure(bg=background_color)
+    chrome_driver_button.configure(bg=background_color)
+
+    poster_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
+    poster_roll_down["menu"].config(background=background_color, activebackground=background_color)
+
+    for item in checkbox.values():
+        item[1].configure(background=background_color)
+
+    button_save_and_start.configure(bg=background_color)
+
+skins_options = []
+for item in settings_data['skins'].keys():        # creating a list of the SKINS from settings_db.json / skins
+    skins_options = skins_options + [item]
+
+skins_roll_down_clicked = StringVar()
+skins_roll_down_clicked.set("Skins")    
+skins_roll_down = OptionMenu( window, skins_roll_down_clicked, *skins_options, command=change_skin)     
+skins_roll_down.configure(background=background_color, activebackground=background_color, highlightbackground=background_color)
+skins_roll_down['menu'].configure(background=background_color, activebackground=background_color)
 
 # CHECKBOXES
 checkbox = {
@@ -56,25 +110,20 @@ title_search_options = []
 for item in settings_data['title_search_links'].keys():
     title_search_options = title_search_options + [item]    # creating a list of the "title_search_links" dictonary`s keys (Hungarian / Czech /..) from settings_db.json
                                                             # adding new title link key-value pair: just add it to the settings_db.json / "title_search_links" dictionary
-title_search_clicked = StringVar()
-title_search_clicked.set(settings_data['title_search_link_selected'])   # set to the latest saved value (Hungarian / Czech /..)
-title_search_roll_down = OptionMenu( window, title_search_clicked, *title_search_options )
-title_search_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
-title_search_roll_down["menu"].config(background=background_color, activebackground=background_color)
+title_search_roll_down_clicked = StringVar()
+title_search_roll_down_clicked.set(settings_data['title_search_link_selected'])   # set to the latest saved value (Hungarian / Czech /..)
+title_search_roll_down = OptionMenu( window, title_search_roll_down_clicked, *title_search_options )
+title_search_roll_down.configure(background=background_color, activebackground=background_color, highlightbackground=background_color)
+title_search_roll_down['menu'].configure(background=background_color, activebackground=background_color)
 # highlightbackground - color around the button
 # activebackground - color when mouse over or clicked
 
-## PATH FIELDS - SEARCHBOXES
-# TARGET SHEET
+## PATH - FIELDS + SEARCHBOXES
+# TARGET SHEET - FIELD + SEARCHBOX
 target_sheet_text = "Target sheet path"
-target_sheet_field = Text(window,
-height = 1,
-width = 20,
-background=field_background_color)
+target_sheet_field = Text(window, height = 1, width = 20, background=field_background_color)
 target_sheet_field.insert(END,settings_data['path_movie_new_record'])   # set to the latest saved PATH value
-target_sheet_field_title = Label(window,
-text = target_sheet_text,
-background=background_color)
+target_sheet_field_title = Label(window, text = target_sheet_text, background=background_color)
 target_sheet_field_title.config(font =(font_style, 12))
 
 filename = None
@@ -86,21 +135,12 @@ def browseSheet_1():
     # label_file_explorer.configure(text=filename)
     target_sheet_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     target_sheet_field.insert(END,filename)     # adding the path and the name of the selected file
+target_sheet_button = Button(window, text = ">>", command = browseSheet_1, background=background_color)
 
-target_sheet_button = Button(window,
-text = ">>",
-command = browseSheet_1,
-background=background_color)
-
-# MOVIES DB SHEET
-movies_db_sheet_field = Text(window,
-height = 1,
-width = 20,
-background=field_background_color)
+# MOVIES DB SHEET - FIELD + SEARCHBOX
+movies_db_sheet_field = Text(window, height = 1, width = 20, background=field_background_color)
 movies_db_sheet_field.insert(END,settings_data['path_movies_db_sheet'])    # set to the latest saved PATH value
-movies_db_sheet_field_title = Label(window,
-text = "Movies DB sheet path",
-background=background_color)
+movies_db_sheet_field_title = Label(window, text = "Movies DB sheet path", background=background_color)
 movies_db_sheet_field_title.config(font =(font_style, 12))
 
 def browseSheet_2():
@@ -111,25 +151,15 @@ def browseSheet_2():
     # label_file_explorer.configure(text=filename)
     movies_db_sheet_field.delete('1.0', END)        # once a button is clicked, removes the previous value
     movies_db_sheet_field.insert(END,filename)      # adding the path and the name of the selected file
+movies_db_sheet_button = Button(window, text = ">>", command = browseSheet_2, background=background_color)
 
-movies_db_sheet_button = Button(window,
-text = ">>",
-command = browseSheet_2,
-background=background_color)
-
-# CHROME DRIVER
+# CHROME DRIVER - FIELD + SEARCHBOX
 chrome_driver_text = "Chrome driver path"
-chrome_driver_field = Text(window,
-height = 1,
-width = 20,
-background=field_background_color)
+chrome_driver_field = Text(window, height = 1, width = 20, background=field_background_color)
 chrome_driver_field.insert(END,settings_data["path_chrome_driver"])   # set to the latest saved PATH value
-chrome_driver_field_title = Label(window,
-text = chrome_driver_text,
-background=background_color)
+chrome_driver_field_title = Label(window, text = chrome_driver_text, background=background_color)
 chrome_driver_field_title.config(font =(font_style, 12))
 
-filename = None
 def browseSheet_3():
     filename = filedialog.askopenfilename(initialdir = "/",
             title = "Select a File",
@@ -138,31 +168,28 @@ def browseSheet_3():
     # label_file_explorer.configure(text=filename)
     chrome_driver_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     chrome_driver_field.insert(END,filename)     # adding the path and the name of the selected file
-
-chrome_driver_button = Button(window,
-text = ">>",
-command = browseSheet_3,
-background=background_color)
+chrome_driver_button = Button(window, text = ">>", command = browseSheet_3, background=background_color)
 
 ## POSTER SIZE - ROLL DOWN MENU
 poster_size_options = []
 for item in settings_data['poster_size_options'].keys():        # creating a list of the POSTER SIZE OPTIONS holded in settings_db.json / poster_size_options
     poster_size_options = poster_size_options + [item]
 
-clicked = StringVar()
-clicked.set(settings_data['poster_size'])       # # set to the latest saved value
-poster_roll_down = OptionMenu( window, clicked, *poster_size_options)
+poster_roll_down_clicked = StringVar()
+poster_roll_down_clicked.set(settings_data['poster_size'])       # # set to the latest saved value
+poster_roll_down = OptionMenu( window, poster_roll_down_clicked, *poster_size_options)
 poster_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
 poster_roll_down["menu"].config(background=background_color, activebackground=background_color)
 
 ### SAVE SETTINGS, START THE ENGINE
 def save_and_start():
+    ## SETUP AND SAVE
     # CLIPBOARD CHECKBOX
     settings_data['imdb_link_in_clipboard'] = checkbox['clipboard'][0].get()
     
     # POSTER IN NEW TAB - CHECKBOX + ROLL DOWN BUTTON
     settings_data['poster_open_in_new_tab'] = checkbox['poster'][0].get() 
-    settings_data['poster_size'] = clicked.get()
+    settings_data['poster_size'] = poster_roll_down_clicked.get()
 
     # RUN BY START CHECKBOX
     settings_data['run_by_start'] = checkbox['run'][0].get()
@@ -171,8 +198,8 @@ def save_and_start():
     settings_data['no_picture_in_sheet'] = checkbox['no_picture'][0].get()
 
     # LOOK FOR NATIVE TITLE - CHECKBOX + ROLL DOWN BUTTON
-    settings_data['title_search'] = checkbox['title'][0].get()                      # from CHECKBOXES for loop: variable = item[0] -> item[0] = checkbox['title'][0]
-    settings_data['title_search_link_selected'] = title_search_clicked.get()        # Hungarian / Czech..
+    settings_data['title_search'] = checkbox['title'][0].get()                              # from CHECKBOXES for loop: variable = item[0] -> item[0] = checkbox['title'][0]
+    settings_data['title_search_link_selected'] = title_search_roll_down_clicked.get()      # Hungarian / Czech..
 
     # CHROME DRIVER PATH FIELD
     settings_data['path_chrome_driver'] = chrome_driver_field.get("1.0", "end-1c")
@@ -182,6 +209,9 @@ def save_and_start():
 
     # MOVIES DB SHEET PATH FIELD
     settings_data['path_movies_db_sheet'] = movies_db_sheet_field.get("1.0", "end-1c")
+
+    # SKINS ROLL DOWN BUTTON
+    # the skin is saved, when it is updated -> next time will load the latest used skin, without the need of the Save & Start button/process  
 
     settings.save_settings(settings_data)
 
@@ -209,12 +239,9 @@ def save_and_start():
         # error pop-up message, more relevant for the first time users
     engine.start_engine()   # will start data collection / save to excel sheet / if selected: open poster and native title search in new tabs, open movie DB sheet...
     
-button_save_and_start = Button(window,
-text = "Save & Start",
-command = save_and_start,       # no () in save_and_start() otherwise will execute it automatically before clicking the button 
-font = (font_style, 15),
-background=background_color)        # binding multiple commands to the same button: command = lambda: [save_settings(), engine.start_engine()]
-
+button_save_and_start = Button(window, text = "Save & Start", command = save_and_start, font = (font_style, 15), background=background_color)        
+# no () in save_and_start() otherwise will execute it automatically before clicking the button
+# binding multiple commands to the same button: command = lambda: [save_settings(), engine.start_engine()]
 
 ### DISPLAY WIDGETS
 def display_widgets():
@@ -267,6 +294,9 @@ def display_widgets():
 
     # SAVE SETTINGS BUTTON
     button_save_and_start.place(x=display_x+30, y=y_location(12)+10)
+
+    # SKINS ROLL DOWN BUTTON
+    skins_roll_down.place(x=7, y=y_location(11))
 
 display_widgets()
 

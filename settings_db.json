@@ -1,22 +1,37 @@
 {
-  "imdb_link_in_clipboard": 1,
+  "imdb_link_in_clipboard": 0,
   "path_chrome_driver": "C:/Program Files (x86)/chromedriver.exe",
   "path_movies_db_sheet": "",
   "path_movie_new_record": "D:/Movies_New_Record.xlsx",
-  "title_search": 1,
+  "title_search": 0,
   "title_search_links": {
     "Hungarian": "https://www.mafab.hu/search/&search=",
     "Czech": "https://www.csfd.cz/hledat/?q="
   },
-  "title_search_link_selected": "Czech",
-  "poster_open_in_new_tab": 1,
+  "title_search_link_selected": "Hungarian",
+  "poster_open_in_new_tab": 0,
   "poster_size_options": {
     "Small": 0,
     "Medium": 2,
     "Larger": 4,
     "All sizes": "all"
   },
-  "poster_size": "All sizes",
+  "poster_size": "Larger",
+  "skin_selected": "default",
+  "skins": {
+    "default": {
+      "background_color": "#E6B91E",
+      "field_background_color": "#E6B91E",
+      "font_style": "Georgia",
+      "window_title": "Hunny for Life"
+    },
+    "darth": {
+      "background_color": "#6B414C",
+      "field_background_color": "#6B414C",
+      "font_style": "Georgia",
+      "window_title": "Hunny for Force"
+    }
+  },
   "run_by_start": 0,
-  "no_picture_in_sheet": 1
+  "no_picture_in_sheet": 0
 }
