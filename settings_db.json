@@ -1,8 +1,8 @@
 {
   "imdb_link_in_clipboard": 0,
-  "path_chrome_driver": "C:/Program Files (x86)/chromedriver.exe",
+  "path_chrome_driver": "",
   "path_movies_db_sheet": "",
-  "path_movie_new_record": "D:/Movies_New_Record.xlsx",
+  "path_movie_new_record": "",
   "title_search": 0,
   "title_search_links": {
     "Hungarian": "https://www.mafab.hu/search/&search=",
@@ -23,12 +23,14 @@
       "background_color": "#E6B91E",
       "field_background_color": "#E6B91E",
       "font_style": "Georgia",
+      "font_color": "black",
       "window_title": "Hunny for Life"
     },
     "darth": {
-      "background_color": "#6B414C",
-      "field_background_color": "#6B414C",
+      "background_color": "black",
+      "field_background_color": "black",
       "font_style": "Georgia",
+      "font_color": "red",
       "window_title": "Hunny for Force"
     }
   },

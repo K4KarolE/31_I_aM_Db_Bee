@@ -15,6 +15,7 @@ skin_selected = settings_data['skin_selected']                                  
 background_color = settings_data['skins'][skin_selected]['background_color']    # example: skins / default / background_color / #E6B91E
 field_background_color = settings_data['skins'][skin_selected]['field_background_color'] 
 font_style = settings_data['skins'][skin_selected]['font_style']
+font_color = settings_data['skins'][skin_selected]['font_color']
 
 
 # WINDOW
@@ -47,32 +48,33 @@ def change_skin(__):
     window.iconbitmap(f"./skins/{skin_selected}/icon.ico")
     #COLORS
     background_color = settings_data['skins'][skin_selected]['background_color']
+    font_color = settings_data['skins'][skin_selected]['font_color']
+    print(font_color)
+    skins_roll_down.configure(foreground=font_color, background=background_color, activebackground=background_color, highlightbackground=background_color)
+    skins_roll_down['menu'].configure(background=background_color, activebackground=background_color, activeforeground = "white")
 
-    skins_roll_down.configure(background=background_color, activebackground=background_color, highlightbackground=background_color)
-    skins_roll_down['menu'].configure(background=background_color, activebackground=background_color)
+    title_search_roll_down.configure(foreground=font_color, background=background_color, activebackground=background_color, highlightbackground=background_color)
+    title_search_roll_down['menu'].configure(foreground=font_color, background=background_color, activeforeground = font_color, activebackground=background_color)
 
-    title_search_roll_down.configure(background=background_color, activebackground=background_color, highlightbackground=background_color)
-    title_search_roll_down['menu'].configure(background=background_color, activebackground=background_color)
+    target_sheet_field.configure(foreground=font_color, background=background_color)
+    target_sheet_field_title.configure(foreground=font_color, background=background_color)
+    target_sheet_button.configure(foreground=font_color, background=background_color)
 
-    target_sheet_field.configure(bg=background_color)
-    target_sheet_field_title.configure(bg=background_color)
-    target_sheet_button.configure(bg=background_color)
+    movies_db_sheet_field.configure(foreground=font_color, background=background_color)
+    movies_db_sheet_field_title.configure(foreground=font_color, background=background_color)
+    movies_db_sheet_button.configure(foreground=font_color, background=background_color)
 
-    movies_db_sheet_field.configure(bg=background_color)
-    movies_db_sheet_field_title.configure(bg=background_color)
-    movies_db_sheet_button.configure(bg=background_color)
+    chrome_driver_field.configure(foreground=font_color, background=background_color)
+    chrome_driver_field_title.configure(foreground=font_color, background=background_color)
+    chrome_driver_button.configure(foreground=font_color, background=background_color)
 
-    chrome_driver_field.configure(bg=background_color)
-    chrome_driver_field_title.configure(bg=background_color)
-    chrome_driver_button.configure(bg=background_color)
-
-    poster_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
-    poster_roll_down["menu"].config(background=background_color, activebackground=background_color)
+    poster_roll_down.config(foreground=font_color, background=background_color, activebackground=background_color, highlightbackground=background_color)
+    poster_roll_down["menu"].config(foreground=font_color, background=background_color, activeforeground = "white", activebackground=background_color)
 
     for item in checkbox.values():
-        item[1].configure(background=background_color)
+        item[1].configure(foreground=font_color, background=background_color, activeforeground = font_color, activebackground=background_color, highlightbackground=background_color)
 
-    button_save_and_start.configure(bg=background_color)
+    button_save_and_start.configure(foreground=font_color, background=background_color)
 
 skins_options = []
 for item in settings_data['skins'].keys():        # creating a list of the SKINS from settings_db.json / skins
@@ -81,8 +83,8 @@ for item in settings_data['skins'].keys():        # creating a list of the SKINS
 skins_roll_down_clicked = StringVar()
 skins_roll_down_clicked.set("Skins")    
 skins_roll_down = OptionMenu( window, skins_roll_down_clicked, *skins_options, command=change_skin)     
-skins_roll_down.configure(background=background_color, activebackground=background_color, highlightbackground=background_color)
-skins_roll_down['menu'].configure(background=background_color, activebackground=background_color)
+skins_roll_down.configure(foreground=font_color, background=background_color, activeforeground = font_color, activebackground=background_color, highlightbackground=background_color)
+skins_roll_down['menu'].configure(foreground=font_color, background=background_color, activebackground=background_color)
 
 # CHECKBOXES
 checkbox = {
@@ -102,7 +104,9 @@ for item in checkbox.values():
         variable = item[0], 
         height = 1,
         font = (font_style, 12),
+        foreground=font_color,
         background=background_color,
+        activeforeground = font_color,
         activebackground=background_color   # activebackground - color when clicked
         )
 checkbox['no_picture'][1].config(font = (font_style, 9))    # make the /No pictures in target sheet/ checkbox text smaller
@@ -115,17 +119,17 @@ for item in settings_data['title_search_links'].keys():
 title_search_roll_down_clicked = StringVar()
 title_search_roll_down_clicked.set(settings_data['title_search_link_selected'])   # set to the latest saved value (Hungarian / Czech /..)
 title_search_roll_down = OptionMenu( window, title_search_roll_down_clicked, *title_search_options )
-title_search_roll_down.configure(background=background_color, activebackground=background_color, highlightbackground=background_color)
-title_search_roll_down['menu'].configure(background=background_color, activebackground=background_color)
+title_search_roll_down.configure(foreground=font_color, background=background_color, activeforeground = font_color, activebackground=background_color, highlightbackground=background_color)
+title_search_roll_down['menu'].configure(foreground=font_color, background=background_color, activebackground=background_color)
 # highlightbackground - color around the button
 # activebackground - color when mouse over or clicked
 
 ## PATH - FIELDS + SEARCHBOXES
 # TARGET SHEET - FIELD + SEARCHBOX
 target_sheet_text = "Target sheet path"
-target_sheet_field = Text(window, height = 1, width = 20, background=field_background_color)
+target_sheet_field = Text(window, height = 1, width = 20, foreground=font_color, background=field_background_color)
 target_sheet_field.insert(END,settings_data['path_movie_new_record'])   # set to the latest saved PATH value
-target_sheet_field_title = Label(window, text = target_sheet_text, background=background_color)
+target_sheet_field_title = Label(window, text = target_sheet_text, foreground=font_color, background=background_color)
 target_sheet_field_title.config(font =(font_style, 12))
 
 filename = None
@@ -137,12 +141,12 @@ def browseSheet_1():
     # label_file_explorer.configure(text=filename)
     target_sheet_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     target_sheet_field.insert(END,filename)     # adding the path and the name of the selected file
-target_sheet_button = Button(window, text = ">>", command = browseSheet_1, background=background_color)
+target_sheet_button = Button(window, text = ">>", command = browseSheet_1, foreground=font_color, background=background_color)
 
 # MOVIES DB SHEET - FIELD + SEARCHBOX
-movies_db_sheet_field = Text(window, height = 1, width = 20, background=field_background_color)
+movies_db_sheet_field = Text(window, height = 1, width = 20, foreground=font_color, background=field_background_color)
 movies_db_sheet_field.insert(END,settings_data['path_movies_db_sheet'])    # set to the latest saved PATH value
-movies_db_sheet_field_title = Label(window, text = "Movies DB sheet path", background=background_color)
+movies_db_sheet_field_title = Label(window, text = "Movies DB sheet path", foreground=font_color, background=background_color)
 movies_db_sheet_field_title.config(font =(font_style, 12))
 
 def browseSheet_2():
@@ -153,13 +157,13 @@ def browseSheet_2():
     # label_file_explorer.configure(text=filename)
     movies_db_sheet_field.delete('1.0', END)        # once a button is clicked, removes the previous value
     movies_db_sheet_field.insert(END,filename)      # adding the path and the name of the selected file
-movies_db_sheet_button = Button(window, text = ">>", command = browseSheet_2, background=background_color)
+movies_db_sheet_button = Button(window, text = ">>", command = browseSheet_2, foreground=font_color, background=background_color)
 
 # CHROME DRIVER - FIELD + SEARCHBOX
 chrome_driver_text = "Chrome driver path"
-chrome_driver_field = Text(window, height = 1, width = 20, background=field_background_color)
+chrome_driver_field = Text(window, height = 1, width = 20, foreground=font_color, background=field_background_color)
 chrome_driver_field.insert(END,settings_data["path_chrome_driver"])   # set to the latest saved PATH value
-chrome_driver_field_title = Label(window, text = chrome_driver_text, background=background_color)
+chrome_driver_field_title = Label(window, text = chrome_driver_text, foreground=font_color, background=background_color)
 chrome_driver_field_title.config(font =(font_style, 12))
 
 def browseSheet_3():
@@ -170,18 +174,20 @@ def browseSheet_3():
     # label_file_explorer.configure(text=filename)
     chrome_driver_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     chrome_driver_field.insert(END,filename)     # adding the path and the name of the selected file
-chrome_driver_button = Button(window, text = ">>", command = browseSheet_3, background=background_color)
+chrome_driver_button = Button(window, text = ">>", command = browseSheet_3, foreground=font_color, background=background_color)
 
 ## POSTER SIZE - ROLL DOWN MENU
 poster_size_options = []
 for item in settings_data['poster_size_options'].keys():        # creating a list of the POSTER SIZE OPTIONS holded in settings_db.json / poster_size_options
     poster_size_options = poster_size_options + [item]
 
+
+
 poster_roll_down_clicked = StringVar()
 poster_roll_down_clicked.set(settings_data['poster_size'])       # # set to the latest saved value
 poster_roll_down = OptionMenu( window, poster_roll_down_clicked, *poster_size_options)
-poster_roll_down.config(background=background_color, activebackground=background_color, highlightbackground=background_color)
-poster_roll_down["menu"].config(background=background_color, activebackground=background_color)
+poster_roll_down.config(foreground=font_color, background=background_color, activeforeground = font_color, activebackground=background_color, highlightbackground=background_color)
+poster_roll_down["menu"].config(foreground=font_color, background=background_color, activebackground=background_color)
 
 ### SAVE SETTINGS, START THE ENGINE
 def save_and_start():
@@ -241,7 +247,7 @@ def save_and_start():
         # error pop-up message, more relevant for the first time users
     engine.start_engine()   # will start data collection / save to excel sheet / if selected: open poster and native title search in new tabs, open movie DB sheet...
     
-button_save_and_start = Button(window, text = "Save & Start", command = save_and_start, font = (font_style, 15), background=background_color)        
+button_save_and_start = Button(window, text = "Save & Start", command = save_and_start, font = (font_style, 15), foreground=font_color, background=background_color)        
 # no () in save_and_start() otherwise will execute it automatically before clicking the button
 # binding multiple commands to the same button: command = lambda: [save_settings(), engine.start_engine()]
 
