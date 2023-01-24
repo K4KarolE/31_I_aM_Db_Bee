@@ -101,18 +101,18 @@ def change_skin(__):
     # PATH - FIELDS + SEARCHBOXES
     target_sheet_field.configure(foreground=font_color, background=background_color)
     target_sheet_field_title.configure(foreground=font_color, background=background_color)
-    target_sheet_button.configure(foreground=font_color, background=background_color)
+    target_sheet_button.configure(foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
     movies_db_sheet_field.configure(foreground=font_color, background=background_color)
     movies_db_sheet_field_title.configure(foreground=font_color, background=background_color)
-    movies_db_sheet_button.configure(foreground=font_color, background=background_color)
+    movies_db_sheet_button.configure(foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
     chrome_driver_field.configure(foreground=font_color, background=background_color)
     chrome_driver_field_title.configure(foreground=font_color, background=background_color)
-    chrome_driver_button.configure(foreground=font_color, background=background_color)
+    chrome_driver_button.configure(foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
     # SAVE AND START BUTTON
-    button_save_and_start.configure(foreground=font_color, background=background_color)
+    button_save_and_start.configure(foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
 skins_options = []
 for item in settings_data['skins'].keys():        # creating a list of the SKINS from settings_db.json / skins
@@ -164,7 +164,7 @@ def browseSheet_1():
     # label_file_explorer.configure(text=filename)
     target_sheet_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     target_sheet_field.insert(END,filename)     # adding the path and the name of the selected file
-target_sheet_button = Button(window, text = ">>", command = browseSheet_1, foreground=font_color, background=background_color)
+target_sheet_button = Button(window, text = ">>", command = browseSheet_1, foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
 # MOVIES DB SHEET - FIELD + SEARCHBOX
 movies_db_sheet_field = Text(window, height = 1, width = 20, foreground=font_color, background=field_background_color)
@@ -180,7 +180,7 @@ def browseSheet_2():
     # label_file_explorer.configure(text=filename)
     movies_db_sheet_field.delete('1.0', END)        # once a button is clicked, removes the previous value
     movies_db_sheet_field.insert(END,filename)      # adding the path and the name of the selected file
-movies_db_sheet_button = Button(window, text = ">>", command = browseSheet_2, foreground=font_color, background=background_color)
+movies_db_sheet_button = Button(window, text = ">>", command = browseSheet_2, foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
 # CHROME DRIVER - FIELD + SEARCHBOX
 chrome_driver_text = "Chrome driver path"
@@ -197,7 +197,7 @@ def browseSheet_3():
     # label_file_explorer.configure(text=filename)
     chrome_driver_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     chrome_driver_field.insert(END,filename)     # adding the path and the name of the selected file
-chrome_driver_button = Button(window, text = ">>", command = browseSheet_3, foreground=font_color, background=background_color)
+chrome_driver_button = Button(window, text = ">>", command = browseSheet_3, foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
 
 
@@ -257,7 +257,7 @@ def save_and_start():
         # error pop-up message, more relevant for the first time users
     engine.start_engine()   # will start data collection / save to excel sheet / if selected: open poster and native title search in new tabs, open movie DB sheet...
     
-button_save_and_start = Button(window, text = "Save & Start", command = save_and_start, font = (font_style, 15), foreground=font_color, background=background_color)        
+button_save_and_start = Button(window, text = "Save & Start", command = save_and_start, font = (font_style, 15), foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)        
 # no () in save_and_start() otherwise will execute it automatically before clicking the button
 # binding multiple commands to the same button: command = lambda: [save_settings(), engine.start_engine()]
 
