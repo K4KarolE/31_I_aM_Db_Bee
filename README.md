@@ -1,7 +1,7 @@
 # I aM D bee
-## IMDb scraping app for movie, tv show, tv mini series..
+## IMDb scraping app for movies, tv shows, tv mini-series..
 - Gets the IMDb link from clipboard
-- Copies** the movie details(title, year, stars..) to the taget excel sheet - user able to add the path of the excel sheet via UI
+- Copies** the movie details(title, year, stars..) to the target excel sheet - user able to add the path of the excel sheet via UI
 - ** using Selenium - able to add the chrome driver path via UI
 - Automatically opens the target excel sheet, once the data is saved
 - Opens the movie poster in a new browser tab (if checked - multi size options)
