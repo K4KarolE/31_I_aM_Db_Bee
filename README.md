@@ -21,22 +21,20 @@ $~$
 
 # Requirements
 ## Python and Mondules
-1. Python 3
+### 1. Python 3
 - in the installation, click on the checkbox: add to path
 - https://www.python.org/
-$~$
 
-2. Selenium
+### 2. Selenium
 ```
 Win: py -m pip install selenium
 ```
-$~$
 
 3. Openpyxl
 ```
 Win: py -m pip install openpyxl
 ```
-$~$
+
 
 ## Others
 
