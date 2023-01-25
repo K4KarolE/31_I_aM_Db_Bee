@@ -1,12 +1,13 @@
 # I aM D bee
 ## IMDb scraping app for movies, tv shows, tv mini-series..
 - Gets the movie`s IMDb link from clipboard
-- Copies** the details(title, year, director, stars, genres, date of the day, length of the movie) to the target excel sheet
+- Copies the details to the target excel sheet: movie title, year of release, director, stars, genres, date of the day, length of the movie
 - Automatically opens the target excel sheet, once the data is saved
 $~$
-- Opens the movie poster in a new browser tab (if checked) - note: the poster image is not "right-click copyable" from the movie`s IMDb front page by default
-- Looks for the user`s native language movie title (if checked)
-- Automatically opens your movie database excel sheet (if the path added)
+
+- If checked in: Opens the movie poster in a new browser tab - note: the poster image is not "right-click copyable" from the movie`s IMDb front page by default
+- If checked in: Looks for the user`s native language movie title (if checked)
+- If checked in: Automatically opens your movie database excel sheet (if the path added)
 $~$
 
 <div align="center">
