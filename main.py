@@ -3,14 +3,15 @@ from tkinter import *
 from tkinter import filedialog      # for browse window (adding path)
 import tkinter.messagebox           # for pop-up windows
 
-import engine
+import os
 
+import engine
 from functions import settings
 settings_data = settings.open_settings()        # access to the saved/default settings (settings_db.json)
 
 
 # COLORS - FONT STYLE
-# IMDb yellow: #E6B91E // original: #F0F0F0
+# IMDb yellow: #E6B91E // original tkinter grey: #F0F0F0 - FYI
 skin_selected = settings_data['skin_selected']                                  # example: default
 background_color = settings_data['skins'][skin_selected]['background_color']    # example: skins / default / background_color / #E6B91E
 field_background_color = settings_data['skins'][skin_selected]['field_background_color'] 
@@ -25,14 +26,17 @@ width = 500
 length = 600
 window.geometry(f'{width}x{length}')
 window.resizable(0,0)   # lock the main window
-# window.configure(background="black")
+# window.configure(background="black")  - FYI
 
 
 # IMAGES
-backgound_image = PhotoImage(file = f"./skins/{skin_selected}/BG.png")  # folder name = skin name
+working_directory = os.path.dirname(__file__)     # os.path.dirname(__file__) = D:\_DEV\Python\31_I_aM_D_bee   //in my case
+path_image = str(working_directory) + f"\skins\{skin_selected}\BG.png"    
+path_icon = str(working_directory) + f"\skins\{skin_selected}\icon.ico"
+backgound_image = PhotoImage(file = path_image)
 backgound_image_label = Label( window, image = backgound_image)
 backgound_image_label.place(x = -2, y = 0)
-window.iconbitmap(f"./skins/{skin_selected}/icon.ico")        # window icon
+window.iconbitmap(path_icon)        # window icon - left, top corner
 
 
 ## CHECKBOXES
@@ -69,17 +73,17 @@ def change_skin(__):
     settings_data['skin_selected'] = skins_roll_down_clicked.get()  # updating & saving the "skin_selected" value in settings_db.json with every click/skin change
     settings.save_settings(settings_data)
     skin_selected = skins_roll_down_clicked.get()
-    # if skin_selected == "darth":                      # for future buttons movement: IMDB, HELP
-    #     skins_roll_down.place(x=50, y=200)
-    # if skin_selected == "default":
-    #     skins_roll_down.place(x=7, y=200)
 
     # LIST OF WIDGETS TO UPDATE
     #TEXT
     window.title(settings_data['skins'][skin_selected]['window_title'])
+
     #IMAGES
-    backgound_image.configure(file = f"./skins/{skin_selected}/BG.png")
-    window.iconbitmap(f"./skins/{skin_selected}/icon.ico")
+    path_image = str(working_directory) + f"\skins\{skin_selected}\BG.png"
+    path_icon = str(working_directory) + f"\skins\{skin_selected}\icon.ico"
+    backgound_image.configure(file = path_image)
+    window.iconbitmap(path_icon)
+
     ##COLORS
     background_color = settings_data['skins'][skin_selected]['background_color']
     font_color = settings_data['skins'][skin_selected]['font_color']
