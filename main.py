@@ -266,55 +266,52 @@ button_save_and_start = Button(window, text = "Save & Start", command = save_and
 def display_widgets():
     # BASE VALUES
     # X
-    display_x = 150
-    display_x_button_gap = 170
-    display_x_gap_for_path_objects = 5
+    x = 150
+    x_button_gap = 170
+    x_gap_for_path_objects = 5
     # Y
-    display_y_BASE = 130
-    display_y_GAP = 30
+    y_base = 130
+    y_gap = 30
 
     
     def y_location(gap_by_number):
-        display_y = display_y_BASE + display_y_GAP * gap_by_number
+        display_y = y_base + y_gap * gap_by_number
         return display_y
 
-    #WINDOW TITLE
-    # window_title.place(x=display_x+40, y=10)
-
     # CLIPBOARD CHECKBOX
-    checkbox['clipboard'][1].place(x=display_x, y=y_location(0))
+    checkbox['clipboard'][1].place(x=x, y=y_location(0))
 
     # POSTER CHECKBOX + ROLL DOWN BUTTON
-    checkbox['poster'][1].place(x=display_x, y=y_location(1))
-    poster_roll_down.place(x=display_x+display_x_button_gap, y=y_location(1))
+    checkbox['poster'][1].place(x=x, y=y_location(1))
+    poster_roll_down.place(x=x+x_button_gap, y=y_location(1))
 
     # LOOK FOR NATIVE TITLE + ROLL DOWN BUTTON
-    checkbox['title'][1].place(x=display_x, y=y_location(2))
-    title_search_roll_down.place(x=display_x+display_x_button_gap, y=y_location(2))
+    checkbox['title'][1].place(x=x, y=y_location(2))
+    title_search_roll_down.place(x=x+x_button_gap, y=y_location(2))
 
      # RAUN BY START CHECKBOX
-    checkbox['run'][1].place(x=display_x, y=y_location(3))
+    checkbox['run'][1].place(x=x, y=y_location(3))
 
     # CHROME DRIVER PATH - TITEL + FIELD + BUTTON
-    chrome_driver_field_title.place(x=display_x+display_x_gap_for_path_objects, y=y_location(5))
-    chrome_driver_field.place(x=display_x+display_x_gap_for_path_objects+3, y=y_location(5)+25)
-    chrome_driver_button.place(x=display_x+display_x_gap_for_path_objects+display_x_button_gap, y=y_location(5)+13)
+    chrome_driver_field_title.place(x=x+x_gap_for_path_objects, y=y_location(5))
+    chrome_driver_field.place(x=x+x_gap_for_path_objects+3, y=y_location(5)+25)
+    chrome_driver_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(5)+13)
 
     # TARGET SHEET PATH - TITEL + FIELD + BUTTON
-    target_sheet_field_title.place(x=display_x+display_x_gap_for_path_objects, y=y_location(7))
-    target_sheet_field.place(x=display_x+display_x_gap_for_path_objects+3, y=y_location(7)+25)
-    target_sheet_button.place(x=display_x+display_x_gap_for_path_objects+display_x_button_gap, y=y_location(7)+13)
+    target_sheet_field_title.place(x=x+x_gap_for_path_objects, y=y_location(7))
+    target_sheet_field.place(x=x+x_gap_for_path_objects+3, y=y_location(7)+25)
+    target_sheet_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(7)+13)
 
     # NO PICTURE IN TARHET SHEET CHECKBOX
-    checkbox['no_picture'][1].place(x=display_x+display_x_gap_for_path_objects, y=y_location(8)+13)
+    checkbox['no_picture'][1].place(x=x+x_gap_for_path_objects, y=y_location(8)+13)
 
     # MOVIES DB SHEET PATH - TITEL + FIELD + BUTTON
-    movies_db_sheet_field_title.place(x=display_x+display_x_gap_for_path_objects, y=y_location(10)-12)
-    movies_db_sheet_field.place(x=display_x+display_x_gap_for_path_objects+3, y=y_location(10)+25-12)
-    movies_db_sheet_button.place(x=display_x+display_x_gap_for_path_objects+display_x_button_gap, y=y_location(10)+13-12)
+    movies_db_sheet_field_title.place(x=x+x_gap_for_path_objects, y=y_location(10)-12)
+    movies_db_sheet_field.place(x=x+x_gap_for_path_objects+3, y=y_location(10)+25-12)
+    movies_db_sheet_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(10)+13-12)
 
     # SAVE SETTINGS & START BUTTON
-    button_save_and_start.place(x=display_x+display_x_gap_for_path_objects+30, y=y_location(12)+10)
+    button_save_and_start.place(x=x+x_gap_for_path_objects+30, y=y_location(12)+10)
 
     # SKINS ROLL DOWN BUTTON
     skins_roll_down.place(x=7, y=y_location(11))

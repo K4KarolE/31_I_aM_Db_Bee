@@ -10,8 +10,12 @@
 - Automatically opens your movie database excel sheet (if the path added by the user via UI)
 $~$
 * Please see the requirements in the docs folder
-* Default skin: bee icon/figure by Martin Berube, please see more information in launcher/icon
-$~$
+
+
 <div align="center">
-    <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png" width="500px"</img> 
+    <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png" width="502px"</img> 
+</div>
+
+<div align="center">
+    <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/darth.png" width="502px"</img> 
 </div>
