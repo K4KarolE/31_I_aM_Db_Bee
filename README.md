@@ -16,10 +16,7 @@ $~$
     <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png" width="502px"</img> 
 </div>
 
-<<<<<<< HEAD
 <br>
-=======
->>>>>>> 806761dc68045a3d309c96527c5abceb2352f933
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/darth.png" width="502px"</img> 
