@@ -31,8 +31,8 @@ window.resizable(0,0)   # lock the main window
 
 # IMAGES
 working_directory = os.path.dirname(__file__)     # os.path.dirname(__file__) = D:\_DEV\Python\31_I_aM_D_bee   //in my case
-path_image = str(working_directory) + f"\skins\{skin_selected}\BG.png"    
-path_icon = str(working_directory) + f"\skins\{skin_selected}\icon.ico"
+path_image = working_directory + f"\skins\{skin_selected}\BG.png"    
+path_icon = working_directory + f"\skins\{skin_selected}\icon.ico"
 backgound_image = PhotoImage(file = path_image)
 backgound_image_label = Label( window, image = backgound_image)
 backgound_image_label.place(x = -2, y = 0)
@@ -45,7 +45,7 @@ checkbox = {
     'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
     'run': ['run_by_start', 'run_by_start_button', 'Autorun by next start' ],
     'title': ['title_search', 'title_search_button', 'Look for native title' ],
-    'no_picture': ['no_picture_in_sheet', 'no_picture_in_sheet_button', 'No pictures in target sheet' ]
+    'no_picture': ['no_picture_in_sheet', 'no_picture_in_sheet_button', 'No pictures in sheet' ]
 }
 
 for item in checkbox.values():
@@ -79,8 +79,8 @@ def change_skin(__):
     window.title(settings_data['skins'][skin_selected]['window_title'])
 
     #IMAGES
-    path_image = str(working_directory) + f"\skins\{skin_selected}\BG.png"
-    path_icon = str(working_directory) + f"\skins\{skin_selected}\icon.ico"
+    path_image = working_directory + f"\skins\{skin_selected}\BG.png"
+    path_icon = working_directory + f"\skins\{skin_selected}\icon.ico"
     backgound_image.configure(file = path_image)
     window.iconbitmap(path_icon)
 

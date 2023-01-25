@@ -9,8 +9,6 @@
 - Looks for the user`s native language movie title (if checked - multiple languages option)
 - Automatically opens your movie database excel sheet (if the path added by the user via UI)
 $~$
-* Please see the requirements in the docs folder
-
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/default.png" width="502px"</img> 
@@ -21,3 +19,33 @@ $~$
 <div align="center">
     <img src="https://raw.githubusercontent.com/K4KarolE/31_I_aM_D_bee/main/docs/promo/darth.png" width="502px"</img> 
 </div>
+
+# Requirements
+## Python and Mondules
+1. Python 3
+- in the installation, click on the checkbox: add to path
+- https://www.python.org/
+
+2. Selenium
+- Win: py -m pip install selenium
+
+3. Openpyxl
+- Win: py -m pip install openpyxl
+
+## Others
+
+4. Google Chrome
+- https://www.google.co.uk/chrome/
+
+5. Selenium WebDriver
+- you will be able to add the location of the chromedriver.exe via UI once you start the program
+- https://sites.google.com/chromium.org/driver/
+
+6. Excel sheet
+- Movies_New_Record Excel sheet, attached in the docs folder
+- you will be able to add the location of the sheet via UI once you start the program
+- any excel app installed on your system (MS Excel, LibreOffice Calc..)
+- in the excel sheet we are going to save the collected data
+- if you are using your own sheet:
+- + it should not contain pictures (openpyxl module removes the pictures from the sheet)
+- + with no merged cells for the Directors, Stars values (where we can write more data in one column)

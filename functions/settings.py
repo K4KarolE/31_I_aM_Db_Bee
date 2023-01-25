@@ -1,12 +1,16 @@
 import json
+import os
+
+functions_directory = os.path.dirname(__file__)     # os.path.dirname(__file__) = D:\_DEV\Python\31_I_aM_D_bee\functions   //in my case
+main_directory = functions_directory.strip("functions")
+path_json = main_directory + "settings_db.json" 
 
 def open_settings():
-    f = open(r"d:\_DEV\Python\31_I_aM_D_bee\settings_db.json")
+    f = open(path_json)
     settings_data = json.load(f)
     return settings_data
 
 def save_settings(settings_data):
-    with open('settings_db.json', 'w') as f:
+    with open(path_json, 'w') as f:
         json.dump(settings_data, f, indent=2)
     return
-
