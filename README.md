@@ -41,7 +41,7 @@
 - https://sites.google.com/chromium.org/driver/
 
 ### 6. Excel
-- Any excel app installed on your system (`MS Excel`, `LibreOffice Calc`..)
+- Any excel app installed on your system (`MS Excel`, `LibreOffice Calc`)
 
 ### 7. Target Excel Sheet
 - Recommended: `docs\ Movies_New_Record.xlsx`
