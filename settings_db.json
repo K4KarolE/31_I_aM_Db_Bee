@@ -1,5 +1,5 @@
 {
-  "imdb_link_in_clipboard": 1,
+  "imdb_link_in_clipboard": 0,
   "path_chrome_driver": "C:/Program Files (x86)/chromedriver.exe",
   "path_movies_db_sheet": "",
   "path_movie_new_record": "D:/Movies_New_Record.xlsx",

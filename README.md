@@ -5,13 +5,12 @@
 
 <img src="docs/guide/target_sheet.png"> 
 
-- Automatically opens the `target excel sheet`, once the data is saved
+- Automatically opens the sheet, once the data is saved
 - If checked in: 
     - Opens the movie poster in a new browser tab - the poster image is not "right-click copyable" from the movie`s front page by default
     - Searches for the movie in another database in a new browser tab - for the non-english user`s native language movie title
 - If the path added:
     - Automatically opens your `movie database excel sheet`
-
 <br>
 <div align="center">
     <img src="docs/promo/default.png"</img> 
@@ -56,9 +55,6 @@
 In progress
 
 # Tips and Tricks
-## Save settings
-In progress
-
 ## How to use less information/columns from the target sheet
 No code:
 - Hide the unwanted columns in the `target excel sheet`
@@ -70,16 +66,12 @@ https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884
 ```
 Code: amend the `functions / excel_sheet.py` file
 
-## Alternative start
-In progress
-
 ## How to add your own "Look for native title" option
 Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start.
 
 <div align="center">
     <img src="docs/guide/title_search_link.png"</img> 
 </div>
-
 
 ## How to create your own skin
 - In the `skins` folder create a new folder with the name of your skin
@@ -91,3 +83,12 @@ Just add your key-value pair in `settings_db.json / title_search_links` and it w
 <div align="center">
     <img src="docs/guide/own_skin.png"</img> 
 </div>
+
+## How to save settings without running the program
+- Uncheck the `No pictures in sheet` and click `Save & Start` button
+    - Settings will be saved
+    - Error message will be displayed in a pop-up window
+- Change skin, every skin update triggers the `save function`
+
+## Alternative start
+In progress
