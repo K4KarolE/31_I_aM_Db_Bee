@@ -69,11 +69,11 @@
 - Automatically triggers the scraping engine by the next start of the program using the previously saved settings
 
 ## Chrome driver path - Mandatory
-- You are able to add the location of the driver via UI
+- You are able to add the location of the driver
 
 ## Target sheet path - Mandatory
 - Recommended: `docs\ Movies_New_Record.xlsx`
-- You are able relocate and add the new location of the sheet via UI
+- You are able to add the new location of the sheet (if you relocated it)
 - If you are using your own sheet:
     - It should NOT contain pictures (`openpyxl` module removes the pictures from the sheet)
     - No merged cells for the `Directors`, `Stars` values (more than one cell can be used in the same column)
