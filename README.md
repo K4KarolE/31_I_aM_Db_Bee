@@ -35,7 +35,8 @@ https://pypi.org/project/openpyxl/
 https://www.google.co.uk/chrome/
 
 ### 5. Selenium WebDriver
-https://sites.google.com/chromium.org/driver/
+- You will be able add the location of the driver via UI
+- https://sites.google.com/chromium.org/driver/
 
 ### 6. Excel
 Any excel app installed on your system (`MS Excel`, `LibreOffice Calc`..)
@@ -44,8 +45,8 @@ Any excel app installed on your system (`MS Excel`, `LibreOffice Calc`..)
 - Recommended: `docs\ Movies_New_Record.xlsx`
 - You will be able relocate and add the new location of the sheet via UI
 - If you are using your own sheet:
-- + It should not contain pictures (`openpyxl` module removes the pictures from the sheet)
-- + No merged cells for the Directors, Stars values (where we can write more data in one column)
+- - It should not contain pictures (`openpyxl` module removes the pictures from the sheet)
+- - No merged cells for the Directors, Stars values (where we can write more data in one column)
 
 # Guide
 ## Options
