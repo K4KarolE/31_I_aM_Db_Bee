@@ -26,14 +26,6 @@
       "font_color": "black",
       "window_title": "Hunny for Life",
       "error_window_title": "Danger Will Robinson, danger!"
-    },
-    "darth": {
-      "background_color": "black",
-      "field_background_color": "black",
-      "font_style": "Georgia",
-      "font_color": "red",
-      "window_title": "Hunny for Force",
-      "error_window_title": "Your thoughts betray you.."
     }
   },
   "run_by_start": 0,
