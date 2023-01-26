@@ -37,7 +37,6 @@
 - https://www.google.co.uk/chrome/
 
 ### 5. Selenium WebDriver
-- You will be able add the location of the driver via UI
 - https://sites.google.com/chromium.org/driver/
 
 ### 6. Excel
@@ -45,35 +44,55 @@
 
 ### 7. Target Excel Sheet
 - Recommended: `docs\ Movies_New_Record.xlsx`
-- You will be able relocate and add the new location of the sheet via UI
-- If you are using your own sheet:
-    - It should not contain pictures (`openpyxl` module removes the pictures from the sheet)
-    - No merged cells for the Directors, Stars values (where we can write more data in one column)
+
 
 # Guide
-## Options
-In progress
+## IMDb link in clipboard - Mandatory
+- Copy the link of your movie (or series, TV show, ..)
+- It is more for the first time users
+<div align="center">
+    <img src="docs/guide/link_in_clipboard.png"</img> 
+</div>
+
+## Poster in new tab
+- The poster image is not "right-click copyable" from the movie`s front page by default (left)
+<div align="center">
+    <img src="docs/guide/poster.png"</img> 
+</div>
+
+## Look for native title
+- Takes the title and release year of the movie
+- Adds it to the end of the selected search link
+- Opens it in a new tab
+
+## Autorun by next start
+- Automatically triggers the scraping engine by the next start of the program using the previously saved settings
+
+## Chrome driver path - Mandatory
+- You are able to add the location of the driver via UI
+
+## Target sheet path - Mandatory
+- Recommended: `docs\ Movies_New_Record.xlsx`
+- You will be able relocate and add the new location of the sheet via UI
+- If you are using your own sheet:
+    - It should NOT contain pictures (`openpyxl` module removes the pictures from the sheet)
+    - No merged cells for the Directors, Stars values (where we can write more data in one column)
+
+## Movies DB sheeth path
+- You are able to add the location of `movie database excel sheet`
+- No error message, when the field left empty
+
 
 # Tips and Tricks
-## How to use less information/columns from the target sheet
-- No code:
-    - Hide the unwanted columns in the `target excel sheet`
-    - Save and close it
-    - Run the program
-    - Copy visible cells only, help:
-    ```
-    https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884-4332-b262-8b814412847e
-    ```
-- Code: amend the `functions / excel_sheet.py` file
-
 ## How to add your own "Look for native title" option
-Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start.
+- Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start.
+- Makse sure your link is suitable for concatenation
 
 <div align="center">
     <img src="docs/guide/title_search_link.png"</img> 
 </div>
 
-## How to create your own skin
+## How to set up your own skin
 - In the `skins` folder create a new folder with the name of your skin
 - Place your version of `BG.png` and `icon.ico` in the folder (BG.png: 500x600)
 - In the `settings_db.json \ skins` create a new dictionary with the same name of your folder
@@ -84,11 +103,21 @@ Just add your key-value pair in `settings_db.json / title_search_links` and it w
     <img src="docs/guide/own_skin.png"</img> 
 </div>
 
-## How to save settings without running the program
-- Uncheck the `No pictures in sheet` and click `Save & Start` button
-    - Settings will be saved
-    - Error message will be displayed in a pop-up window
-- Change skin, every skin update triggers the `save function`
+## How to test/save your selected skin without running the scraping engine
+- Change the skin there and back, every skin update triggers the `save & update function` for the skin
 
 ## Alternative start
-In progress
+- Look around in the the `docs\launcher` folder, if you want to launch the program from your desktop* or Total Commander button
+- Do not forget to change the path and python types according to your system
+- * = Windows: you can create a shortcut to the `.bat` file
+
+## How to use less information/columns from the target sheet
+- No code:
+    - Hide the unwanted columns in the `target excel sheet`
+    - Save and close it
+    - Run the program
+    - Copy visible cells only, help:
+    ```
+    https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884-4332-b262-8b814412847e
+    ```
+- Code: amend the `functions / excel_sheet.py` file
