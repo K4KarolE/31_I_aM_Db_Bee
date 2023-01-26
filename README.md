@@ -3,7 +3,7 @@
 - Gets the movie`s IMDb link from clipboard
 - Copies the details to the `target excel sheet`:
 
-    <img src="docs/guide/target_sheet.png"></img> 
+<img src="docs/guide/target_sheet.png"> 
 
 - Automatically opens the `target excel sheet`, once the data is saved
 - If checked in: 
@@ -14,15 +14,12 @@
 
 <br>
 
-<div align="center">
-    <img src="docs/promo/default.png"</img> 
-</div>
+<img src="docs/promo/default.png"> 
 
 <br>
 
-<div align="center">
-    <img src="docs/promo/darth.png"</img> 
-</div>
+<img src="docs/promo/darth.png"> 
+
 
 # Requirements
 ## Python and Mondules
