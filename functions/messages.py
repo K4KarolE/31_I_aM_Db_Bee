@@ -1,12 +1,11 @@
 #!/bin python3.11
 
-import tkinter.messagebox  
+import tkinter.messagebox
+from functions import settings
+settings_data = settings.open_settings()
 
-
-error_popup_window_title = [
-    'Got stuck in honey',
-    'Danger Will Robinson, danger!'
-    ]
+skin_selected = settings_data['skin_selected']  
+error_popup_window_title = settings_data['skins'][skin_selected]['error_window_title']
 
 popup_message_dic = {
     'wrong_link': 'Wrong link in clipboard\n\nCopy the IMDb link and click OK',
@@ -15,10 +14,7 @@ popup_message_dic = {
     }
 
 def error_pop_up(popup_message_dic_key):
-    tkinter.messagebox.showinfo(error_popup_window_title[0], f"{popup_message_dic[popup_message_dic_key]}") # tkinter.messagebox.showinfo ( window title, message )
-
-# error_pop_up('wrong_link')
-# error_pop_up('excel_is_open')
+    tkinter.messagebox.showinfo(error_popup_window_title, f"{popup_message_dic[popup_message_dic_key]}") # tkinter.messagebox.showinfo ( window title, message )
 
 
 ### TERMINAL MESSAGES
@@ -38,7 +34,6 @@ message_dic = { 'banner': ' I aM D bee! ',
             'error_length':'ERROR - LENGTH',
             'error_excel':'ERROR - Close your sheet and hit Enter',
             'error_poster':'ERROR - ERROR - POSTER',}
-
 
 def message(frame_type, frame_length_adjuster, message_type):
     message_length = len(message_dic[message_type])
