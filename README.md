@@ -1,7 +1,7 @@
 # I aM D bee
 ## IMDb scraping app for movies, tv shows, tv mini-series..
 - Gets the movie`s IMDb link from clipboard
-- Copies the details to the target excel sheet: movie title, year of release, director(s), star(s), genre(s), date of the day, length of the movie
+- Copies the details to the `target excel sheet`: movie title, year of release, director(s), star(s), genre(s), date of the day, length of the movie
 - Automatically opens the `target excel sheet`, once the data is saved
 - If checked in: opens the movie poster in a new browser tab - the poster image is not "right-click copyable" from the movie`s front page by default
 - If checked in: searches for the movie in another database in a new browser tab - for the non-english user`s native language movie title
@@ -56,11 +56,15 @@ in progress
 in progress
 
 ## How to use less information/columns from the target sheet
-- No code:
+No code:
+- Hide the unwanted columns in the `target excel sheet`
+- Save and close it
+- Run the program
+- Copy visible cells only, help:
 ```
 https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884-4332-b262-8b814412847e
 ```
-- Code: or you can amend the `functions / excel_sheet.py` file
+Code: amend the `functions / excel_sheet.py` file
 
 ## Alternative start
 in progress
