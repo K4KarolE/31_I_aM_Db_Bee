@@ -1,11 +1,11 @@
 # I aM D bee
-## IMDb scraping app for movies, tv shows, tv mini-series..
-- Gets the movie`s IMDb link from clipboard
-- Copies the details to the `target excel sheet`:
+## About
+- `I aM d bee` collects and copies of your selected motion picture's basic IMDb details to a `target excel sheet`:
 
 <img src="docs/guide/target_sheet.png"> 
 
-- Automatically opens the sheet, once the data is saved
+## +
+- Automatically opens the `target excel sheet`, once the data is saved
 - If opt in: 
     - Opens the movie poster in a new browser tab - the poster image is not "right-click copyable" from the movie`s front page by default
     - Searches for the movie in another database in a new browser tab - for the non-english user`s native language movie title
@@ -61,9 +61,10 @@
 </div>
 
 ## Look for native title
-- Takes the title and the release year of the movie
-- Adds it to the end of the selected search link
-- Opens it in a new browser tab
+- Searches for the movie in another database in a new browser tab - for the non-english user`s native language movie title:
+    - Uses the title and the release year of the movie
+    - Adds it to the end of the selected search link
+    - Opens it in a new browser tab
 
 ## Autorun by next start
 - Automatically triggers the scraping engine by the next start of the program using the previously saved settings
@@ -84,7 +85,7 @@
 
 
 # Tips and Tricks
-## How to add your own "Look for native title" option
+## How to add a new "Look for native title" option
 - Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start.
 - Make sure your link is suitable for concatenation
 
@@ -92,7 +93,7 @@
     <img src="docs/guide/title_search_link.png"</img> 
 </div>
 
-## How to set up your own skin
+## How to add a new skin
 - In the `skins` folder create a new folder with the name of your skin
 - Place your version of `BG.png` and `icon.ico` into the folder (BG.png: 500x600)
 - In the `settings_db.json \ skins` create a new dictionary with the same name of your folder
@@ -104,12 +105,12 @@
 </div>
 
 ## How to test/save your selected skin without running the scraping engine
-- Change the skin there and back, every skin update triggers the `save & update function` for the skin
+- Change the skin, every skin update triggers the `save & update function` (for the skin only)
 
 ## Alternative start
-- Look around in the the `docs\launcher` folder, if you want to launch the program from your desktop* or from Total Commander`s button section
+- Look around in the the `docs\launcher` folder, if you want to launch the program from your desktop or from Total Commander`s button section
+    - Windows: you can create a shortcut for the `.bat` file
 - Do not forget to change the path and python types according to your system
-- * = Windows: you can create a shortcut for the `.bat` file
 
 ## How to use less information/columns from the target sheet
 - No code:

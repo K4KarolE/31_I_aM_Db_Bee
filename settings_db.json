@@ -8,7 +8,7 @@
     "Hungarian": "https://www.mafab.hu/search/&search=",
     "Czech": "https://www.csfd.cz/hledat/?q="
   },
-  "title_search_link_selected": "Hungarian",
+  "title_search_link_selected": "Czech",
   "poster_open_in_new_tab": 0,
   "poster_size_options": {
     "Small": 0,
@@ -16,8 +16,8 @@
     "Larger": 4,
     "All sizes": "all"
   },
-  "poster_size": "Small",
-  "skin_selected": "darth",
+  "poster_size": "All sizes",
+  "skin_selected": "default",
   "skins": {
     "darth": {
       "background_color": "black",
@@ -37,5 +37,5 @@
     }
   },
   "run_by_start": 0,
-  "no_picture_in_sheet": 1
+  "no_picture_in_sheet": 0
 }
