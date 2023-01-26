@@ -3,7 +3,7 @@
 - Gets the movie`s IMDb link from clipboard
 - Copies the details to the `target excel sheet`:
 
-<img src="docs/guide/target_sheet.png"</img>
+    <img src="docs/guide/target_sheet.png"></img> 
 
 - Automatically opens the `target excel sheet`, once the data is saved
 - If checked in: 
