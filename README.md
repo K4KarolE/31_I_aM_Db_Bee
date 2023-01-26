@@ -2,9 +2,9 @@
 ## IMDb scraping app for movies, tv shows, tv mini-series..
 - Gets the movie`s IMDb link from clipboard
 - Copies the details to the `target excel sheet`:
-<div align="center">
-    <img src="docs/guide/target_sheet.png"</img> 
-</div>
+
+<img src="docs/guide/target_sheet.png"</img>
+
 - Automatically opens the `target excel sheet`, once the data is saved
 - If checked in: 
     - Opens the movie poster in a new browser tab - the poster image is not "right-click copyable" from the movie`s front page by default
