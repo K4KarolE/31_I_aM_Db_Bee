@@ -56,15 +56,15 @@ In progress
 
 # Tips and Tricks
 ## How to use less information/columns from the target sheet
-No code:
-- Hide the unwanted columns in the `target excel sheet`
-- Save and close it
-- Run the program
-- Copy visible cells only, help:
-```
-https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884-4332-b262-8b814412847e
-```
-Code: amend the `functions / excel_sheet.py` file
+- No code:
+    - Hide the unwanted columns in the `target excel sheet`
+    - Save and close it
+    - Run the program
+    - Copy visible cells only, help:
+    ```
+    https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884-4332-b262-8b814412847e
+    ```
+- Code: amend the `functions / excel_sheet.py` file
 
 ## How to add your own "Look for native title" option
 Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start.
