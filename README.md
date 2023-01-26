@@ -13,13 +13,14 @@
     - Automatically opens your `movie database excel sheet`
 
 <br>
-
-<img src="docs/promo/default.png"> 
+<div align="center">
+    <img src="docs/promo/default.png"</img> 
+</div>
 
 <br>
-
-<img src="docs/promo/darth.png"> 
-
+<div align="center">
+    <img src="docs/promo/darth.png"</img> 
+</div>
 
 # Requirements
 ## Python and Mondules
