@@ -3,9 +3,11 @@
 - Gets the movie`s IMDb link from clipboard
 - Copies the details to the `target excel sheet`: movie title, year of release, director(s), star(s), genre(s), date of the day, length of the movie
 - Automatically opens the `target excel sheet`, once the data is saved
-- If checked in: opens the movie poster in a new browser tab - the poster image is not "right-click copyable" from the movie`s front page by default
-- If checked in: searches for the movie in another database in a new browser tab - for the non-english user`s native language movie title
-- If the path added: automatically opens your `movie database excel sheet`
+- If checked in: 
+    - Opens the movie poster in a new browser tab - the poster image is not "right-click copyable" from the movie`s front page by default
+    - Searches for the movie in another database in a new browser tab - for the non-english user`s native language movie title
+- If the path added:
+    - Automatically opens your `movie database excel sheet`
 
 <br>
 
@@ -32,7 +34,7 @@
 
 ## Others
 ### 4. Google Chrome
-https://www.google.co.uk/chrome/
+- https://www.google.co.uk/chrome/
 
 ### 5. Selenium WebDriver
 - You will be able add the location of the driver via UI
@@ -50,11 +52,11 @@ https://www.google.co.uk/chrome/
 
 # Guide
 ## Options
-in progress
+In progress
 
 # Tips and Tricks
 ## Save settings
-in progress
+In progress
 
 ## How to use less information/columns from the target sheet
 No code:
@@ -68,7 +70,7 @@ https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884
 Code: amend the `functions / excel_sheet.py` file
 
 ## Alternative start
-in progress
+In progress
 
 ## How to add your own "Look for native title" option
 Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start.
@@ -79,4 +81,4 @@ Just add your key-value pair in `settings_db.json / title_search_links` and it w
 
 
 ## How to create your own skin
-in progress
+In progress
