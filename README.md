@@ -1,7 +1,10 @@
 # I aM D bee
 ## IMDb scraping app for movies, tv shows, tv mini-series..
 - Gets the movie`s IMDb link from clipboard
-- Copies the details to the `target excel sheet`: movie title, year of release, director(s), star(s), genre(s), date of the day, length of the movie
+- Copies the details to the `target excel sheet`:
+<div align="center">
+    <img src="docs/guide/target_sheet.png"</img> 
+</div>
 - Automatically opens the `target excel sheet`, once the data is saved
 - If checked in: 
     - Opens the movie poster in a new browser tab - the poster image is not "right-click copyable" from the movie`s front page by default
@@ -81,4 +84,12 @@ Just add your key-value pair in `settings_db.json / title_search_links` and it w
 
 
 ## How to create your own skin
-In progress
+- In the `skins` folder create a new folder with the name of your skin
+- Place your version of `BG.png` and `icon.ico` in the folder (BG.png: 500x600)
+- In the `settings_db.json \ skins` create a new dictionary with the same name of your folder
+- In the `settings_db.json \ skins \ your skin` amend the parameters as you wish
+- The new skin will be automatically listed at the next start
+
+<div align="center">
+    <img src="docs/guide/own_skin.png"</img> 
+</div>

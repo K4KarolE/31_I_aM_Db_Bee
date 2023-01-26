@@ -3,13 +3,13 @@
   "path_chrome_driver": "C:/Program Files (x86)/chromedriver.exe",
   "path_movies_db_sheet": "",
   "path_movie_new_record": "D:/Movies_New_Record.xlsx",
-  "title_search": 0,
+  "title_search": 1,
   "title_search_links": {
     "Hungarian": "https://www.mafab.hu/search/&search=",
     "Czech": "https://www.csfd.cz/hledat/?q="
   },
   "title_search_link_selected": "Hungarian",
-  "poster_open_in_new_tab": 0,
+  "poster_open_in_new_tab": 1,
   "poster_size_options": {
     "Small": 0,
     "Medium": 2,
@@ -19,6 +19,14 @@
   "poster_size": "Small",
   "skin_selected": "default",
   "skins": {
+    "darth": {
+      "background_color": "black",
+      "field_background_color": "black",
+      "font_style": "Georgia",
+      "font_color": "red",
+      "window_title": "Hunny for Force",
+      "error_window_title": "Your thoughts betray you.."
+    },
     "default": {
       "background_color": "#E6B91E",
       "field_background_color": "#E6B91E",
