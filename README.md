@@ -22,13 +22,13 @@
 # Requirements
 ## Python and Mondules
 ### 1. Python 3
-https://www.python.org/
+- https://www.python.org/
 
 ### 2. Selenium
-https://pypi.org/project/selenium/
+- https://pypi.org/project/selenium/
 
 ### 3. Openpyxl
-https://pypi.org/project/openpyxl/
+- https://pypi.org/project/openpyxl/
 
 ## Others
 ### 4. Google Chrome
@@ -39,14 +39,14 @@ https://www.google.co.uk/chrome/
 - https://sites.google.com/chromium.org/driver/
 
 ### 6. Excel
-Any excel app installed on your system (`MS Excel`, `LibreOffice Calc`..)
+- Any excel app installed on your system (`MS Excel`, `LibreOffice Calc`..)
 
 ### 7. Target Excel Sheet
 - Recommended: `docs\ Movies_New_Record.xlsx`
 - You will be able relocate and add the new location of the sheet via UI
 - If you are using your own sheet:
-- - It should not contain pictures (`openpyxl` module removes the pictures from the sheet)
-- - No merged cells for the Directors, Stars values (where we can write more data in one column)
+    - It should not contain pictures (`openpyxl` module removes the pictures from the sheet)
+    - No merged cells for the Directors, Stars values (where we can write more data in one column)
 
 # Guide
 ## Options
