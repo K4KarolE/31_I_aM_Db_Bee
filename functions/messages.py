@@ -18,13 +18,13 @@ def error_pop_up(popup_message_dic_key):
 
 
 ### TERMINAL MESSAGES
-import shutil
+import shutil       # able to print the messages in the middle of the terminal
 terminal_columns = shutil.get_terminal_size().columns
 
 frame = { 'bee_noise': ' Z-z-z ',
             'error': ' * '}
 
-message_dic = { 'banner': ' I aM D bee! ',
+message_dic = { 'banner': ' Collecting nectar my dear',
             'outro': ' Honey added to your jar! ',
             'error_link': 'ERROR - WRONG IMDb LINK - COPY AGAIN & HIT ENTER ',
             'error_decider': 'ERROR - DECIDER ',

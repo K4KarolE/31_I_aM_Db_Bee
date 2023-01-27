@@ -9,7 +9,7 @@ import pyperclip
 
 import sys
 import webbrowser
-import platform
+# import platform
 
 from functions import messages
 
@@ -22,8 +22,6 @@ def get_link():
     while 'imdb.com/title/' not in link:
         counter += 1
         messages.error_pop_up('wrong_link')
-        # messages.message('error', 1.2, 'error_link')
-        # input()
         link = pyperclip.paste()
         if counter == 2:
             messages.error_pop_up('bye_bye')
@@ -35,17 +33,16 @@ def get_link():
 def web_driver():
     settings_data = settings.open_settings()
     link = get_link()
-    if platform.system() == 'Windows':
-        service = Service(settings_data["path_chrome_driver"])
-        driver = webdriver.Chrome(service=service)
-        driver.minimize_window()
-        driver.get(link)
+    service = Service(settings_data["path_chrome_driver"])
+    driver = webdriver.Chrome(service=service)
+    driver.minimize_window()
+    driver.get(link)
 
-    if platform.system() == 'Linux':
-        service = Service(settings_data["path_chrome_driver"])
-        driver = webdriver.Chrome(service=service)
-        driver.minimize_window()
-        driver.get(link)
+    # if platform.system() == 'Linux':
+    #     service = Service(settings_data["path_chrome_driver"])
+    #     driver = webdriver.Chrome(service=service)
+    #     driver.minimize_window()
+    #     driver.get(link)
 
 #### DECIDER
     try:

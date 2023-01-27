@@ -1,9 +1,10 @@
 import json
 import os
+from pathlib import Path
 
 functions_directory = os.path.dirname(__file__)     # os.path.dirname(__file__) = D:\_DEV\Python\31_I_aM_D_bee\functions   //in my case
 main_directory = functions_directory.strip("functions")
-path_json = main_directory + "settings_db.json" 
+path_json = Path(main_directory,  "settings_db.json")       # Path functions makes the path OS independent
 
 def open_settings():
     f = open(path_json)

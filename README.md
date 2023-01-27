@@ -1,67 +1,72 @@
 # I aM D bee
-## About
-- `I aM d bee` collects and copies of your selected motion picture's basic IMDb details to a `target excel sheet`:
+- `I aM d bee` collects and copies of your selected motion picture's basic IMDb details to a `target excel sheet`: 
 
 <img src="docs/guide/target_sheet.png"> 
 
-## +
-- Automatically opens the `target excel sheet`, once the data is saved
-- If opt in: 
-    - Opens the movie poster in a new browser tab - the poster image is not "right-click copyable" from the movie`s front page by default
-    - Searches for the movie in another database in a new browser tab - for the non-english user`s native language movie title
+- Automatically opens the the sheet, once the data is saved
+- If selected: 
+    - Opens the movie poster in a new browser tab
+    - Searches for the movie on the selected, non-English movie site
 - If the path added:
     - Automatically opens your `movie database excel sheet`
-<br>
+
 <div align="center">
-    <img src="docs/promo/default.png"</img> 
+    <img src="docs/promo/default.png" </img> 
 </div>
 
 <br>
 <div align="center">
-    <img src="docs/promo/darth.png"</img> 
+    <img src="docs/promo/darth.png" </img> 
 </div>
 
 # Requirements
-## Python and Mondules
-### 1. Python 3
+## Python and Modules
+### Python 3 - used: 3.11
 - https://www.python.org/
 
-### 2. Selenium
+### Pyperclip
+- https://pypi.org/project/pyperclip/
+
+### Selenium
 - https://pypi.org/project/selenium/
 
-### 3. Openpyxl
+### Openpyxl
 - https://pypi.org/project/openpyxl/
 
 ## Others
-### 4. Google Chrome
+### Google Chrome
 - https://www.google.co.uk/chrome/
 
-### 5. Selenium WebDriver
+### Selenium WebDriver
 - https://sites.google.com/chromium.org/driver/
 
-### 6. Excel
+### Excel
 - Any excel app installed on your system (`MS Excel`, `LibreOffice Calc`)
 
-### 7. Target Excel Sheet
+### Target Excel Sheet
 - Recommended: `docs\ Movies_New_Record.xlsx`
-
 
 # Guide
 ## IMDb link in clipboard - Mandatory
-- You are requested to copy the link of the movie (or series, TV show, ..)
-- It is more for the first time users
+- You are requested to copy the link of the movie (or series, TV shows, ..)
+- It is more for the first-time users
 <div align="center">
     <img src="docs/guide/link_in_clipboard.png"</img> 
 </div>
 
 ## Poster in new tab
+- Opens the movie poster in a new browser tab
+- Poster size estimates: 
+    - Small ~ 190 x 280
+    - Medium ~ 280 x 420
+    - Larger ~ 380 x 560
 - The poster image is not "right-click copyable" from the movie`s front page by default (left)
 <div align="center">
     <img src="docs/guide/poster.png"</img> 
 </div>
 
 ## Look for native title
-- Searches for the movie in another database in a new browser tab - for the non-english user`s native language movie title:
+- Searches for the movie on the selected, non-English movie site:
     - Uses the title and the release year of the movie
     - Adds it to the end of the selected search link
     - Opens it in a new browser tab
@@ -79,14 +84,13 @@
     - It should NOT contain pictures (`openpyxl` module removes the pictures from the sheet)
     - No merged cells for the `Directors`, `Stars` values (more than one cell can be used in the same column)
 
-## Movies DB sheeth path
+## Movies DB sheet path
 - You are able to add the location of `movie database excel sheet`
 - Not mandatory, no error message, when the field left empty
 
-
 # Tips and Tricks
 ## How to add a new "Look for native title" option
-- Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start.
+- Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start
 - Make sure your link is suitable for concatenation
 
 <div align="center">
@@ -95,7 +99,7 @@
 
 ## How to add a new skin
 - In the `skins` folder create a new folder with the name of your skin
-- Place your version of `BG.png` and `icon.ico` into the folder (BG.png: 500x600)
+- Place your version of `BG.png` and `icon.ico` into the folder (`BG.png`: 500x600)
 - In the `settings_db.json \ skins` create a new dictionary with the same name of your folder
 - In the `settings_db.json \ skins \ your skin` amend the parameters as you wish
 - The new skin will be automatically listed at the next start
@@ -104,18 +108,36 @@
     <img src="docs/guide/own_skin.png"</img> 
 </div>
 
-## How to test/save your selected skin without running the scraping engine
-- Change the skin, every skin update triggers the `save & update function` (for the skin only)
+## How to test your updated skin without running the scraping engine
+Scenario: you updated the `BG.png` background picture in an already existing skin
+- Change the skin with the `Skins` button for different one and back to the updated one
+- Every skin change triggers the `save & update function` (for the skin only)
+- Your updated picture should be visible without restarting the program
 
 ## Alternative start
+Scenario: launching the program without IDE or terminal
 - Look around in the the `docs\launcher` folder, if you want to launch the program from your desktop or from Total Commander`s button section
     - Windows: you can create a shortcut for the `.bat` file
 - Do not forget to change the path and python types according to your system
 
-## How to use less information/columns from the target sheet
+## How to use less information/columns from the target sheet with one selection
+Scenario: you are native English person, who collects only the English titles of the movies
 - No code:
     - Hide the unwanted columns in the `target excel sheet`
     - Save and close it
     - Run the program
     - [Copy visible cells only](https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884-4332-b262-8b814412847e)
-- Code: amend the `functions / excel_sheet.py` file
+- Code: amend the `functions / excel_sheet.py` file to
+    - Reduce the information transfered to the sheet
+    - Alter the location(cells)
+
+# Modules used, which are part of Python 3
+- datetime
+- json
+- os
+- pathlib
+- shutil
+- sys
+- webbrowser
+
+## Thank you all who worked on the modules listed in this document!
