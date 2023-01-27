@@ -46,6 +46,16 @@
 ### Target Excel Sheet
 - Recommended: `docs\ Movies_New_Record.xlsx`
 
+### OS
+- Windows (tested on 10)
+- Linux (tested on Mint 21):
+    - Window icon will not be displayed
+    - Excel sheets will not open automatically
+    - The checkbox text placement can be off, solution:
+        - Change the font style to `Arial` in `settings_db.json \ skins \ [every skin] \ font_style`
+        - and/or decrease the font size in `main.py \ around line 54 \ checkbox creation for loop \  font = (font_style, 12)`
+    - `Pyperclip` module: "On Linux, this module makes use of the xclip or xsel commands, which should come with the os. Otherwise run “sudo apt-get install xclip” or “sudo apt-get install xsel” (Note: xsel does not always seem to work.) Otherwise on Linux, you will need the gtk or PyQt4 modules installed. "
+
 # Guide
 ## IMDb link in clipboard - Mandatory
 - You are requested to copy the link of the movie (or series, TV shows, ..)
@@ -78,7 +88,7 @@
 - You are able to add the location of the driver
 
 ## Target sheet path - Mandatory
-- Recommended: `docs\ Movies_New_Record.xlsx`
+- Recommended: `docs\Movies_New_Record.xlsx`
 - You are able to add the new location of the sheet (if you relocated it)
 - If you are using your own sheet:
     - It should NOT contain pictures (`openpyxl` module removes the pictures from the sheet)
@@ -90,7 +100,7 @@
 
 # Tips and Tricks
 ## How to add a new "Look for native title" option
-- Just add your key-value pair in `settings_db.json / title_search_links` and it will be automatically listed at the next start
+- Just add your key-value pair in `settings_db.json \ title_search_links` and it will be automatically listed at the next start
 - Make sure your link is suitable for concatenation
 
 <div align="center">
@@ -127,7 +137,7 @@ Scenario: you are native English person, who collects only the English titles of
     - Save and close it
     - Run the program
     - [Copy visible cells only](https://support.microsoft.com/en-us/office/copy-visible-cells-only-6e3a1f01-2884-4332-b262-8b814412847e)
-- Code: amend the `functions / excel_sheet.py` file to
+- Code: amend the `functions \ excel_sheet.py` file to
     - Reduce the information transfered to the sheet
     - Alter the location(cells)
 

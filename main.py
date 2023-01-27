@@ -63,7 +63,8 @@ for item in checkbox.values():
         foreground=font_color,
         background=background_color,
         activeforeground = font_color,
-        activebackground=background_color   # activebackground - color when clicked
+        activebackground=background_color,   # activebackground - color when clicked
+        highlightbackground=background_color
         )
 checkbox['no_picture'][1].config(font = (font_style, 9))    # make the /No pictures in target sheet/ checkbox text smaller
 
