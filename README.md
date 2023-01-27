@@ -136,6 +136,7 @@ Scenario: you are native English person, who collects only the English titles of
 - json
 - os
 - pathlib
+- platform
 - shutil
 - sys
 - webbrowser

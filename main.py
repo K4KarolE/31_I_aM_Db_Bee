@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import filedialog      # for browse window (adding path)
 import tkinter.messagebox           # for pop-up windows
 
+import platform                     # to check which OS is used
 import os
 from pathlib import Path
 
@@ -32,12 +33,14 @@ window.resizable(0,0)   # lock the main window
 
 # IMAGES
 working_directory = os.path.dirname(__file__)     # os.path.dirname(__file__) = D:\_DEV\Python\31_I_aM_D_bee   //in my case
-path_image = Path(working_directory, "skins", skin_selected, "BG.png")      # Path functions makes the path OS independent
-path_icon = Path(working_directory, "skins", skin_selected, "icon.ico")     # running the program on Windows: ..skins\default.., on Linux: ..skins/default..)
+path_image = Path(working_directory, "skins", skin_selected, "BG.png")      # Path functions makes the path OS independent, running the program on Windows: ..skins\default.., on Linux: ..skins/default..)
 backgound_image = PhotoImage(file = path_image)
 backgound_image_label = Label( window, image = backgound_image)
 backgound_image_label.place(x = -2, y = 0)
-window.iconbitmap(path_icon)        # window icon - left, top corner
+
+if platform.system() == 'Windows':      # will not be visible on Linux, macOS
+    path_icon = Path(working_directory, "skins", skin_selected, "icon.ico")
+    window.iconbitmap(path_icon)        # window icon - left, top corner
 
 ## CHECKBOXES
 checkbox = {
@@ -79,10 +82,12 @@ def change_skin(__):
     window.title(settings_data['skins'][skin_selected]['window_title'])
 
     #IMAGES
-    path_image = working_directory + f"\skins\{skin_selected}\BG.png"
-    path_icon = working_directory + f"\skins\{skin_selected}\icon.ico"
+    path_image = Path(working_directory, "skins", skin_selected, "BG.png")
     backgound_image.configure(file = path_image)
-    window.iconbitmap(path_icon)
+
+    if platform.system() == 'Windows': 
+        path_icon = Path(working_directory, "skins", skin_selected, "icon.ico")
+        window.iconbitmap(path_icon)
 
     ##COLORS
     background_color = settings_data['skins'][skin_selected]['background_color']
