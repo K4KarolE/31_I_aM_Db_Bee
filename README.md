@@ -107,8 +107,8 @@
 - Not mandatory, no error message, when the field left empty
 
 ## ChromeDriver path
-# - UNDER CONSTRUCTION -
-- If the ChromeDriver is not in your system path: you are able to add the path
+### - UNDER CONSTRUCTION -
+- If the `ChromeDriver` is not in your system path: you are able to add the path
 
 # Tips and Tricks
 ## How to add a new "Look for native title" option
