@@ -2,11 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.chrome.service import Service
-import pyperclip
-
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
+from fake_useragent import UserAgent
+
+import pyperclip
 import sys
 import webbrowser
 
@@ -31,17 +32,15 @@ def get_link():
 def web_driver():
     settings_data = settings.open_settings()
     link = get_link()
-    
-    # service = Service(settings_data["path_chrome_driver"])
-    # driver = webdriver.Chrome(service=service)
+    # SET UP
+    service = Service(executable_path= settings_data["path_chrome_driver"])
     options = Options()
-    options.add_argument("window-size=1200,600")
-    from fake_useragent import UserAgent
+    options.add_argument("window-size=1100,700")
     ua = UserAgent()
     user_agent = ua.random
     options.add_argument(f'user-agent={user_agent}')
-    driver = webdriver.Chrome(options=options)
-    
+    # DRIVER
+    driver = webdriver.Chrome(options=options, service=service) 
     driver.minimize_window()
     driver.get(link)
 

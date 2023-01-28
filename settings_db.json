@@ -1,14 +1,14 @@
 {
   "imdb_link_in_clipboard": 1,
   "path_chrome_driver": "",
-  "path_movies_db_sheet": "\n",
-  "path_movie_new_record": "D:/Movies_New_Record.xlsx",
+  "path_movies_db_sheet": "",
+  "path_movie_new_record": "",
   "title_search": 1,
   "title_search_links": {
     "Czech": "https://www.csfd.cz/hledat/?q=",
     "Hungarian": "https://www.mafab.hu/search/&search="
   },
-  "title_search_link_selected": "Hungarian",
+  "title_search_link_selected": "Czech",
   "poster_open_in_new_tab": 1,
   "poster_size_options": {
     "Small": 0,
@@ -16,8 +16,8 @@
     "Larger": 4,
     "All sizes": "all"
   },
-  "poster_size": "Small",
-  "skin_selected": "default",
+  "poster_size": "Larger",
+  "skin_selected": "darth",
   "skins": {
     "darth": {
       "background_color": "black",

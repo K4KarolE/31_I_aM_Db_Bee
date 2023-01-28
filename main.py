@@ -155,13 +155,17 @@ poster_roll_down["menu"].config(foreground=font_color, background=background_col
 
 
 ## PATH - FIELDS + SEARCHBOXES
+mandatory_field_text = '- - MANDATORY - -'
+
 # TARGET SHEET - FIELD + SEARCHBOX
 target_sheet_text = "Target sheet path"
 target_sheet_field = Text(window, height = 1, width = 20, foreground=font_color, background=field_background_color)
-if settings_data['path_movie_new_record'] == "":
-    target_sheet_field.insert(END,"mandatory")
+
+if settings_data['path_movie_new_record'] == "":        # mandatory field reminder
+    target_sheet_field.insert(END, mandatory_field_text)
 else:
     target_sheet_field.insert(END,settings_data['path_movie_new_record'])   # set to the latest saved PATH value
+
 target_sheet_field_title = Label(window, text = target_sheet_text, foreground=font_color, background=background_color)
 target_sheet_field_title.config(font =(font_style, 12))
 
@@ -171,7 +175,6 @@ def browseSheet_1():
             title = "Select a File",
             filetypes = (("Excel sheet", "*.xlsx"),
                         ("all files", "*.*")))
-    # label_file_explorer.configure(text=filename)
     target_sheet_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     target_sheet_field.insert(END,filename)     # adding the path and the name of the selected file
 target_sheet_button = Button(window, text = ">>", command = browseSheet_1, foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
@@ -187,15 +190,19 @@ def browseSheet_2():
             title = "Select a File",
             filetypes = (("Excel sheet", "*.xlsx"),
                         ("all files", "*.*")))
-    # label_file_explorer.configure(text=filename)
     movies_db_sheet_field.delete('1.0', END)        # once a button is clicked, removes the previous value
     movies_db_sheet_field.insert(END,filename)      # adding the path and the name of the selected file
 movies_db_sheet_button = Button(window, text = ">>", command = browseSheet_2, foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
 # CHROME DRIVER - FIELD + SEARCHBOX
-chrome_driver_text = "Chrome driver path"
+chrome_driver_text = "ChromeDriver path"
 chrome_driver_field = Text(window, height = 1, width = 20, foreground=font_color, background=field_background_color)
-chrome_driver_field.insert(END,settings_data["path_chrome_driver"])   # set to the latest saved PATH value
+
+if settings_data["path_chrome_driver"] == '':               # mandatory field reminder
+    chrome_driver_field.insert(END, mandatory_field_text)
+else:
+    chrome_driver_field.insert(END,settings_data["path_chrome_driver"])   # set to the latest saved PATH value
+
 chrome_driver_field_title = Label(window, text = chrome_driver_text, foreground=font_color, background=background_color)
 chrome_driver_field_title.config(font =(font_style, 12))
 
@@ -204,7 +211,6 @@ def browseSheet_3():
             title = "Select a File",
             filetypes = (("Executable", "*.exe"),
                         ("all files", "*.*")))
-    # label_file_explorer.configure(text=filename)
     chrome_driver_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     chrome_driver_field.insert(END,filename)     # adding the path and the name of the selected file
 chrome_driver_button = Button(window, text = ">>", command = browseSheet_3, foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
@@ -249,8 +255,12 @@ def save_and_start():
     ### START ###
     ## MANDATORY FIELDS CHECK   
     error_popup_window_title = settings_data['skins'][skin_selected]['error_window_title']  # after skin switch the window title will be updated once the prog. restarted
+    # CHROME DRIVER
+    if chrome_driver_field.get("1.0", "end-1c") in ['', mandatory_field_text]:
+        tkinter.messagebox.showinfo(error_popup_window_title, f"#{chrome_driver_text}# needs to be added")   # error pop-up message
+        return      # stops the function without exiting from the main script
     # TARGET SHEET
-    if target_sheet_field.get("1.0", "end-1c") == '':
+    if target_sheet_field.get("1.0", "end-1c") in ['', mandatory_field_text]:
         tkinter.messagebox.showinfo(error_popup_window_title, f"#{target_sheet_text}# needs to be added")   # error pop-up message
         return
     # NO PICTURES IN TARGET SHEET - CHECKBOX
@@ -298,23 +308,23 @@ def display_widgets():
      # RAUN BY START CHECKBOX
     checkbox['run'][1].place(x=x, y=y_location(3))
 
+     # CHROME DRIVER PATH - TITEL + FIELD + BUTTON
+    chrome_driver_field_title.place(x=x+x_gap_for_path_objects, y=y_location(5))
+    chrome_driver_field.place(x=x+x_gap_for_path_objects+3, y=y_location(5)+25)
+    chrome_driver_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(5)+13)
+
     # TARGET SHEET PATH - TITEL + FIELD + BUTTON
-    target_sheet_field_title.place(x=x+x_gap_for_path_objects, y=y_location(5))
-    target_sheet_field.place(x=x+x_gap_for_path_objects+3, y=y_location(5)+25)
-    target_sheet_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(5)+13)
+    target_sheet_field_title.place(x=x+x_gap_for_path_objects, y=y_location(7))
+    target_sheet_field.place(x=x+x_gap_for_path_objects+3, y=y_location(7)+25)
+    target_sheet_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(7)+13)
 
     # NO PICTURE IN TARHET SHEET CHECKBOX
-    checkbox['no_picture'][1].place(x=x+x_gap_for_path_objects, y=y_location(6)+13)
+    checkbox['no_picture'][1].place(x=x+x_gap_for_path_objects, y=y_location(8)+13)
 
     # MOVIES DB SHEET PATH - TITEL + FIELD + BUTTON
-    movies_db_sheet_field_title.place(x=x+x_gap_for_path_objects, y=y_location(8)-12)
-    movies_db_sheet_field.place(x=x+x_gap_for_path_objects+3, y=y_location(8)+25-12)
-    movies_db_sheet_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(8)+13-12)
-
-    # CHROME DRIVER PATH - TITEL + FIELD + BUTTON
-    chrome_driver_field_title.place(x=x+x_gap_for_path_objects, y=y_location(10)-12)
-    chrome_driver_field.place(x=x+x_gap_for_path_objects+3, y=y_location(10)+25-12)
-    chrome_driver_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(10)+13-12)
+    movies_db_sheet_field_title.place(x=x+x_gap_for_path_objects, y=y_location(10)-12)
+    movies_db_sheet_field.place(x=x+x_gap_for_path_objects+3, y=y_location(10)+25-12)
+    movies_db_sheet_button.place(x=x+x_gap_for_path_objects+x_button_gap, y=y_location(10)+13-12)
 
     # SAVE SETTINGS & START BUTTON
     button_save_and_start.place(x=x+x_gap_for_path_objects+30, y=y_location(12)+10)
