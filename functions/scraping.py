@@ -2,8 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.chrome.service import Service
 import pyperclip
+
+from selenium.webdriver.chrome.options import Options
 
 import sys
 import webbrowser
@@ -29,8 +31,17 @@ def get_link():
 def web_driver():
     settings_data = settings.open_settings()
     link = get_link()
-    service = Service(settings_data["path_chrome_driver"])
-    driver = webdriver.Chrome(service=service)
+    
+    # service = Service(settings_data["path_chrome_driver"])
+    # driver = webdriver.Chrome(service=service)
+    options = Options()
+    options.add_argument("window-size=1200,600")
+    from fake_useragent import UserAgent
+    ua = UserAgent()
+    user_agent = ua.random
+    options.add_argument(f'user-agent={user_agent}')
+    driver = webdriver.Chrome(options=options)
+    
     driver.minimize_window()
     driver.get(link)
 
@@ -170,5 +181,7 @@ def web_driver():
                 webbrowser.open(posterLink_list[4])   # larger
         except:
                 messages.message('error', 2, 'error_poster')
+    
+    driver.quit()
 
     return titleRead, yearRead, directors, stars, genres, lengthHour, lengthMinute

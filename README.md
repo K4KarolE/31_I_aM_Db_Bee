@@ -33,6 +33,9 @@
 ### Openpyxl
 - https://pypi.org/project/openpyxl/
 
+### Fake User Agent
+- https://pypi.org/project/fake_user_agent/
+
 ## Others
 ### Google Chrome
 - https://www.google.co.uk/chrome/
@@ -54,11 +57,14 @@
     - The checkbox text placement can be off, solution:
         - Change the font style to `Arial` in `settings_db.json \ skins \ [every skin] \ font_style`
         - and/or decrease the font size in `main.py \ around line 54 \ checkbox creation for loop \  font = (font_style, 12)`
-    - `Chrome driver path`: Chrome driver has no attributes -> will not be selectable in the browse window, how to avoid typing the path:
-        1. Rename / add `.exe` attribute to the driver
-        2. Select in the browser window -> the path will be displyayed in the field
-        3. Remove the `.exe` ending from the path
-        3. Remove the `.exe` attribute from the driver
+        
+    ### - UNDER CONSTRUCTION -
+    - `Chrome driver path`: If the `ChromeDriver` is not in your system path:
+        - Chrome driver has no attributes -> will not be selectable in the browse window, how to avoid typing the path:
+            1. Rename / add `.exe` attribute to the driver
+            2. Select in the browser window -> the path will be displyayed in the field
+            3. Remove the `.exe` ending from the path
+            3. Remove the `.exe` attribute from the driver
     - `Pyperclip` module: "On Linux, this module makes use of the xclip or xsel commands, which should come with the os. Otherwise run “sudo apt-get install xclip” or “sudo apt-get install xsel” (Note: xsel does not always seem to work.) Otherwise on Linux, you will need the gtk or PyQt4 modules installed. "
 
 # Guide
@@ -89,9 +95,6 @@
 ## Autorun by next start
 - Automatically triggers the scraping engine by the next start of the program using the previously saved settings
 
-## Chrome driver path - Mandatory
-- You are able to add the location of the driver
-
 ## Target sheet path - Mandatory
 - Recommended: `docs\Movies_New_Record.xlsx`
 - You are able to add the new location of the sheet (if you relocated it)
@@ -102,6 +105,10 @@
 ## Movies DB sheet path
 - You are able to add the location of `movie database excel sheet`
 - Not mandatory, no error message, when the field left empty
+
+## ChromeDriver path
+# - UNDER CONSTRUCTION -
+- If the ChromeDriver is not in your system path: you are able to add the path
 
 # Tips and Tricks
 ## How to add a new "Look for native title" option
