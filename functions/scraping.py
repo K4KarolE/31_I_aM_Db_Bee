@@ -1,5 +1,3 @@
-#!/bin python3.11
-
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -9,10 +7,8 @@ import pyperclip
 
 import sys
 import webbrowser
-# import platform
 
 from functions import messages
-
 from functions import settings              # from settings_db.json getting the info for the POSTER CHECKBOX, ROLDOWN MENU
                                             
 def get_link():
@@ -37,12 +33,6 @@ def web_driver():
     driver = webdriver.Chrome(service=service)
     driver.minimize_window()
     driver.get(link)
-
-    # if platform.system() == 'Linux':
-    #     service = Service(settings_data["path_chrome_driver"])
-    #     driver = webdriver.Chrome(service=service)
-    #     driver.minimize_window()
-    #     driver.get(link)
 
 #### DECIDER
     try:
@@ -115,7 +105,6 @@ def web_driver():
     except:
             messages.message('error', 2, 'error_stars') # would be triggered if the movie has less than 3 stars (not common)
             
-
 ### GENRE(S)
     genres= []
     try:    

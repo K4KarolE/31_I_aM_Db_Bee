@@ -1,5 +1,3 @@
-#!/bin python3.11
-
 import platform
 import os
 import sys

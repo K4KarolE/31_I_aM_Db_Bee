@@ -1,5 +1,3 @@
-#!/bin python3.11
-
 import tkinter.messagebox
 from functions import settings
 settings_data = settings.open_settings()
@@ -24,11 +22,11 @@ terminal_columns = shutil.get_terminal_size().columns
 frame = { 'bee_noise': ' Z-z-z ',
             'error': ' * '}
 
-message_dic = { 'banner': ' Collecting nectar my dear',
-            'outro': ' Honey added to your jar! ',
-            'error_link': 'ERROR - WRONG IMDb LINK - COPY AGAIN & HIT ENTER ',
+message_dic = { 'banner': 'Collecting your nectar',
+            'outro': 'Honey added to your jar!',
+            'error_link': 'ERROR - WRONG IMDb LINK - COPY AGAIN & HIT ENTER',
             'error_decider': 'ERROR - DECIDER ',
-            'error_movie_title':' ERROR - MOVIE TITLE ',
+            'error_movie_title':' ERROR - MOVIE TITLE',
             'error_year':'ERROR - YEAR OF RELEASE',
             'error_stars':'ERROR - STARS',
             'error_length':'ERROR - LENGTH',

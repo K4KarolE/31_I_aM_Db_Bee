@@ -5,8 +5,8 @@
   "path_movie_new_record": "D:/Movies_New_Record.xlsx",
   "title_search": 1,
   "title_search_links": {
-    "Hungarian": "https://www.mafab.hu/search/&search=",
-    "Czech": "https://www.csfd.cz/hledat/?q="
+    "Czech": "https://www.csfd.cz/hledat/?q=",
+    "Hungarian": "https://www.mafab.hu/search/&search="
   },
   "title_search_link_selected": "Czech",
   "poster_open_in_new_tab": 1,

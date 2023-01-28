@@ -1,4 +1,3 @@
-
 from tkinter import *
 from tkinter import filedialog      # for browse window (adding path)
 import tkinter.messagebox           # for pop-up windows
@@ -20,16 +19,14 @@ field_background_color = settings_data['skins'][skin_selected]['field_background
 font_style = settings_data['skins'][skin_selected]['font_style']
 font_color = settings_data['skins'][skin_selected]['font_color']
 
-
 # WINDOW
 window = Tk()
 window.title(settings_data['skins'][skin_selected]['window_title'])
 width = 500
 length = 600
 window.geometry(f'{width}x{length}')
-window.resizable(0,0)   # lock the main window
+window.resizable(0,0)   # locks the main window
 # window.configure(background="black")  - FYI
-
 
 # IMAGES
 working_directory = os.path.dirname(__file__)     # os.path.dirname(__file__) = D:\_DEV\Python\31_I_aM_D_bee   //in my case

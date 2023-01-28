@@ -54,6 +54,11 @@
     - The checkbox text placement can be off, solution:
         - Change the font style to `Arial` in `settings_db.json \ skins \ [every skin] \ font_style`
         - and/or decrease the font size in `main.py \ around line 54 \ checkbox creation for loop \  font = (font_style, 12)`
+    - `Chrome driver path`: Chrome driver has no attributes -> will not be selectable in the browse window, how to avoid typing the path:
+        1. Rename / add `.exe` attribute to the driver
+        2. Select in the browser window -> the path will be displyayed in the field
+        3. Remove the `.exe` ending from the path
+        3. Remove the `.exe` attribute from the driver
     - `Pyperclip` module: "On Linux, this module makes use of the xclip or xsel commands, which should come with the os. Otherwise run “sudo apt-get install xclip” or “sudo apt-get install xsel” (Note: xsel does not always seem to work.) Otherwise on Linux, you will need the gtk or PyQt4 modules installed. "
 
 # Guide
