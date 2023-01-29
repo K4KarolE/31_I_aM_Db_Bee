@@ -3,7 +3,7 @@
 
 <img src="docs/guide/target_sheet.png"> 
 
-- Automatically opens the the sheet, once the data is saved
+- Automatically opens the sheet
 - If selected: 
     - Opens the movie poster in a new browser tab
     - Searches for the movie on the selected, non-English movie site

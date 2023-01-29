@@ -6,9 +6,12 @@
   "title_search": 1,
   "title_search_links": {
     "Czech": "https://www.csfd.cz/hledat/?q=",
-    "Hungarian": "https://www.mafab.hu/search/&search="
+    "French": "https://www.allocine.fr/rechercher/?q=",
+    "German": "https://www.kino.de/se/?searchterm=",
+    "Hungarian": "https://www.mafab.hu/search/&search=",
+    "Romanian": "https://www.cinemagia.ro/cauta/?q="
   },
-  "title_search_link_selected": "Czech",
+  "title_search_link_selected": "Romanian",
   "poster_open_in_new_tab": 1,
   "poster_size_options": {
     "Small": 0,
@@ -17,7 +20,7 @@
     "All sizes": "all"
   },
   "poster_size": "Larger",
-  "skin_selected": "default",
+  "skin_selected": "darth",
   "skins": {
     "darth": {
       "background_color": "black",
