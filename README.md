@@ -40,7 +40,7 @@
 ### Google Chrome
 - https://www.google.co.uk/chrome/
 
-### Selenium WebDriver
+### ChromeDriver
 - https://sites.google.com/chromium.org/driver/
 
 ### Excel
@@ -58,16 +58,17 @@
         - Change the font style to `Arial` in `settings_db.json \ skins \ [every skin] \ font_style`
         - and/or decrease the font size in `main.py \ around line 54 \ checkbox creation for loop \  font = (font_style, 12)`
         
-    ### - UNDER CONSTRUCTION -
-    - `Chrome driver path`: If the `ChromeDriver` is not in your system path:
-        - Chrome driver has no attributes -> will not be selectable in the browse window, how to avoid typing the path:
-            1. Rename / add `.exe` attribute to the driver
-            2. Select in the browser window -> the path will be displyayed in the field
-            3. Remove the `.exe` ending from the path
-            3. Remove the `.exe` attribute from the driver
+    - `Chrome driver path` field: `ChromeDriver` has no attributes -> will not be selectable in the browse window, how to avoid typing the path:
+        - Rename / add `.exe` attribute to the driver
+        - Select it in the browser window -> the path will be displyayed in the field
+        - Remove the `.exe` ending from the path
+        - Remove the `.exe` attribute from the driver
     - `Pyperclip` module: "On Linux, this module makes use of the xclip or xsel commands, which should come with the os. Otherwise run “sudo apt-get install xclip” or “sudo apt-get install xsel” (Note: xsel does not always seem to work.) Otherwise on Linux, you will need the gtk or PyQt4 modules installed. "
 
 # Guide
+## Directors
+- `Directors` are not displayed on the front page for the `TV Series`, `TV Mini Series` -> will not be populated in the Excel sheet
+
 ## IMDb link in clipboard - Mandatory
 - You are requested to copy the link of the movie (or series, TV shows, ..)
 - It is more for the first-time users
@@ -107,8 +108,7 @@
 - Not mandatory, no error message, when the field left empty
 
 ## ChromeDriver path
-### - UNDER CONSTRUCTION -
-- If the `ChromeDriver` is not in your system path: you are able to add the path
+- You are able to add the path of the driver
 
 # Tips and Tricks
 ## How to add a new "Look for native title" option
