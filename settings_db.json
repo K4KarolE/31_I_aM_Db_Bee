@@ -1,17 +1,16 @@
 {
   "imdb_link_in_clipboard": 1,
-  "path_chrome_driver": "",
-  "path_movies_db_sheet": "",
-  "path_movie_new_record": "",
+  "path_chrome_driver": "C:/Program Files (x86)/chromedriver.exe",
+  "path_movies_db_sheet": "D:/Movies.xlsx",
+  "path_movie_new_record": "D:/Movies_New_Record.xlsx",
   "title_search": 1,
   "title_search_links": {
     "Czech": "https://www.csfd.cz/hledat/?q=",
     "French": "https://www.allocine.fr/rechercher/?q=",
-    "German": "https://www.kino.de/se/?searchterm=",
-    "Hungarian": "https://www.mafab.hu/search/&search=",
-    "Romanian": "https://www.cinemagia.ro/cauta/?q="
+    "German": "https://www.moviepilot.de/suche?q=",
+    "Hungarian": "https://www.mafab.hu/search/&search="
   },
-  "title_search_link_selected": "Romanian",
+  "title_search_link_selected": "Czech",
   "poster_open_in_new_tab": 1,
   "poster_size_options": {
     "Small": 0,
@@ -19,7 +18,7 @@
     "Larger": 4,
     "All sizes": "all"
   },
-  "poster_size": "Larger",
+  "poster_size": "Small",
   "skin_selected": "darth",
   "skins": {
     "darth": {
@@ -40,5 +39,5 @@
     }
   },
   "run_by_start": 0,
-  "no_picture_in_sheet": 1
+  "no_picture_in_sheet": 0
 }

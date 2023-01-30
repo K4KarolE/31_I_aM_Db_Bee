@@ -124,6 +124,7 @@ def change_skin(__):
 skins_options = []
 for item in settings_data['skins'].keys():        # creating a list of the SKINS from settings_db.json / skins
     skins_options = skins_options + [item]
+skins_options.sort()        #sorts the list ascending
 
 skins_roll_down_clicked = StringVar()
 skins_roll_down_clicked.set("Skins")    
@@ -135,7 +136,7 @@ skins_roll_down['menu'].configure(foreground=font_color, background=background_c
 title_search_options = []
 for item in settings_data['title_search_links'].keys():
     title_search_options = title_search_options + [item]        # creating a list of the "title_search_links" dictonary`s keys (Hungarian / Czech /..) from settings_db.json
-    title_search_options.sort()     #sorts the list ascending   # adding new title link key-value pair: just add it to the settings_db.json / "title_search_links" dictionary
+title_search_options.sort()         #sorts the list ascending   # adding new title link key-value pair: just add it to the settings_db.json / "title_search_links" dictionary
 
 title_search_roll_down_clicked = StringVar()
 title_search_roll_down_clicked.set(settings_data['title_search_link_selected'])   # set to the latest saved value (Hungarian / Czech /..)
@@ -156,7 +157,7 @@ poster_roll_down["menu"].config(foreground=font_color, background=background_col
 
 
 ## PATH - FIELDS + SEARCHBOXES
-mandatory_field_text = '- - MANDATORY - -'
+mandatory_field_text = ' - - MANDATORY - -'
 
 # TARGET SHEET - FIELD + SEARCHBOX
 target_sheet_text = "Target sheet path"

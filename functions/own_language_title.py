@@ -11,4 +11,4 @@ def search(titleRead, yearRead):
 
 ## TEST
 # use /import settings/ instead of /from functions import settings/
-# search("Forrest Gump","1994")
+# search("My Cousin Vinny","1992")
