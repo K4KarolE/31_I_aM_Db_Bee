@@ -121,6 +121,12 @@ def change_skin(__):
     # SAVE AND START BUTTON
     button_save_and_start.configure(foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
 
+    # SKINS MENU LOCATION
+    if skin_selected == "dredd":
+        skins_roll_down.place(x=212, y=550)
+    else:
+        skins_roll_down.place(x=7, y=460)
+
 skins_options = []
 for item in settings_data['skins'].keys():        # creating a list of the SKINS from settings_db.json / skins
     skins_options = skins_options + [item]
@@ -332,7 +338,10 @@ def display_widgets():
     button_save_and_start.place(x=x+x_gap_for_path_objects+30, y=y_location(12)+10)
 
     # SKINS ROLL DOWN BUTTON
-    skins_roll_down.place(x=7, y=y_location(11))
+    if skin_selected == "dredd":
+        skins_roll_down.place(x=212, y=550)
+    else:
+        skins_roll_down.place(x=7, y=y_location(11))
 
 
 display_widgets()
