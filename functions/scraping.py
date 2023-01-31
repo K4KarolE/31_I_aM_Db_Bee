@@ -43,6 +43,7 @@ def web_driver():
     driver = webdriver.Chrome(options=options, service=service) 
     driver.minimize_window()
     driver.get(link)
+    # print(user_agent)
 
 #### DECIDER
     try:

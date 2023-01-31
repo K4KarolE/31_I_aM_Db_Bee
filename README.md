@@ -33,8 +33,8 @@
 ### Openpyxl
 - https://pypi.org/project/openpyxl/
 
-### Fake User Agent
-- https://pypi.org/project/fake_user_agent/
+### Fake-useragent
+- https://pypi.org/project/fake-useragent/
 
 ## Others
 ### Google Chrome
