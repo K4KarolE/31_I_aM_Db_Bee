@@ -20,6 +20,11 @@
 </div>
 
 # Requirements
+## Install Packages\Dependencies
+```
+pip install -r requirements.txt
+```
+
 ## Python and Modules
 ### Python 3 - used: 3.11
 - https://www.python.org/
@@ -50,8 +55,8 @@
 - Recommended: `docs\ Movies_New_Record.xlsx`
 
 ### OS
-- Windows (tested on 10)
-- Linux (tested on Mint 21):
+- `Windows` (tested on 10)
+- `Linux` (tested on Mint 21):
     - Window icon will not be displayed
     - Excel sheets will not open automatically
     - The checkbox text placement can be off, solution:
