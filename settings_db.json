@@ -1,9 +1,9 @@
 {
-  "imdb_link_in_clipboard": 0,
-  "path_chrome_driver": "C:/Program Files (x86)/chromedriver.exe",
-  "path_movies_db_sheet": "D:/Movies.xlsx",
-  "path_movie_new_record": "D:/Movies_New_Record.xlsx",
-  "title_search": 1,
+  "imdb_link_in_clipboard": 1,
+  "path_chrome_driver": " - - MANDATORY - -",
+  "path_movies_db_sheet": "",
+  "path_movie_new_record": " - - MANDATORY - -",
+  "title_search": 0,
   "title_search_links": {
     "Czech": "https://www.csfd.cz/hledat/?q=",
     "French": "https://www.allocine.fr/rechercher/?q=",
@@ -11,15 +11,15 @@
     "Hungarian": "https://www.mafab.hu/search/&search="
   },
   "title_search_link_selected": "Czech",
-  "poster_open_in_new_tab": 1,
+  "poster_open_in_new_tab": 0,
   "poster_size_options": {
     "Small": 0,
     "Medium": 2,
     "Larger": 4,
     "All sizes": "all"
   },
-  "poster_size": "Medium",
-  "skin_selected": "dredd",
+  "poster_size": "Small",
+  "skin_selected": "default",
   "skins": {
     "darth": {
       "background_color": "black",
