@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import filedialog      # for browse window (adding path)
 import tkinter.messagebox           # for pop-up windows
 
+import sys
 import platform                     # to check which OS is used
 import os
 from pathlib import Path
@@ -43,7 +44,7 @@ if platform.system() == 'Windows':      # will not be visible on Linux, macOS
 checkbox = {
     'clipboard': ['imdb_link_in_clipboard', 'clipboard_button', 'IMDb link in clipboard' ],     # [0/1, button, text]
     'poster': ['poster_open_in_new_tab', 'poster_open_in_new_tab_button', 'Poster in a new tab' ],
-    'run': ['run_by_start', 'run_by_start_button', 'Autorun by next start' ],
+    'quit': ['quit_after_run', 'quit_after_run_button', 'Quit after run' ],
     'title': ['title_search', 'title_search_button', 'Look for native title' ],
     'no_picture': ['no_picture_in_sheet', 'no_picture_in_sheet_button', 'No pictures in sheet' ]
 }
@@ -235,8 +236,8 @@ def save_and_start():
     settings_data['poster_open_in_new_tab'] = checkbox['poster'][0].get() 
     settings_data['poster_size'] = poster_roll_down_clicked.get()
 
-    # RUN BY START CHECKBOX
-    settings_data['run_by_start'] = checkbox['run'][0].get()
+    # QUIT AFTER RUN CHECKBOX
+    settings_data['quit_after_run'] = checkbox['quit'][0].get()
 
     # NO PICTURE IN TARHET SHEET CHECKBOX
     settings_data['no_picture_in_sheet'] = checkbox['no_picture'][0].get()
@@ -255,7 +256,7 @@ def save_and_start():
     settings_data['path_movies_db_sheet'] = movies_db_sheet_field.get("1.0", "end-1c")
 
     # SKINS ROLL DOWN BUTTON
-    # the skin is saved, when it is updated -> next time will load the latest used skin, without the need of the Save & Start button/process  
+    # FYI: the skin is saved, when it is updated -> next time will load the latest used skin, without the need of the Save & Start button/process  
 
     settings.save_settings(settings_data)
 
@@ -280,6 +281,9 @@ def save_and_start():
         tkinter.messagebox.showinfo(error_popup_window_title, f"#{checkbox['clipboard'][2]}# checkbox is not selected\n\nClick OK once the link is copied")
         # error pop-up message, more relevant for the first time users
     engine.start_engine()   # will start data collection / save to excel sheet / if selected: open poster and native title search in new tabs, open movie DB sheet...
+
+    if checkbox['quit'][0].get() == 1:
+        sys.exit()
     
 button_save_and_start = Button(window, text = "Save & Start", command = save_and_start, font = (font_style, 15), foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)        
 # no () in save_and_start() otherwise will execute it automatically before clicking the button
@@ -313,8 +317,8 @@ def display_widgets():
     checkbox['title'][1].place(x=x, y=y_location(2))
     title_search_roll_down.place(x=x+x_button_gap, y=y_location(2))
 
-     # RAUN BY START CHECKBOX
-    checkbox['run'][1].place(x=x, y=y_location(3))
+     # QUIT AFTER RUN CHECKBOX
+    checkbox['quit'][1].place(x=x, y=y_location(3))
 
      # CHROME DRIVER PATH - TITEL + FIELD + BUTTON
     chrome_driver_field_title.place(x=x+x_gap_for_path_objects, y=y_location(5))
@@ -343,11 +347,6 @@ def display_widgets():
     else:
         skins_roll_down.place(x=7, y=y_location(11))
 
-
 display_widgets()
-
-# START THE ENGINE AUTOMATICALLY WHEN THE run by start CHECKBOX VALUE SAVED AS 1/checked
-if settings_data['run_by_start'] == 1:
-    engine.start_engine()
 
 window.mainloop()

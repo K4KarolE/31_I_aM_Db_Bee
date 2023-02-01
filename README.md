@@ -68,7 +68,7 @@ pip install -r requirements.txt
         - Change the font style to `Arial` in `settings_db.json \ skins \ [every skin] \ font_style`
         - and/or decrease the font size in `main.py \ around line 54 \ checkbox creation for loop \  font = (font_style, 12)`
         
-    - `Chrome driver path` field: `ChromeDriver` has no attributes -> will not be selectable in the browse window, how to avoid typing the path:
+    - `ChromeDriver path` field: `ChromeDriver` has no attributes -> will not be selectable in the browse window, how to avoid typing the path:
         - Rename / add `.exe` attribute to the driver
         - Select it in the browser window -> the path will be displyayed in the field
         - Remove the `.exe` ending from the path
@@ -103,8 +103,8 @@ pip install -r requirements.txt
     - Adds it to the end of the selected search link
     - Opens it in a new browser tab
 
-## Autorun by next start
-- Automatically triggers the scraping engine by the next start of the program using the previously saved settings
+## Quit after run
+- Automatically exit after the engine function is executed (data collection and writing, poster in new tab, ..)
 
 ## ChromeDriver path - Mandatory
 - You are able to add the path of the driver

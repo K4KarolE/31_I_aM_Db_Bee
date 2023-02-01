@@ -1,17 +1,9 @@
 {
-  "imdb_link_in_clipboard": 1,
-  "path_chrome_driver": " - - MANDATORY - -",
-  "path_movies_db_sheet": "",
-  "path_movie_new_record": " - - MANDATORY - -",
-  "title_search": 0,
-  "title_search_links": {
-    "Czech": "https://www.csfd.cz/hledat/?q=",
-    "French": "https://www.allocine.fr/rechercher/?q=",
-    "German": "https://www.moviepilot.de/suche?q=",
-    "Hungarian": "https://www.mafab.hu/search/&search="
-  },
-  "title_search_link_selected": "Czech",
+  "imdb_link_in_clipboard": 0,
   "poster_open_in_new_tab": 0,
+  "title_search": 0,
+  "quit_after_run": 0,
+  "no_picture_in_sheet": 0,
   "poster_size_options": {
     "Small": 0,
     "Medium": 2,
@@ -19,6 +11,16 @@
     "All sizes": "all"
   },
   "poster_size": "Small",
+  "title_search_link_selected": "Czech",
+  "title_search_links": {
+    "Czech": "https://www.csfd.cz/hledat/?q=",
+    "French": "https://www.allocine.fr/rechercher/?q=",
+    "German": "https://www.moviepilot.de/suche?q=",
+    "Hungarian": "https://www.mafab.hu/search/&search="
+  },
+  "path_chrome_driver": " - - MANDATORY - -",
+  "path_movies_db_sheet": "",
+  "path_movie_new_record": " - - MANDATORY - -",
   "skin_selected": "default",
   "skins": {
     "darth": {
@@ -45,7 +47,5 @@
       "window_title": "Hunny for Justice",
       "error_window_title": "You betrayed the Law!"
     }
-  },
-  "run_by_start": 0,
-  "no_picture_in_sheet": 0
+  }
 }
