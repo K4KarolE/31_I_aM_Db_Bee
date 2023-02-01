@@ -20,12 +20,12 @@
 </div>
 
 # Requirements
-## Install Packages\Dependencies
+## Python and Modules
+### Install packages\dependencies
 ```
 pip install -r requirements.txt
 ```
-
-## Python and Modules
+### Separately
 ### Python 3 - used: 3.11
 - https://www.python.org/
 
@@ -101,6 +101,9 @@ pip install -r requirements.txt
 ## Autorun by next start
 - Automatically triggers the scraping engine by the next start of the program using the previously saved settings
 
+## ChromeDriver path - Mandatory
+- You are able to add the path of the driver
+
 ## Target sheet path - Mandatory
 - Recommended: `docs\Movies_New_Record.xlsx`
 - You are able to add the new location of the sheet (if you relocated it)
@@ -111,9 +114,6 @@ pip install -r requirements.txt
 ## Movies DB sheet path
 - You are able to add the location of `movie database excel sheet`
 - Not mandatory, no error message, when the field left empty
-
-## ChromeDriver path
-- You are able to add the path of the driver
 
 # Tips and Tricks
 ## How to add a new "Look for native title" option
@@ -158,7 +158,7 @@ Scenario: you are native English person, who collects only the English titles of
     - Reduce the information transfered to the sheet
     - Alter the location(cells)
 
-# Modules used, which are part of Python 3
+# Modules used, which are part of Python 3.11
 - datetime
 - json
 - os
@@ -166,6 +166,7 @@ Scenario: you are native English person, who collects only the English titles of
 - platform
 - shutil
 - sys
+- tkinter
 - webbrowser
 
 ## Thank you all who worked on the modules listed in this document!
