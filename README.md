@@ -19,6 +19,11 @@
     <img src="docs/promo/darth.png" </img> 
 </div>
 
+<br>
+<div align="center">
+    <img src="docs/promo/dredd.png" </img> 
+</div>
+
 # Requirements
 ## Python and Modules
 ### Install packages\dependencies
