@@ -1,12 +1,4 @@
-test.py
-
-test1.py
-
-test2.py
-
-test3.py
-
-test4.py
+test*.py
 
 __pycache__
 
