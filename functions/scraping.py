@@ -99,7 +99,7 @@ def web_driver():
         try:    
                 for counter in range(1,4):
                         directors = directors +[driver.find_element(
-                        By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
+                        By.CSS_SELECTOR, f'.sc-b13e9d78-0 > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
         except:
                 pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
 
@@ -112,7 +112,7 @@ def web_driver():
     try:    
             for counter in range(1,4):
                     stars = stars + [driver.find_element(
-                    By.CSS_SELECTOR, f'.sc-fa02f843-0 > ul:nth-child(1) > li:nth-child({index_s}) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
+                    By.CSS_SELECTOR, f'.sc-b13e9d78-0 > ul:nth-child(1) > li:nth-child({index_s}) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
     except:
             messages.message('error', 2, 'error_stars') # would be triggered if the movie has less than 3 stars (not common)
             
@@ -121,7 +121,7 @@ def web_driver():
     try:    
             for counter in range(1,4):
                     genres = genres + [driver.find_element(
-            By.CSS_SELECTOR, f'a.sc-16ede01-3:nth-child({counter}) > span:nth-child(1)').text]
+            By.CSS_SELECTOR, f'a.sc-b5a9e5a3-3:nth-child({counter}) > span:nth-child(1)').text]
 
     except:
             pass # would be triggered if the movie has less than 3 genres

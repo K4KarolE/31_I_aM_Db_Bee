@@ -216,10 +216,13 @@ chrome_driver_field_title = Label(window, text = chrome_driver_text, foreground=
 chrome_driver_field_title.config(font =(font_style, 12))
 
 def browseSheet_3():
-    filename = filedialog.askopenfilename(initialdir = "/",
-            title = "Select a File",
-            filetypes = (("Executable", "*.exe"),
-                        ("all files", "*.*")))
+    if platform.system() == 'Linux':
+        filename = filedialog.askdirectory()        # on Linux we need the folder of the driver
+    else:
+        filename = filedialog.askopenfilename(initialdir = "/",
+                title = "Select a File",
+                filetypes = (("Executable", "*.exe"),
+                            ("all files", "*.*")))
     chrome_driver_field.delete('1.0', END)       # once a button is clicked, removes the previous value
     chrome_driver_field.insert(END,filename)     # adding the path and the name of the selected file
 chrome_driver_button = Button(window, text = ">>", command = browseSheet_3, foreground=font_color, background=background_color, activeforeground=background_color, activebackground=font_color)
