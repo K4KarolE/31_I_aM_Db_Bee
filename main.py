@@ -23,9 +23,11 @@ font_color = settings_data['skins'][skin_selected]['font_color']
 # WINDOW
 window = Tk()
 window.title(settings_data['skins'][skin_selected]['window_title'])
-width = 500
-length = 600
-window.geometry(f'{width}x{length}')
+window_width = 500
+window_length = 600
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
+window.geometry(f'{window_width}x{window_length}+%d+%d' % (screen_width/2-200, screen_height/2-250))
 window.resizable(0,0)   # locks the main window
 # window.configure(background="black")  - FYI
 
@@ -33,7 +35,7 @@ window.resizable(0,0)   # locks the main window
 working_directory = os.path.dirname(__file__)     # os.path.dirname(__file__) = D:\_DEV\Python\31_I_aM_D_bee   //in my case
 path_image = Path(working_directory, "skins", skin_selected, "BG.png")      # Path functions makes the path OS independent, running the program on Windows: ..skins\default.., on Linux: ..skins/default..)
 backgound_image = PhotoImage(file = path_image)
-backgound_image_label = Label( window, image = backgound_image)
+backgound_image_label = Label(window, image = backgound_image)
 backgound_image_label.place(x = -2, y = 0)
 
 if platform.system() == 'Windows':      # will not be visible on Linux, macOS
