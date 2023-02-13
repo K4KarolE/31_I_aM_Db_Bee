@@ -41,19 +41,35 @@ def web_driver():
     options.add_argument(f'user-agent={user_agent}')
     # DRIVER
     driver = webdriver.Chrome(options=options, service=service) 
-    driver.minimize_window()
+    # driver.minimize_window()
     driver.get(link)
     # print(user_agent)
 
 #### DECIDER
     try:
-        element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((
-                By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(1)'))
-        )                       
-        
-        decider_read = driver.find_element(
-        By.CSS_SELECTOR, '.sc-8c396aa2-0 > li:nth-child(1)').text      
+        # Movies
+        try:                                                
+            element = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((
+                    By.CSS_SELECTOR, '.sc-f26752fb-0 > li:nth-child(1) > a:nth-child(1)'))
+            )                       
+            
+            decider_read = driver.find_element(
+            By.CSS_SELECTOR, '.sc-f26752fb-0 > li:nth-child(1) > a:nth-child(1)').text
+        except:
+              pass
+        # Series
+        try:                                                
+            element = WebDriverWait(driver, 0).until(       # 0 = no wait <- the site should be already loaded in the previous section
+            EC.presence_of_element_located((
+                    By.CSS_SELECTOR, '.sc-f26752fb-0 > li:nth-child(1)'))
+            )                       
+            
+            decider_read = driver.find_element(
+            By.CSS_SELECTOR, '.sc-f26752fb-0 > li:nth-child(1)').text
+        except:
+              pass
+              
     except:
         messages.message('error', 2, 'error_decider')
         driver.quit()
@@ -88,7 +104,7 @@ def web_driver():
         index = 2  # series, tv_movie
     try:
         yearRead = driver.find_element(
-        By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index}) > a:nth-child(1)').text
+        By.CSS_SELECTOR, f'.sc-f26752fb-0 > li:nth-child({index}) > a:nth-child(1)').text
                     
     except:
             messages.message('error', 2, 'error_year')
@@ -137,12 +153,12 @@ def web_driver():
     try:
         # taking the 2nd item(1h 33m) from "2022 1h 33m"
         movieLengthSum = driver.find_element(
-        By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index_l_1}) > a:nth-child(1)').text
+        By.CSS_SELECTOR, f'.sc-f26752fb-0 > li:nth-child({index_l_1}) > a:nth-child(1)').text
 
         # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
         if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
                 movieLengthSum = driver.find_element(
-                By.CSS_SELECTOR, f'.sc-8c396aa2-0 > li:nth-child({index_l_2})').text
+                By.CSS_SELECTOR, f'.sc-f26752fb-0 > li:nth-child({index_l_2})').text
     except:
         movieLengthSum = None
         messages.message('error', 2, 'error_length')
