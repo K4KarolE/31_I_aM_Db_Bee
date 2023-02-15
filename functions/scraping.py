@@ -35,7 +35,8 @@ def web_driver():
     # SET UP
     service = Service(executable_path= settings_data["path_chrome_driver"])
     options = Options()
-    options.add_argument("window-size=1100,700")
+    options.add_argument("window-size=1100,1200")
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])      # disable the "DevTools listening on ws://127.0..." console message
     ua = UserAgent()
     user_agent = ua.random
     options.add_argument(f'user-agent={user_agent}')
