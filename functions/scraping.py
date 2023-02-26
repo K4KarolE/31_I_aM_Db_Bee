@@ -138,7 +138,7 @@ def web_driver():
     try:    
             for counter in range(1,4):
                     genres = genres + [driver.find_element(
-            By.CSS_SELECTOR, f'a.sc-b5a9e5a3-3:nth-child({counter}) > span:nth-child(1)').text]
+            By.CSS_SELECTOR, f'a.sc-6cc92269-3:nth-child({counter}) > span:nth-child(1)').text]
 
     except:
             pass # would be triggered if the movie has less than 3 genres
