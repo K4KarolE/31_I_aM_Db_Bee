@@ -35,7 +35,7 @@ def web_driver():
     # SET UP
     service = Service(executable_path= settings_data["path_chrome_driver"])
     options = Options()
-    options.add_argument("window-size=1100,1200")
+    options.add_argument("window-size=1300,1400")
     options.add_experimental_option('excludeSwitches', ['enable-logging'])      # disable the "DevTools listening on ws://127.0..." console message
     ua = UserAgent()
     user_agent = ua.random
@@ -52,22 +52,22 @@ def web_driver():
         try:                                                
             element = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((
-                    By.CSS_SELECTOR, '.sc-f26752fb-0 > li:nth-child(1) > a:nth-child(1)'))
+                    By.CSS_SELECTOR, 'ul.ipc-inline-list:nth-child(2) > li:nth-child(1) > a:nth-child(1)'))
             )                       
             
             decider_read = driver.find_element(
-            By.CSS_SELECTOR, '.sc-f26752fb-0 > li:nth-child(1) > a:nth-child(1)').text
+            By.CSS_SELECTOR, 'ul.ipc-inline-list:nth-child(2) > li:nth-child(1) > a:nth-child(1)').text
         except:
               pass
         # Series
         try:                                                
             element = WebDriverWait(driver, 0).until(       # 0 = no wait <- the site should be already loaded in the previous section
             EC.presence_of_element_located((
-                    By.CSS_SELECTOR, '.sc-f26752fb-0 > li:nth-child(1)'))
+                    By.CSS_SELECTOR, 'ul.ipc-inline-list:nth-child(2) > li:nth-child(1)'))
             )                       
             
             decider_read = driver.find_element(
-            By.CSS_SELECTOR, '.sc-f26752fb-0 > li:nth-child(1)').text
+            By.CSS_SELECTOR, 'ul.ipc-inline-list:nth-child(2) > li:nth-child(1)').text
         except:
               pass
               
@@ -86,13 +86,7 @@ def web_driver():
 
 ### MOVIE TITLE
     try:
-        element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((
-                By.CSS_SELECTOR, '.sc-b73cd867-0'))
-        )                       
-        
-        titleRead = driver.find_element(
-        By.CSS_SELECTOR, '.sc-b73cd867-0').text
+        titleRead = driver.find_element(By.CSS_SELECTOR, '.sc-afe43def-1').text
     except:
         messages.message('error', 2, 'error_movie_title')
         driver.quit()
@@ -105,7 +99,7 @@ def web_driver():
         index = 2  # series, tv_movie
     try:
         yearRead = driver.find_element(
-        By.CSS_SELECTOR, f'.sc-f26752fb-0 > li:nth-child({index}) > a:nth-child(1)').text
+        By.CSS_SELECTOR, f'ul.ipc-inline-list:nth-child(2) > li:nth-child({index}) > a:nth-child(1)').text
                     
     except:
             messages.message('error', 2, 'error_year')
@@ -116,7 +110,7 @@ def web_driver():
         try:    
                 for counter in range(1,4):
                         directors = directors +[driver.find_element(
-                        By.CSS_SELECTOR, f'.sc-b13e9d78-0 > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
+                        By.CSS_SELECTOR, f'.sc-eda143c4-3 > div:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
         except:
                 pass # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
 
@@ -129,7 +123,7 @@ def web_driver():
     try:    
             for counter in range(1,4):
                     stars = stars + [driver.find_element(
-                    By.CSS_SELECTOR, f'.sc-b13e9d78-0 > ul:nth-child(1) > li:nth-child({index_s}) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
+                    By.CSS_SELECTOR, f'.sc-eda143c4-3 > div:nth-child(1) > ul:nth-child(1) > li:nth-child({index_s}) > div:nth-child(2) > ul:nth-child(1) > li:nth-child({counter}) > a:nth-child(1)').text]
     except:
             messages.message('error', 2, 'error_stars') # would be triggered if the movie has less than 3 stars (not common)
             
@@ -138,28 +132,28 @@ def web_driver():
     try:    
             for counter in range(1,4):
                     genres = genres + [driver.find_element(
-            By.CSS_SELECTOR, f'a.sc-6cc92269-3:nth-child({counter}) > span:nth-child(1)').text]
+            By.CSS_SELECTOR, f'a.ipc-chip--on-baseAlt:nth-child({counter}) > span:nth-child(1)').text]
 
     except:
             pass # would be triggered if the movie has less than 3 genres
 
 ### LENGTH VALUE
     if decider == 'movie':  # format: 1992 15 1h 35m 
-        index_l_1 = 2
-        index_l_2 = 3
+        index_l_1 = 3   
+        # index_l_2 = 3     # UPDATE 03/03/23 - Test for a while
         
     else:                   # format: TV Series 2011–2019 18 57m
-        index_l_1 = 3
-        index_l_2 = 4
+        index_l_1 = 4
+        # index_l_2 = 4
     try:
         # taking the 2nd item(1h 33m) from "2022 1h 33m"
         movieLengthSum = driver.find_element(
-        By.CSS_SELECTOR, f'.sc-f26752fb-0 > li:nth-child({index_l_1}) > a:nth-child(1)').text
+        By.CSS_SELECTOR, f'ul.ipc-inline-list:nth-child(2) > li:nth-child({index_l_1})').text
 
-        # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
-        if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
-                movieLengthSum = driver.find_element(
-                By.CSS_SELECTOR, f'.sc-f26752fb-0 > li:nth-child({index_l_2})').text
+        # # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item         # UPDATE 03/03/23 - Test for a while
+        # if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
+        #         movieLengthSum = driver.find_element(
+        #         By.CSS_SELECTOR, f'.sc-f26752fb-0 > li:nth-child({index_l_2})').text
     except:
         movieLengthSum = None
         messages.message('error', 2, 'error_length')
