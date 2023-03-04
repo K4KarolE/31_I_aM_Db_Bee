@@ -1,7 +1,7 @@
 {
   "imdb_link_in_clipboard": 1,
-  "poster_open_in_new_tab": 1,
-  "title_search": 1,
+  "poster_open_in_new_tab": 0,
+  "title_search": 0,
   "quit_after_run": 0,
   "no_picture_in_sheet": 1,
   "poster_size_options": {
@@ -19,7 +19,7 @@
     "Hungarian": "https://www.mafab.hu/search/&search="
   },
   "path_chrome_driver": "C:/ChromeDriver/chromedriver.exe",
-  "path_movies_db_sheet": "D:/Movies.xlsx",
+  "path_movies_db_sheet": "",
   "path_movie_new_record": "D:/Movies_New_Record.xlsx",
   "skin_selected": "default",
   "skins": {
@@ -47,5 +47,6 @@
       "window_title": "Hunny for Justice",
       "error_window_title": "You betrayed the Law!"
     }
-  }
+  },
+  "run_by_start": 0
 }

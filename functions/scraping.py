@@ -39,13 +39,14 @@ def web_driver():
     window_width = random.randint(1100, 1300)
     window_high = random.randint(1300, 1500)
     options.add_argument(f"window-size={window_width},{window_high}")
+    options.add_experimental_option("detach", True)     # stops closing the browser
     # DETECTION BYPASS
     options.add_argument('--disable-blink-features=AutomationControlled')
     options.add_argument("--disable-blink-features")
     options.add_experimental_option('excludeSwitches', ['enable-automation'])
     options.add_experimental_option('useAutomationExtension', False)
-    ua = UserAgent()
-    user_agent = ua.random
+    user_agent = UserAgent().random
+    print(user_agent)
     options.add_argument(f'user-agent={user_agent}')
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
@@ -67,7 +68,10 @@ def web_driver():
     driver = webdriver.Chrome(options=options, service=service) 
     # driver.minimize_window()
     driver.get(link)
-    # print(user_agent)
+
+
+#### FIRST CSS SELECTOR TAG
+    first_css_tag = 'ul.ipc-inline-list:nth-child(2)'
 
 #### DECIDER
     try:
@@ -75,22 +79,22 @@ def web_driver():
         try:                                                
             element = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((
-                    By.CSS_SELECTOR, 'ul.ipc-inline-list:nth-child(2) > li:nth-child(1) > a:nth-child(1)'))
+                    By.CSS_SELECTOR, f'{first_css_tag} > li:nth-child(1) > a:nth-child(1)'))
             )                       
             
             decider_read = driver.find_element(
-            By.CSS_SELECTOR, 'ul.ipc-inline-list:nth-child(2) > li:nth-child(1) > a:nth-child(1)').text
+            By.CSS_SELECTOR, f'{first_css_tag} > li:nth-child(1) > a:nth-child(1)').text
         except:
               pass
         # Series
         try:                                                
             element = WebDriverWait(driver, 0).until(       # 0 = no wait <- the site should be already loaded in the previous section
             EC.presence_of_element_located((
-                    By.CSS_SELECTOR, 'ul.ipc-inline-list:nth-child(2) > li:nth-child(1)'))
+                    By.CSS_SELECTOR, f'{first_css_tag} > li:nth-child(1)'))
             )                       
             
             decider_read = driver.find_element(
-            By.CSS_SELECTOR, 'ul.ipc-inline-list:nth-child(2) > li:nth-child(1)').text
+            By.CSS_SELECTOR, f'{first_css_tag} > li:nth-child(1)').text
         except:
               pass
               
@@ -122,7 +126,7 @@ def web_driver():
         index = 2  # series, tv_movie
     try:
         yearRead = driver.find_element(
-        By.CSS_SELECTOR, f'ul.ipc-inline-list:nth-child(2) > li:nth-child({index}) > a:nth-child(1)').text
+        By.CSS_SELECTOR, f'{first_css_tag} > li:nth-child({index}) > a:nth-child(1)').text
                     
     except:
             messages.message('error', 2, 'error_year')
@@ -171,7 +175,7 @@ def web_driver():
     try:
         # taking the 2nd item(1h 33m) from "2022 1h 33m"
         movieLengthSum = driver.find_element(
-        By.CSS_SELECTOR, f'ul.ipc-inline-list:nth-child(2) > li:nth-child({index_l_1})').text
+        By.CSS_SELECTOR, f'{first_css_tag} > li:nth-child({index_l_1})').text
 
         # # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item         # UPDATE 03/03/23 - Test for a while
         # if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
@@ -216,6 +220,6 @@ def web_driver():
         except:
                 messages.message('error', 2, 'error_poster')
     
-    driver.quit()
+    # driver.quit() # closing the browser
 
     return titleRead, yearRead, directors, stars, genres, lengthHour, lengthMinute
