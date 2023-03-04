@@ -164,6 +164,7 @@ Scenario: you are native English person, who collects only the English titles of
 - os
 - pathlib
 - platform
+- random
 - shutil
 - sys
 - tkinter

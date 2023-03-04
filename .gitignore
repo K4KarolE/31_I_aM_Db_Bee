@@ -5,3 +5,5 @@ __pycache__
 virt_env
 
 test_env
+
+settings_db.json

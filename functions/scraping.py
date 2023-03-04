@@ -10,6 +10,7 @@ from fake_useragent import UserAgent
 import pyperclip
 import sys
 import webbrowser
+import random
 
 from functions import messages
 from functions import settings              # from settings_db.json getting the info for the POSTER CHECKBOX, ROLDOWN MENU
@@ -35,11 +36,33 @@ def web_driver():
     # SET UP
     service = Service(executable_path= settings_data["path_chrome_driver"])
     options = Options()
-    options.add_argument("window-size=1300,1400")
-    options.add_experimental_option('excludeSwitches', ['enable-logging'])      # disable the "DevTools listening on ws://127.0..." console message
+    window_width = random.randint(1100, 1300)
+    window_high = random.randint(1300, 1500)
+    options.add_argument(f"window-size={window_width},{window_high}")
+    # DETECTION BYPASS
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_argument("--disable-blink-features")
+    options.add_experimental_option('excludeSwitches', ['enable-automation'])
+    options.add_experimental_option('useAutomationExtension', False)
     ua = UserAgent()
     user_agent = ua.random
     options.add_argument(f'user-agent={user_agent}')
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-impl-side-painting")
+    options.add_argument("--disable-setuid-sandbox")
+    options.add_argument("--disable-seccomp-filter-sandbox")
+    options.add_argument("--disable-breakpad")
+    options.add_argument("--disable-client-side-phishing-detection")
+    options.add_argument("--disable-cast")
+    options.add_argument("--disable-cast-streaming-hw-encoding")
+    options.add_argument("--disable-cloud-import")
+    options.add_argument("--disable-popup-blocking")
+    options.add_argument("--ignore-certificate-errors")
+    options.add_argument("--disable-session-crashed-bubble")
+    options.add_argument("--disable-ipv6")
+    options.add_argument("--allow-http-screen-capture") 
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])      # disable the "DevTools listening on ws://127.0..." console message 
     # DRIVER
     driver = webdriver.Chrome(options=options, service=service) 
     # driver.minimize_window()
@@ -89,8 +112,8 @@ def web_driver():
         titleRead = driver.find_element(By.CSS_SELECTOR, '.sc-afe43def-1').text
     except:
         messages.message('error', 2, 'error_movie_title')
-        driver.quit()
-        sys.exit()
+        titleRead = "ERROR"
+
 
 ### YEAR OF RELEASE
     if decider == 'movie':
