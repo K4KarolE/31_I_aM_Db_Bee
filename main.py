@@ -1,5 +1,4 @@
-# Please note: I am not following the IMDb siteupdates daily basis
-# May some changes required in the "functions / scraping.py - CSS Selector tags"
+''' DEPRECATED '''
 
 from tkinter import *
 from tkinter import filedialog      # for browse window (adding path)
