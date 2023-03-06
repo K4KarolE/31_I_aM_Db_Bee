@@ -1,5 +1,5 @@
 # DEPRECATED
-- This is no longer supported, please consider using [MoDdeC(work in progress)](https://github.com/K4KarolE/MoDeC) instead.
+- This is no longer supported, please consider using [MoDeC(work in progress)](https://github.com/K4KarolE/MoDeC) instead.
 
 # I aM D bee
 - `I aM d bee` collects and copies of your selected motion picture's basic IMDb details to a `target excel sheet`: 
