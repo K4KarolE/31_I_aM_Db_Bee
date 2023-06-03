@@ -79,7 +79,6 @@ pip install -r requirements.txt
 
 ## IMDb link in clipboard - Mandatory
 - You are requested to copy the link of the movie (or series, TV shows, ..)
-- It is more for the first-time users
 <div align="center">
     <img src="docs/guide/link_in_clipboard.png"</img> 
 </div>
